@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
 const contactLinks = [
     {
         name: 'TELEGRAM 🌐',
-        url: 'TON_LIEN_TELEGRAM_LEGAL',
+        url: 'https://t.me/MonkeyDieLuffy',
         icon: '#icon-telegram',
         id: 'telegram-main',
         className: 'telegram-main',
@@ -18,7 +18,7 @@ const contactLinks = [
     },
     {
         name: 'PAGE INSTAGRAM 🟣',
-        url: 'TON_LIEN_INSTAGRAM_LEGAL',
+        url: 'https://www.instagram.com/realuffythedry.31?igsh=MWNsenVrdncwcmswdA%3D%3D&utm_source=qr',
         icon: '#icon-instagram',
         id: 'insta-main',
         className: 'insta-main',
@@ -26,7 +26,7 @@ const contactLinks = [
     },
     {
         name: 'POTATO 🥔',
-        url: 'TON_LIEN_POTATO_LEGAL',
+        url: 'https://tatokdym.org/joinchat/HjXuEMdY2hj94aLmMabCrg',
         icon: '#icon-potato',
         id: 'potato-main',
         className: 'potato-main',
@@ -79,6 +79,26 @@ const contactLinks = [
                     image: '',
                     badgeText: '1 produit',
                     products: [
+                        {
+                            id: 'South Park Chem 🍋‍🟩🥤',
+                            name: 'South Park Chem 🍋‍🟩🥤',
+                            farm: 'TRAFICANTE FARMLAND 🇲🇦',
+                            promoEligible: false,
+                            type: 'Hash',
+                            image: 'ProductSP.png',
+                            video: 'VideoSP.mov',
+                            videos:['VideoSP1.mov','VideoSP2.mov','VideoSP3.mov'],
+                            description: 'Plates 50g \n\n Ferme Connue 🇲🇦 Produit Pépite Bête De Variété+Terps Texture De Fou 🌪️🍬 Qualité Qui Parle Delle Même Pas Besoin De Vous Présenter 🥇🥇Blanc De Blanc La Folie Extrême 💨💨⛽️⛽️Prix Arranger De Tare Vu La Qualité Stratosphérique 🪐🪐',
+                            tarifs: [
+                                { weight: '3g', price: 60.00 },
+                                { weight: '5g', price: 90.00 },
+                                { weight: '10g', price: 160.00 },
+                                { weight: '20g', price: 300.00 },
+                                { weight: '25g', price: 350.00 },
+                                { weight: '50g', price: 600.00 },
+                                { weight: '100g', price: 1050.00 }
+                            ]
+                        },
                         {
                             id: 'Sunset Sherbet 🎇💥💨',
                             name: 'Sunset Sherbet 🎇💥💨',
