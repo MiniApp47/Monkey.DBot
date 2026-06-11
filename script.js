@@ -80,6 +80,38 @@ const contactLinks = [
                     badgeText: '1 produit',
                     products: [
                         {
+                            id: 'Grape Gas 🦍',
+                            name: 'Grape Gas ⛽',
+                            farm: 'Hamdullah Farmz 🇺🇸🇲🇦',
+                            promoEligible: false,
+                            type: 'Hash',
+                            image: 'ProductGrap.png',
+                            video: 'VideoGrap.mp4',
+                            description: 'New Farm Qui Fait Parler D’elle 🇲🇦 Full Seeds 🇺🇸 Qualité Premium 😱😱 Goût Visuel Texture De Taré 🥶 Fort En Thc 🧪 Pour Les Gros Poumons 🫁',
+                            tarifs: [
+                                { weight: '3g', price: 60.00 },
+                                { weight: '5g', price: 90.00 },
+                                { weight: '10g', price: 160.00 },
+                                { weight: '25g', price: 300.00 },
+                            ]
+                        },
+                        {
+                            id: 'Tarzamania 🦍',
+                            name: 'Tarzamania 🦍',
+                            farm: 'Hamdullah Farmz 🇺🇸🇲🇦',
+                            promoEligible: false,
+                            type: 'Hash',
+                            image: 'ProductTar.png',
+                            video: 'VideoTar.mp4',
+                            description: 'New Farm Qui Fait Parler D’elle 🇲🇦 Full Seeds 🇺🇸 Qualité Premium 😱😱 Goût Visuel Texture De Taré 🥶 Fort En Thc 🧪 Pour Les Gros Poumons 🫁',
+                            tarifs: [
+                                { weight: '3g', price: 60.00 },
+                                { weight: '5g', price: 90.00 },
+                                { weight: '10g', price: 160.00 },
+                                { weight: '25g', price: 300.00 },
+                            ]
+                        },
+                        {
                             id: 'South Park Chem 🍋‍🟩🥤',
                             name: 'South Park Chem 🍋‍🟩🥤',
                             farm: 'TRAFICANTE FARMLAND 🇲🇦',
