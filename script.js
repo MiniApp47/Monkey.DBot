@@ -61,6 +61,57 @@ const contactLinks = [
                     image: '',
                     badgeText: '1 produit',
                     products: [
+                         {
+                            id: 'Mandarina 🍊',
+                            name: 'Mandarina 🍊',
+                            farm: '👨‍🌾 HaramBoyz 👨‍🌾',
+                            promoEligible: false,
+                            type: 'Hash',
+                            image: 'ProductMD.png',
+                            video: 'VideoMD.mov',
+                            description: '',
+                            tarifs: [
+                                { weight: '5g', price: 80.00 },
+                                { weight: '10g', price: 130.00 },
+                                { weight: '25g', price: 300.00 },
+                                { weight: '50g', price: 450.00 },
+                                { weight: '100g', price: 850.00 },
+                            ]
+                        },
+                         {
+                            id: 'KayLinePay 💳',
+                            name: 'KayLinePay 💳',
+                            farm: '👨‍🌾 HaramBoyz 👨‍🌾',
+                            promoEligible: false,
+                            type: 'Hash',
+                            image: 'ProductKL.png',
+                            video: 'VideoKL.mov',
+                            description: '',
+                            tarifs: [
+                                { weight: '5g', price: 80.00 },
+                                { weight: '10g', price: 130.00 },
+                                { weight: '25g', price: 300.00 },
+                                { weight: '50g', price: 450.00 },
+                                { weight: '100g', price: 850.00 },
+                            ]
+                        },
+                         {
+                            id: 'ForbiddenFruit 🍎',
+                            name: 'ForbiddenFruit 🍎',
+                            farm: '👨‍🌾 HaramBoyz 👨‍🌾',
+                            promoEligible: false,
+                            type: 'Hash',
+                            image: 'ProductFF.png',
+                            video: 'VideoFF.mov',
+                            description: '',
+                            tarifs: [
+                                { weight: '5g', price: 80.00 },
+                                { weight: '10g', price: 130.00 },
+                                { weight: '25g', price: 300.00 },
+                                { weight: '50g', price: 450.00 },
+                                { weight: '100g', price: 850.00 },
+                            ]
+                        },
                        
                     ]
                 },
