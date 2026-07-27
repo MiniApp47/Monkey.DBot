@@ -48,11 +48,58 @@ const contactLinks = [
             farms: [
                 {
                     id: 'PREMIUM',
-                    name: 'Dry Premium 👩‍🌾',
+                    name: 'TOP DRY 👩‍🌾',
                     image: '',
                     badgeText: '2 produits',
                     products: [
-                       
+                        {
+                            id: 'Candy Fruit 🍑🍌🍬',
+                            name: 'Candy Fruit 🍑🍌🍬',
+                            farm: '👨‍🌾 TOP DRY 120u  👨‍🌾',
+                            promoEligible: false,
+                            type: 'Hash',
+                            image: 'ProductCF.png',
+                            video: 'VideoCF.mov',
+                            description: '',
+                            tarifs: [
+                                { weight: '50g', price: 200.00 },
+                                { weight: '100g', price: 360.00 },
+                                { weight: '500g', price: 1650.00 },
+                                { weight: '1K', price: 2900.00 },
+                            ]
+                        },
+                        {
+                            id: 'Sherbidden 🍓🎇',
+                            name: 'Sherbidden 🍓🎇',
+                            farm: '👨‍🌾 DR CALI 73u 👨‍🌾',
+                            promoEligible: false,
+                            type: 'Hash',
+                            image: 'ProductSH.png',
+                            video: 'VideoSH.mov',
+                            description: '',
+                            tarifs: [
+                                { weight: '50g', price: 180.00 },
+                                { weight: '100g', price: 300.00 },
+                                { weight: '500g', price: 1550.00 },
+                                { weight: '1K', price: 2800.00 },
+                            ]
+                        },
+                        {
+                            id: 'Sherbidden 🍓🎇',
+                            name: 'Sherbidden 🍓🎇',
+                            farm: '👨‍🌾 DR CALI 73u 👨‍🌾',
+                            promoEligible: false,
+                            type: 'Hash',
+                            image: 'ProductSH.png',
+                            video: 'VideoSH.mov',
+                            description: '',
+                            tarifs: [
+                                { weight: '50g', price: 180.00 },
+                                { weight: '100g', price: 300.00 },
+                                { weight: '500g', price: 1550.00 },
+                                { weight: '1K', price: 2800.00 },
+                            ]
+                        },
                     ]
                 },
                 {
