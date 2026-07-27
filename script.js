@@ -84,22 +84,6 @@ const contactLinks = [
                                 { weight: '1K', price: 2800.00 },
                             ]
                         },
-                        {
-                            id: 'Sherbidden 🍓🎇',
-                            name: 'Sherbidden 🍓🎇',
-                            farm: '👨‍🌾 DR CALI 73u 👨‍🌾',
-                            promoEligible: false,
-                            type: 'Hash',
-                            image: 'ProductSH.png',
-                            video: 'VideoSH.mov',
-                            description: '',
-                            tarifs: [
-                                { weight: '50g', price: 180.00 },
-                                { weight: '100g', price: 300.00 },
-                                { weight: '500g', price: 1550.00 },
-                                { weight: '1K', price: 2800.00 },
-                            ]
-                        },
                     ]
                 },
                 {
