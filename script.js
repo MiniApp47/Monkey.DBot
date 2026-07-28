@@ -17,6 +17,14 @@ const contactLinks = [
         text: "TELEGRAM 🌐"
     },
     {
+        name: 'CANAL TELEGRAM 🌐',
+        url: 'https://t.me/+rDOEy45DwFE1ZTJk',
+        icon: '#icon-telegram',
+        id: 'telegram-canal',
+        className: 'telegram-main',
+        text: "CANAL TELEGRAM 🌐"
+    },
+    {
         name: 'PAGE INSTAGRAM 🟣',
         url: 'https://www.instagram.com/realuffythedry.31?igsh=MWNsenVrdncwcmswdA%3D%3D&utm_source=qr',
         icon: '#icon-instagram',
