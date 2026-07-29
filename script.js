@@ -101,6 +101,23 @@ const contactLinks = [
                     badgeText: '1 produit',
                     products: [
                          {
+                            id: 'GrapeGas x Runtz🍇🍭',
+                            name: 'GrapeGas x Runtz🍇🍭',
+                            farm: 'MORROCCAN REFINERY 🌪️🇲🇦',
+                            promoEligible: false,
+                            type: 'Hash',
+                            image: 'ProductGGR.jpg',
+                            video: 'VideoGGR.mov',
+                            description: 'Fresh Frozen Premium 💎🧊 \n\n Totale Exclu 💎💎🌈 Produit De Haute Qualité 🌡️🧊 Glassy Sur La Video 🔬 Terps De Malade Goût Odeur De Cali 10000 🇺🇸',
+                            tarifs: [
+                                { weight: '3g', price: 60.00 },
+                                { weight: '5g', price: 80.00 },
+                                { weight: '10g', price: 140.00 },
+                                { weight: '25g', price: 280.00 },
+                                { weight: '50g', price: 450.00 },
+                            ]
+                        },
+                         {
                             id: 'Mandarina 🍊',
                             name: 'Mandarina 🍊',
                             farm: '👨‍🌾 HaramBoyz 👨‍🌾',
