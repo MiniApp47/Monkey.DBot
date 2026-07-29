@@ -287,10 +287,27 @@ const contactLinks = [
             farms: [
                 {
                     id: 'CALI_USA',
-                    name: '🇺🇸 RÉAL CALI USA 📦',
+                    name: 'CALI TOP SHELF 🇺🇸',
                     image: '',
                     badgeText: '1 produit',
                     products: [
+                         {
+                            id: 'Tropicana 🦜🍹🥭',
+                            name: 'Tropicana 🦜🍹🥭',
+                            farm: 'CALI NL TOP SHELF 🇺🇸🇳🇱',
+                            promoEligible: false,
+                            type: '🪴 Weed 🪴',
+                            image: 'ProductCHP.png',
+                            video: 'VideoCHP.mp4',
+                            description: 'Déjà Victime De Son Succès 🌈💥 Cali Hollandaise 🇳🇱 Du Vrai Crack 💨 Goût Incroyable 🇺🇸🍑🍓 Bien Compacte ☄️ La Fusée 🚀',
+                            tarifs: [
+                                { weight: '5g', price: 70.00 },
+                                { weight: '10g', price: 130.00 },
+                                { weight: '25g', price: 250.00 },
+                                { weight: '50g', price: 400.00 },
+                                { weight: '100g', price: 750.00 }
+                            ]
+                        }
                     ]
                 }
             ]
