@@ -183,15 +183,43 @@
         .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding: 0 20px 20px 20px; }
 
         /* --- PAGE PRODUIT FULL ECRAN --- */
-        .prod-media-zone { width: 100%; height: 45vh; background: #000; position: fixed; top: 0; left: 0; z-index: 1;}
-        .prod-media-zone video, .prod-media-zone img { width: 100%; height: 100%; object-fit: cover; }
+.prod-media-zone { 
+    width: 100%; 
+    height: 45vh; 
+    background: #000; 
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    z-index: 1;
+}
+
+.prod-media-zone video,
+.prod-media-zone img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.prod-sheet {
+    position: relative;
+    z-index: 5;
+}
+
+#product-video-controls-layer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 50;
+}
+       .prod-media-zone video, .prod-media-zone img { width: 100%; height: 100%; object-fit: cover; }
       /* --- PAGE PRODUIT FULL ECRAN --- */
         .prod-sheet {
             background: var(--bg-color); 
             border-radius: var(--radius-lg) var(--radius-lg) 0 0;
             position: relative; 
             z-index: 2; 
-            margin-top: 40vh; 
+            margin-top: 42vh; 
             min-height: 60vh; 
             /* On augmente le padding du bas à 180px pour ne rien cacher en scrollant */
             padding: 25px 20px 180px 20px; 
@@ -595,6 +623,59 @@
         .swipe-text { color: var(--text-muted); }
         .btn-msg-plug { background: rgba(91,55,212,.20); color: #fff; }
 
+.prod-sheet {
+    position: relative;
+    z-index: 5;
+    overflow: visible;
+}
+  #product-video-controls-layer {
+    position: absolute;
+    top: -48px;
+    left: 0;
+    width: 100%;
+    z-index: 80;
+    display: flex;
+    justify-content: center;
+    pointer-events: none;
+}
+
+.product-video-controls {
+    position: relative;
+    left: auto;
+    top: auto;
+    transform: none;
+    z-index: 9999;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px;
+    border-radius: 999px;
+
+    background: rgba(20, 16, 20, 0.75);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(91, 55, 212, 0.65);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.45);
+
+    pointer-events: auto;
+}
+.product-video-controls button {
+    border: none;
+    min-width: 44px;
+    height: 38px;
+    padding: 0 12px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #5b37d4, #c661a4);
+    color: white;
+    font-weight: 900;
+    font-size: 0.85rem;
+    cursor: pointer;
+}
+
+.product-video-controls button:active {
+    transform: scale(0.94);
+}
     </style>
 </head>
 
@@ -718,9 +799,10 @@
     <div id="page-product" class="page">
         <button class="product-close-btn" style="position:fixed; top:20px; left:20px; z-index:10; background:rgba(255,255,255,0.8); border:none; width:35px; height:35px; border-radius:50%; font-size:1.5rem; display:flex; align-items:center; justify-content:center;" onclick="navigate('home')">‹</button>
         
-        <div class="prod-media-zone" id="prod-media"></div>
+       <div class="prod-media-zone" id="prod-media"></div>
 
-      <div class="prod-sheet">
+<div class="prod-sheet">
+    <div id="product-video-controls-layer"></div>
             <span id="p-type" style="background: var(--primary); color: white; font-size: 0.7rem; font-weight: 800; padding: 4px 10px; border-radius: 8px; text-transform: uppercase; letter-spacing: 0.5px; display: inline-block; margin-bottom: 10px;">TYPE</span>
             
             <div class="prod-title-row">

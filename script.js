@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", function () {
                             promoEligible: false,
                             type: 'Hash',
                             image: 'ProductCF.png',
-                            video: 'VideoCF.mov',
+                            video: 'VideoCF.mp4',
                             description: '',
                             tarifs: [
                                 { weight: '50g', price: 200.00 },
@@ -473,6 +473,91 @@ document.addEventListener("DOMContentLoaded", function () {
     navigate("cat-list");
   };
 
+
+  function productVideoControlsHTML() {
+    return `
+        <div class="product-video-controls">
+            <button type="button" id="video-play-pause">⏸</button>
+            <button type="button" id="video-back-10">↺ 10s</button>
+            <button type="button" id="video-fullscreen">⛶</button>
+        </div>
+    `;
+}
+
+function showProductVideoControls() {
+    const layer = document.getElementById("product-video-controls-layer");
+    if (!layer) return;
+
+    layer.innerHTML = productVideoControlsHTML();
+    bindProductVideoControls();
+}
+
+function hideProductVideoControls() {
+    const layer = document.getElementById("product-video-controls-layer");
+    if (!layer) return;
+
+    layer.innerHTML = "";
+}
+
+function getActiveProductVideo() {
+    const mediaZone = document.getElementById("prod-media");
+    const videos = Array.from(mediaZone.querySelectorAll("video"));
+
+    if (videos.length === 0) return null;
+    if (videos.length === 1) return videos[0];
+
+    const center = mediaZone.scrollLeft + mediaZone.clientWidth / 2;
+
+    return videos.reduce((best, video) => {
+        const slide = video.closest(".multi-video-slide");
+        const slideCenter = slide.offsetLeft + slide.clientWidth / 2;
+        const distance = Math.abs(slideCenter - center);
+
+        return distance < best.distance ? { video, distance } : best;
+    }, { video: videos[0], distance: Infinity }).video;
+}
+
+function bindProductVideoControls() {
+    const playPauseBtn = document.getElementById("video-play-pause");
+    const backBtn = document.getElementById("video-back-10");
+    const fullscreenBtn = document.getElementById("video-fullscreen");
+
+    if (!playPauseBtn || !backBtn || !fullscreenBtn) return;
+
+    playPauseBtn.onclick = () => {
+        const video = getActiveProductVideo();
+        if (!video) return;
+
+        if (video.paused) {
+            video.play();
+            playPauseBtn.innerText = "⏸";
+        } else {
+            video.pause();
+            playPauseBtn.innerText = "▶";
+        }
+    };
+
+    backBtn.onclick = () => {
+        const video = getActiveProductVideo();
+        if (!video) return;
+
+        video.currentTime = Math.max(0, video.currentTime - 10);
+    };
+
+    fullscreenBtn.onclick = () => {
+        const video = getActiveProductVideo();
+        if (!video) return;
+
+        if (video.webkitEnterFullscreen) {
+            video.webkitEnterFullscreen(); // iPhone / Safari / Telegram iOS
+        } else if (video.requestFullscreen) {
+            video.requestFullscreen();
+        } else if (video.webkitRequestFullscreen) {
+            video.webkitRequestFullscreen();
+        }
+    };
+}
+
   // --- RENDER PRODUCT ---
   window.openProduct = function (id) {
     currentProd = allProducts.find((p) => p.id === id);
@@ -485,34 +570,41 @@ document.addEventListener("DOMContentLoaded", function () {
     mediaZone.className = "prod-media-zone"; // Reset classe de base
 
     if (currentProd.videos && currentProd.videos.length > 0) {
-      mediaZone.classList.add("multiple-media");
+    mediaZone.classList.add("multiple-media");
 
-      // 1. Rendu des slides vidéos
-      let html = currentProd.videos
+    let html = currentProd.videos
         .map(
-          (v) => `
+            (v) => `
                 <div class="multi-video-slide">
-                    <video autoplay loop muted playsinline>
+                    <video autoplay loop muted playsinline controls>
                         <source src="${v}" type="video/mp4">
                     </video>
                 </div>
-            `,
+            `
         )
         .join("");
 
-      // 2. CONDITION 10X : Si plus d'une vidéo, on injecte le badge indicateur
-      if (currentProd.videos.length > 1) {
+    if (currentProd.videos.length > 1) {
         html += `<div class="swipe-hint">Swipe ➡️</div>`;
-      }
-
-      mediaZone.innerHTML = html;
-    } else if (currentProd.video) {
-      // Mode vidéo unique
-      mediaZone.innerHTML = `<video autoplay loop muted playsinline><source src="${currentProd.video}" type="video/mp4"></video>`;
-    } else {
-      // Mode image par défaut
-      mediaZone.innerHTML = `<img src="${currentProd.image || "Logo.jpg"}">`;
     }
+
+   mediaZone.innerHTML = html;
+showProductVideoControls();
+
+} else if (currentProd.video) {
+    mediaZone.innerHTML = `
+    <video autoplay loop muted playsinline controls>
+        <source src="${currentProd.video}" type="video/mp4">
+    </video>
+`;
+
+showProductVideoControls();
+
+} else {
+    mediaZone.innerHTML = `<img src="${currentProd.image}">`;
+hideProductVideoControls();
+}
+    
 
     document.getElementById("p-name").innerText = currentProd.name;
     // Injection dynamique du type de produit (ex: Top90u, FrozenSift...)
