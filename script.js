@@ -42,6 +42,22 @@ document.addEventListener("DOMContentLoaded", function () {
                     badgeText: '2 produits',
                     products: [
                         {
+                            id: 'Smash Meloncini 🍈🍋‍🟩',
+                            name: 'Smash Meloncini 🍈🍋‍🟩',
+                            farm: 'BONNE MAMAN 120U 🇲🇦',
+                            promoEligible: false,
+                            type: 'Hash',
+                            image: 'ProductSM.png',
+                            videos: ['VideoSM.mov','VideoSM2.mov'],
+                            description: 'De Retour Bonne Maman 🇲🇦 Nouvel Variété 💨🪐🍈 Goût Texture Bien Dur Et Petant 💥 Pour Les Petit Budget 💶 Top Quaite ⭐️',
+                            tarifs: [
+                              { weight: '5g', price: 50.00 },
+                              { weight: '10g', price: 90.00 },
+                              { weight: '25g', price: 200.00 },
+                              { weight: '50g', price: 300.00 },
+                            ]
+                        },
+                        {
                             id: 'Candy Fruit 🍑🍌🍬',
                             name: 'Candy Fruit 🍑🍌🍬',
                             farm: '👨‍🌾 TOP DRY 120u  👨‍🌾',
