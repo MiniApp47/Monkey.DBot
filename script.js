@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", function () {
                                 { weight: '1K', price: 2900.00 },
                             ]
                         },
-                        {
+                        /* {
                             id: 'Sherbidden 🍓🎇',
                             name: 'Sherbidden 🍓🎇',
                             farm: '👨‍🌾 DR CALI 73u 👨‍🌾',
@@ -88,7 +88,7 @@ document.addEventListener("DOMContentLoaded", function () {
                                 { weight: '500g', price: 1550.00 },
                                 { weight: '1K', price: 2800.00 },
                             ]
-                        },
+                        }, */
                     ]
                 },
                 {
