@@ -183,7 +183,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     image: '',
                     badgeText: '1 produit',
                     products: [
-                        {
+                        /* {
                             id: 'Grape Gas 🦍',
                             name: 'Grape Gas ⛽',
                             farm: 'Hamdullah Farmz 🇺🇸🇲🇦',
@@ -214,7 +214,7 @@ document.addEventListener("DOMContentLoaded", function () {
                                 { weight: '10g', price: 160.00 },
                                 { weight: '25g', price: 300.00 },
                             ]
-                        },
+                        }, */
                         {
                             id: 'South Park Chem 🍋‍🟩🥤',
                             name: 'South Park Chem 🍋‍🟩🥤',
