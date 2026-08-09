@@ -170,11 +170,40 @@ document.addEventListener("DOMContentLoaded", function () {
                 },
                 {
                     id: 'STATIC_1',
-                    name: '⚙️ PLASMASTATIC ⚡️',
+                    name: '⚙️ STATIC SIFT ⚡️',
                     image: '',
                     badgeText: '1 produit',
                     products: [
-                       
+                       {
+                            id: 'Papaya x Zangria 🥭🥤',
+                            name: 'Papaya x Zangria 🥭🥤',
+                            farm: 'Wizard Treez x Golden Warriors 🇺🇸',
+                            promoEligible: false,
+                            type: 'Hash',
+                            image: 'ProductPZ.png',
+                            video: 'VideoPZ.mov',
+                            description: 'Static Sift Whole Plante Full Melt 🍯🧤\n Collab Wizard Treez x Golden Head Warriors 🇺🇸 Produit Des Ténèbres 🔥Parmis Les Meilleurs Hash Du Monde 🌍 2 Strains De Folie Full MELT 🍯🍯Tu Pete Ta Tête 🤯🤯🧠',
+                            tarifs: [
+                                { weight: '1g', price: 40.00 },
+                                { weight: '5g', price: 150.00 },
+                                { weight: '10g', price: 280.00 },
+                            ]
+                        },
+                       {
+                            id: 'Limelight 🍋‍🟩☀️',
+                            name: 'Limelight 🍋‍🟩☀️',
+                            farm: 'Wizard Treez x Golden Warriors 🇺🇸',
+                            promoEligible: false,
+                            type: 'Hash',
+                            image: 'ProductLL.png',
+                            video: 'VideoLL.mov',
+                            description: 'Static Sift Whole Plante Full Melt 🍯🧤\n Collab Wizard Treez x Golden Head Warriors 🇺🇸 Produit Des Ténèbres 🔥Parmis Les Meilleurs Hash Du Monde 🌍 2 Strains De Folie Full MELT 🍯🍯Tu Pete Ta Tête 🤯🤯🧠',
+                            tarifs: [
+                                { weight: '1g', price: 40.00 },
+                                { weight: '5g', price: 150.00 },
+                                { weight: '10g', price: 280.00 },
+                            ]
+                        },
                     ]
                 },
                 {
