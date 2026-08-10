@@ -170,7 +170,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 },
                 {
                     id: 'STATIC_1',
-                    name: '⚙️ STATIC SIFT ⚡️',
+                    name: 'STATIC USA 🇺🇸',
                     image: '',
                     badgeText: '1 produit',
                     products: [
@@ -185,8 +185,8 @@ document.addEventListener("DOMContentLoaded", function () {
                             description: 'Static Sift Whole Plante Full Melt 🍯🧤\n Collab Wizard Treez x Golden Head Warriors 🇺🇸 Produit Des Ténèbres 🔥Parmis Les Meilleurs Hash Du Monde 🌍 2 Strains De Folie Full MELT 🍯🍯Tu Pete Ta Tête 🤯🤯🧠',
                             tarifs: [
                                 { weight: '1g', price: 40.00 },
-                                { weight: '5g', price: 150.00 },
-                                { weight: '10g', price: 280.00 },
+                                { weight: '5g', price: 200.00 },
+                                { weight: '10g', price: 340.00 },
                             ]
                         },
                        {
@@ -200,8 +200,8 @@ document.addEventListener("DOMContentLoaded", function () {
                             description: 'Static Sift Whole Plante Full Melt 🍯🧤\n Collab Wizard Treez x Golden Head Warriors 🇺🇸 Produit Des Ténèbres 🔥Parmis Les Meilleurs Hash Du Monde 🌍 2 Strains De Folie Full MELT 🍯🍯Tu Pete Ta Tête 🤯🤯🧠',
                             tarifs: [
                                 { weight: '1g', price: 40.00 },
-                                { weight: '5g', price: 150.00 },
-                                { weight: '10g', price: 280.00 },
+                                { weight: '5g', price: 200.00 },
+                                { weight: '10g', price: 340.00 },
                             ]
                         },
                     ]
