@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", function () {
                               { weight: '50g', price: 300.00 },
                             ]
                         },
-                        {
+                        /* {
                             id: 'Candy Fruit 🍑🍌🍬',
                             name: 'Candy Fruit 🍑🍌🍬',
                             farm: '👨‍🌾 TOP DRY 120u  👨‍🌾',
@@ -72,7 +72,7 @@ document.addEventListener("DOMContentLoaded", function () {
                                 { weight: '500g', price: 1650.00 },
                                 { weight: '1K', price: 2900.00 },
                             ]
-                        },
+                        }, */
                         /* {
                             id: 'Sherbidden 🍓🎇',
                             name: 'Sherbidden 🍓🎇',
@@ -145,7 +145,7 @@ document.addEventListener("DOMContentLoaded", function () {
                                 { weight: '10g', price: 130.00 },
                                 { weight: '25g', price: 300.00 },
                                 { weight: '50g', price: 450.00 },
-                                { weight: '100g', price: 850.00 },
+                                { weight: '100g', price: 700.00 },
                             ]
                         },
                          {
@@ -162,7 +162,7 @@ document.addEventListener("DOMContentLoaded", function () {
                                 { weight: '10g', price: 130.00 },
                                 { weight: '25g', price: 300.00 },
                                 { weight: '50g', price: 450.00 },
-                                { weight: '100g', price: 850.00 },
+                                { weight: '100g', price: 700.00 },
                             ]
                         },
                        
@@ -334,7 +334,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     image: '',
                     badgeText: '1 produit',
                     products: [
-                         {
+                        /*  {
                             id: 'Tropicana 🦜🍹🥭',
                             name: 'Tropicana 🦜🍹🥭',
                             farm: 'CALI NL TOP SHELF 🇺🇸🇳🇱',
@@ -350,7 +350,7 @@ document.addEventListener("DOMContentLoaded", function () {
                                 { weight: '50g', price: 400.00 },
                                 { weight: '100g', price: 750.00 }
                             ]
-                        }
+                        } */
                     ]
                 }
             ]
