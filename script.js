@@ -98,6 +98,23 @@ document.addEventListener("DOMContentLoaded", function () {
                     badgeText: '1 produit',
                     products: [
                          {
+                            id: 'Blue Cookies 🔵🍪',
+                            name: 'Blue Cookies 🔵🍪',
+                            farm: 'FEDERALSIFT RESERVE 🇺🇸⭐️',
+                            promoEligible: false,
+                            type: 'Hash',
+                            image: 'ProductBC.png',
+                            video: 'VideoBC.mp4',
+                            description: 'Fresh Frozen Premium 💎🧊 \n\n Pur Produit 🇺🇸 Terps De Folie 🥇💥🧙🏼 Full Melt 🍯 Pour Les Gros Pecs 🫁 Qui Aime Les Produit Bien Fort 🌡️ Le Prix C’est Cadeau 🎁',
+                            tarifs: [
+                              { weight: '5g', price: 100.00 },
+                                { weight: '10g', price: 180.00 },
+                                { weight: '25g', price: 370.00 },
+                                { weight: '50g', price: 750.00 },
+                                { weight: '100g', price: 1400.00 },
+                            ]
+                        },
+                         {
                             id: 'GrapeGas x Runtz🍇🍭',
                             name: 'GrapeGas x Runtz🍇🍭',
                             farm: 'MORROCCAN REFINERY 🌪️🇲🇦',
