@@ -1,952 +1,804 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const tg = window.Telegram.WebApp;
-  tg.ready();
-  tg.expand();
+ const tg = window.Telegram?.WebApp || {
+  ready() {}, expand() {}, setHeaderColor() {}, setBackgroundColor() {},
+  HapticFeedback: { impactOccurred() {}, selectionChanged() {}, notificationOccurred() {} },
+  initDataUnsafe: { user: null }
+ };
+ tg.ready();
+ tg.expand();
+ try { tg.setHeaderColor("#5b37d4"); tg.setBackgroundColor("#101014"); } catch(e) {}
 
-  // Theme iOS pur
-  tg.setHeaderColor("#5b37d4");
-  tg.setBackgroundColor("#1c1c1d");
+ const loader = document.getElementById("page-loader");
+ setTimeout(() => loader?.classList.add("hide"), 1250);
 
-  const progressBar = document.getElementById("myBar");
-  const loader = document.getElementById("page-loader");
-
-  setTimeout(() => {
-    if (progressBar) progressBar.style.width = "100%";
-  }, 100);
-  setTimeout(() => {
-    if (loader) {
-      loader.style.opacity = "0";
-      setTimeout(() => {
-        loader.style.display = "none";
-        loader.classList.remove("active");
-      }, 200);
-    }
-  }, 1800);
-
-  // --- DATA (NOUVEAU MENU CLF44) ---
-  const appData = [
-        // --- Catégorie 1: HASH ---
+ const appData = [
+    // --- Catégorie 1: HASH ---
+    {
+      id: 'HASH',
+      name: '🍪 Hash 🍪',
+      farm: '',
+      type: 'Hash',
+      quality: ' 🍪 Hash 🍪',
+      image: 'CategHash.png',
+      directToProducts: false,
+      farms: [
         {
-            id: 'HASH',
-            name: '🍪 Hash 🍪',
-            farm: '',
-            type: 'Hash',
-            quality: ' 🍪 Hash 🍪',
-            image: 'CategHash.png',
-            directToProducts: false,
-            farms: [
-                {
-                    id: 'PREMIUM',
-                    name: 'TOP DRY 👩‍🌾',
-                    image: '',
-                    badgeText: '2 produits',
-                    products: [
-                        {
-                            id: 'Smash Meloncini 🍈🍋‍🟩',
-                            name: 'Smash Meloncini 🍈🍋‍🟩',
-                            farm: 'BONNE MAMAN 120U 🇲🇦',
-                            promoEligible: false,
-                            type: 'Hash',
-                            image: 'ProductSM.png',
-                            videos: ['VideoSM.mov','VideoSM2.mov'],
-                            description: 'De Retour Bonne Maman 🇲🇦 Nouvel Variété 💨🪐🍈 Goût Texture Bien Dur Et Petant 💥 Pour Les Petit Budget 💶 Top Quaite ⭐️',
-                            tarifs: [
-                              { weight: '5g', price: 50.00 },
-                              { weight: '10g', price: 90.00 },
-                              { weight: '25g', price: 170.00 },
-                              { weight: '50g', price: 280.00 },
-                            ]
-                        },
-                        /* {
-                            id: 'Candy Fruit 🍑🍌🍬',
-                            name: 'Candy Fruit 🍑🍌🍬',
-                            farm: '👨‍🌾 TOP DRY 120u  👨‍🌾',
-                            promoEligible: false,
-                            type: 'Hash',
-                            image: 'ProductCF.png',
-                            video: 'VideoCF.mp4',
-                            description: '',
-                            tarifs: [
-                                { weight: '50g', price: 200.00 },
-                                { weight: '100g', price: 360.00 },
-                                { weight: '500g', price: 1650.00 },
-                                { weight: '1K', price: 2900.00 },
-                            ]
-                        }, */
-                        /* {
-                            id: 'Sherbidden 🍓🎇',
-                            name: 'Sherbidden 🍓🎇',
-                            farm: '👨‍🌾 DR CALI 73u 👨‍🌾',
-                            promoEligible: false,
-                            type: 'Hash',
-                            image: 'ProductSH.png',
-                            video: 'VideoSH.mov',
-                            description: '',
-                            tarifs: [
-                                { weight: '50g', price: 180.00 },
-                                { weight: '100g', price: 300.00 },
-                                { weight: '500g', price: 1550.00 },
-                                { weight: '1K', price: 2800.00 },
-                            ]
-                        }, */
-                    ]
-                },
-                {
-                    id: 'FROZEN',
-                    name: 'FRESH FROZEN 🧊',
-                    image: '',
-                    badgeText: '1 produit',
-                    products: [
-                         {
-                            id: 'Blue Cookies 🔵🍪',
-                            name: 'Blue Cookies 🔵🍪',
-                            farm: 'FEDERALSIFT RESERVE 🇺🇸⭐️',
-                            promoEligible: false,
-                            type: 'Hash',
-                            image: 'ProductBC.png',
-                            video: 'VideoBC.mp4',
-                            description: 'Fresh Frozen Premium 💎🧊 \n\n Pur Produit 🇺🇸 Terps De Folie 🥇💥🧙🏼 Full Melt 🍯 Pour Les Gros Pecs 🫁 Qui Aime Les Produit Bien Fort 🌡️ Le Prix C’est Cadeau 🎁',
-                            tarifs: [
-                              { weight: '5g', price: 100.00 },
-                                { weight: '10g', price: 180.00 },
-                                { weight: '25g', price: 370.00 },
-                                { weight: '50g', price: 750.00 },
-                                { weight: '100g', price: 1400.00 },
-                            ]
-                        },
-                         {
-                            id: 'GrapeGas x Runtz🍇🍭',
-                            name: 'GrapeGas x Runtz🍇🍭',
-                            farm: 'MORROCCAN REFINERY 🌪️🇲🇦',
-                            promoEligible: false,
-                            type: 'Hash',
-                            image: 'ProductGGR.jpg',
-                            video: 'VideoGGR.mov',
-                            description: 'Fresh Frozen Premium 💎🧊 \n\n Totale Exclu 💎💎🌈 Produit De Haute Qualité 🌡️🧊 Glassy Sur La Video 🔬 Terps De Malade Goût Odeur De Cali 10000 🇺🇸',
-                            tarifs: [
-                                { weight: '3g', price: 60.00 },
-                                { weight: '5g', price: 80.00 },
-                                { weight: '10g', price: 140.00 },
-                                { weight: '25g', price: 280.00 },
-                                { weight: '50g', price: 450.00 },
-                            ]
-                        },
-                         {
-                            id: 'Mandarina 🍊',
-                            name: 'Mandarina 🍊',
-                            farm: '👨‍🌾 HaramBoyz 👨‍🌾',
-                            promoEligible: false,
-                            type: 'Hash',
-                            image: 'ProductMD.png',
-                            video: 'VideoMD.mov',
-                            description: '',
-                            tarifs: [
-                                { weight: '5g', price: 80.00 },
-                                { weight: '10g', price: 130.00 },
-                                { weight: '25g', price: 300.00 },
-                                { weight: '50g', price: 450.00 },
-                                { weight: '100g', price: 850.00 },
-                            ]
-                        },
-                         {
-                            id: 'KayLinePay 💳',
-                            name: 'KayLinePay 💳',
-                            farm: '👨‍🌾 HaramBoyz 👨‍🌾',
-                            promoEligible: false,
-                            type: 'Hash',
-                            image: 'ProductKL.png',
-                            video: 'VideoKL.mov',
-                            description: '',
-                            tarifs: [
-                                { weight: '5g', price: 80.00 },
-                                { weight: '10g', price: 130.00 },
-                                { weight: '25g', price: 300.00 },
-                                { weight: '50g', price: 450.00 },
-                                { weight: '100g', price: 700.00 },
-                            ]
-                        },
-                         {
-                            id: 'ForbiddenFruit 🍎',
-                            name: 'ForbiddenFruit 🍎',
-                            farm: '👨‍🌾 HaramBoyz 👨‍🌾',
-                            promoEligible: false,
-                            type: 'Hash',
-                            image: 'ProductFF.png',
-                            video: 'VideoFF.mov',
-                            description: '',
-                            tarifs: [
-                                { weight: '5g', price: 80.00 },
-                                { weight: '10g', price: 130.00 },
-                                { weight: '25g', price: 300.00 },
-                                { weight: '50g', price: 450.00 },
-                                { weight: '100g', price: 700.00 },
-                            ]
-                        },
-                       
-                    ]
-                },
-                {
-                    id: 'STATIC_1',
-                    name: 'STATIC USA 🇺🇸',
-                    image: '',
-                    badgeText: '1 produit',
-                    products: [
-                       {
-                            id: 'Papaya x Zangria 🥭🥤',
-                            name: 'Papaya x Zangria 🥭🥤',
-                            farm: 'Wizard Treez x Golden Warriors 🇺🇸',
-                            promoEligible: false,
-                            type: 'Hash',
-                            image: 'ProductPZ.png',
-                            video: 'VideoPZ.mov',
-                            description: 'Static Sift Whole Plante Full Melt 🍯🧤\n Collab Wizard Treez x Golden Head Warriors 🇺🇸 Produit Des Ténèbres 🔥Parmis Les Meilleurs Hash Du Monde 🌍 2 Strains De Folie Full MELT 🍯🍯Tu Pete Ta Tête 🤯🤯🧠',
-                            tarifs: [
-                                { weight: '1g', price: 40.00 },
-                                { weight: '5g', price: 200.00 },
-                                { weight: '10g', price: 340.00 },
-                            ]
-                        },
-                       {
-                            id: 'Limelight 🍋‍🟩☀️',
-                            name: 'Limelight 🍋‍🟩☀️',
-                            farm: 'Wizard Treez x Golden Warriors 🇺🇸',
-                            promoEligible: false,
-                            type: 'Hash',
-                            image: 'ProductLL.png',
-                            video: 'VideoLL.mov',
-                            description: 'Static Sift Whole Plante Full Melt 🍯🧤\n Collab Wizard Treez x Golden Head Warriors 🇺🇸 Produit Des Ténèbres 🔥Parmis Les Meilleurs Hash Du Monde 🌍 2 Strains De Folie Full MELT 🍯🍯Tu Pete Ta Tête 🤯🤯🧠',
-                            tarifs: [
-                                { weight: '1g', price: 40.00 },
-                                { weight: '5g', price: 200.00 },
-                                { weight: '10g', price: 340.00 },
-                            ]
-                        },
-                    ]
-                },
-                {
-                    id: 'STATIC_2',
-                    name: '2️⃣ Double Static 🧤',
-                    image: '',
-                    badgeText: '1 produit',
-                    products: [
-                        /* {
-                            id: 'Grape Gas 🦍',
-                            name: 'Grape Gas ⛽',
-                            farm: 'Hamdullah Farmz 🇺🇸🇲🇦',
-                            promoEligible: false,
-                            type: 'Hash',
-                            image: 'ProductGrap.png',
-                            video: 'VideoGrap.mp4',
-                            description: 'New Farm Qui Fait Parler D’elle 🇲🇦 Full Seeds 🇺🇸 Qualité Premium 😱😱 Goût Visuel Texture De Taré 🥶 Fort En Thc 🧪 Pour Les Gros Poumons 🫁',
-                            tarifs: [
-                                { weight: '3g', price: 60.00 },
-                                { weight: '5g', price: 90.00 },
-                                { weight: '10g', price: 160.00 },
-                                { weight: '25g', price: 300.00 },
-                            ]
-                        },
-                        {
-                            id: 'Tarzamania 🦍',
-                            name: 'Tarzamania 🦍',
-                            farm: 'Hamdullah Farmz 🇺🇸🇲🇦',
-                            promoEligible: false,
-                            type: 'Hash',
-                            image: 'ProductTar.png',
-                            video: 'VideoTar.mp4',
-                            description: 'New Farm Qui Fait Parler D’elle 🇲🇦 Full Seeds 🇺🇸 Qualité Premium 😱😱 Goût Visuel Texture De Taré 🥶 Fort En Thc 🧪 Pour Les Gros Poumons 🫁',
-                            tarifs: [
-                                { weight: '3g', price: 60.00 },
-                                { weight: '5g', price: 90.00 },
-                                { weight: '10g', price: 160.00 },
-                                { weight: '25g', price: 300.00 },
-                            ]
-                        }, */
-                        {
-                            id: 'South Park Chem 🍋‍🟩🥤',
-                            name: 'South Park Chem 🍋‍🟩🥤',
-                            farm: 'TRAFICANTE FARMLAND 🇲🇦',
-                            promoEligible: false,
-                            type: 'Hash',
-                            image: 'ProductSP.png',
-                            video: 'VideoSP.mov',
-                            videos:['VideoSP1.mov','VideoSP2.mov','VideoSP3.mov'],
-                            description: 'Plates 50g \n\n Ferme Connue 🇲🇦 Produit Pépite Bête De Variété+Terps Texture De Fou 🌪️🍬 Qualité Qui Parle Delle Même Pas Besoin De Vous Présenter 🥇🥇Blanc De Blanc La Folie Extrême 💨💨⛽️⛽️Prix Arranger De Tare Vu La Qualité Stratosphérique 🪐🪐',
-                            tarifs: [
-                                { weight: '3g', price: 60.00 },
-                                { weight: '5g', price: 90.00 },
-                                { weight: '10g', price: 160.00 },
-                                { weight: '20g', price: 300.00 },
-                                { weight: '25g', price: 350.00 },
-                                { weight: '50g', price: 600.00 },
-                                { weight: '100g', price: 1050.00 }
-                            ]
-                        },
-                        {
-                            id: 'Sunset Sherbet 🎇💥💨',
-                            name: 'Sunset Sherbet 🎇💥💨',
-                            farm: 'TRAFICANTE FARMLAND 🇲🇦',
-                            promoEligible: false,
-                            type: 'Hash',
-                            image: 'ProductSS.png',
-                            video: 'VideoSS.mov',
-                            videos:['VideoSS1.mov','VideoSS2.mov','VideoSS3.mov'],
-                            description: 'Plates 50g \n\n Ferme Connue 🇲🇦 Produit Pépite Bête De Variété+Terps Texture De Fou 🌪️🍬 Qualité Qui Parle Delle Même Pas Besoin De Vous Présenter 🥇🥇Blanc De Blanc La Folie Extrême 💨💨⛽️⛽️Prix Arranger De Tare Vu La Qualité Stratosphérique 🪐🪐',
-                            tarifs: [
-                                { weight: '3g', price: 60.00 },
-                                { weight: '5g', price: 90.00 },
-                                { weight: '10g', price: 160.00 },
-                                { weight: '20g', price: 300.00 },
-                                { weight: '25g', price: 350.00 },
-                                { weight: '50g', price: 600.00 },
-                                { weight: '100g', price: 1050.00 }
-                            ]
-                        },
-                        {
-                            id: 'Fatso x Spritzer 💎⛽️🍬',
-                            name: 'Fatso x Spritzer 💎⛽️🍬',
-                            farm: 'TRAFICANTE FARMLAND 🇲🇦',
-                            promoEligible: false,
-                            type: 'Hash',
-                            image: 'ProductFS.png',
-                            video: 'VideoFS.mov',
-                            videos:['VideoFS1.mov','VideoFS2.mov','VideoFS3.mov'],
-                            description: 'Plates 50g \n\n Ferme Connue 🇲🇦 Produit Pépite Bête De Variété+Terps Texture De Fou 🌪️🍬 Qualité Qui Parle Delle Même Pas Besoin De Vous Présenter 🥇🥇Blanc De Blanc La Folie Extrême 💨💨⛽️⛽️Prix Arranger De Tare Vu La Qualité Stratosphérique 🪐🪐',
-                            tarifs: [
-                                { weight: '3g', price: 60.00 },
-                                { weight: '5g', price: 90.00 },
-                                { weight: '10g', price: 160.00 },
-                                { weight: '20g', price: 300.00 },
-                                { weight: '25g', price: 350.00 },
-                                { weight: '50g', price: 600.00 },
-                                { weight: '100g', price: 1050.00 }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    id: 'WPFF',
-                    name: 'WPFF 💎',
-                    image: '',
-                    badgeText: '1 produit',
-                    products: [
-                       
-                    ]
-                }
-            ]
+          id: 'PREMIUM',
+          name: 'TOP DRY 👩‍🌾',
+          image: '',
+          badgeText: '2 produits',
+          products: [
+            {
+              id: 'Smash Meloncini 🍈🍋‍🟩',
+              name: 'Smash Meloncini 🍈🍋‍🟩',
+              farm: 'BONNE MAMAN 120U 🇲🇦',
+              promoEligible: false,
+              type: 'Hash',
+              image: 'ProductSM.png',
+              videos: ['VideoSM.mov','VideoSM2.mov'],
+              description: 'De Retour Bonne Maman 🇲🇦 Nouvel Variété 💨🪐🍈 Goût Texture Bien Dur Et Petant 💥 Pour Les Petit Budget 💶 Top Quaite ⭐️',
+              tarifs: [
+               { weight: '5g', price: 50.00 },
+               { weight: '10g', price: 90.00 },
+               { weight: '25g', price: 170.00 },
+               { weight: '50g', price: 280.00 },
+              ]
+            },
+            /* {
+              id: 'Candy Fruit 🍑🍌🍬',
+              name: 'Candy Fruit 🍑🍌🍬',
+              farm: '👨‍🌾 TOP DRY 120u 👨‍🌾',
+              promoEligible: false,
+              type: 'Hash',
+              image: 'ProductCF.png',
+              video: 'VideoCF.mp4',
+              description: '',
+              tarifs: [
+                { weight: '50g', price: 200.00 },
+                { weight: '100g', price: 360.00 },
+                { weight: '500g', price: 1650.00 },
+                { weight: '1K', price: 2900.00 },
+              ]
+            }, */
+            /* {
+              id: 'Sherbidden 🍓🎇',
+              name: 'Sherbidden 🍓🎇',
+              farm: '👨‍🌾 DR CALI 73u 👨‍🌾',
+              promoEligible: false,
+              type: 'Hash',
+              image: 'ProductSH.png',
+              video: 'VideoSH.mov',
+              description: '',
+              tarifs: [
+                { weight: '50g', price: 180.00 },
+                { weight: '100g', price: 300.00 },
+                { weight: '500g', price: 1550.00 },
+                { weight: '1K', price: 2800.00 },
+              ]
+            }, */
+          ]
         },
-
-        // --- Catégorie 2: WEED ---
         {
-            id: 'WEED',
-            name: ' 🪴 Weed 🪴',
-            farm: '',
-            type: 'Weed',
-            quality: ' 🪴 Weed 🪴',
-            image: 'CategWeed.png',
-            directToProducts: true,
-            farms: [
-                {
-                    id: 'CALI_USA',
-                    name: 'CALI TOP SHELF 🇺🇸',
-                    image: '',
-                    badgeText: '1 produit',
-                    products: [
-                        /*  {
-                            id: 'Tropicana 🦜🍹🥭',
-                            name: 'Tropicana 🦜🍹🥭',
-                            farm: 'CALI NL TOP SHELF 🇺🇸🇳🇱',
-                            promoEligible: false,
-                            type: '🪴 Weed 🪴',
-                            image: 'ProductCHP.png',
-                            video: 'VideoCHP.mp4',
-                            description: 'Déjà Victime De Son Succès 🌈💥 Cali Hollandaise 🇳🇱 Du Vrai Crack 💨 Goût Incroyable 🇺🇸🍑🍓 Bien Compacte ☄️ La Fusée 🚀',
-                            tarifs: [
-                                { weight: '5g', price: 70.00 },
-                                { weight: '10g', price: 130.00 },
-                                { weight: '25g', price: 250.00 },
-                                { weight: '50g', price: 400.00 },
-                                { weight: '100g', price: 750.00 }
-                            ]
-                        } */
-                    ]
-                }
-            ]
+          id: 'FROZEN',
+          name: 'FRESH FROZEN 🧊',
+          image: '',
+          badgeText: '1 produit',
+          products: [
+             {
+              id: 'FEDERALSIFT RESERVE 🇺🇸⭐️',
+              name: 'FEDERALSIFT RESERVE 🇺🇸⭐️',
+              farm: 'FEDERALSIFT RESERVE 🇺🇸⭐️',
+              promoEligible: false,
+              type: 'Hash',
+              image: 'ProductBC.png',
+              video: 'VideoBC.mp4',
+              description: 'Fresh Frozen Premium 💎🧊 \n\n Pur Produit 🇺🇸 Terps De Folie 🥇💥🧙🏼 Full Melt 🍯 Pour Les Gros Pecs 🫁 Qui Aime Les Produit Bien Fort 🌡️ Le Prix C’est Cadeau 🎁',
+              tarifs: [
+               { weight: '5g', price: 100.00 },
+                { weight: '10g', price: 180.00 },
+                { weight: '25g', price: 370.00 },
+                { weight: '50g', price: 750.00 },
+                { weight: '100g', price: 1400.00 },
+              ]
+            },
+             {
+              id: 'GrapeGas x Runtz🍇🍭',
+              name: 'GrapeGas x Runtz🍇🍭',
+              farm: 'MORROCCAN REFINERY 🌪️🇲🇦',
+              promoEligible: false,
+              type: 'Hash',
+              image: 'ProductGGR.jpg',
+              video: 'VideoGGR.mov',
+              description: 'Fresh Frozen Premium 💎🧊 \n\n Totale Exclu 💎💎🌈 Produit De Haute Qualité 🌡️🧊 Glassy Sur La Video 🔬 Terps De Malade Goût Odeur De Cali 10000 🇺🇸',
+              tarifs: [
+                { weight: '3g', price: 60.00 },
+                { weight: '5g', price: 80.00 },
+                { weight: '10g', price: 140.00 },
+                { weight: '25g', price: 280.00 },
+                { weight: '50g', price: 450.00 },
+              ]
+            },
+             {
+              id: 'Mandarina 🍊',
+              name: 'Mandarina 🍊',
+              farm: '👨‍🌾 HaramBoyz 👨‍🌾',
+              promoEligible: false,
+              type: 'Hash',
+              image: 'ProductMD.png',
+              video: 'VideoMD.mov',
+              description: '',
+              tarifs: [
+                { weight: '5g', price: 80.00 },
+                { weight: '10g', price: 130.00 },
+                { weight: '25g', price: 300.00 },
+                { weight: '50g', price: 450.00 },
+                { weight: '100g', price: 850.00 },
+              ]
+            },
+             {
+              id: 'KayLinePay 💳',
+              name: 'KayLinePay 💳',
+              farm: '👨‍🌾 HaramBoyz 👨‍🌾',
+              promoEligible: false,
+              type: 'Hash',
+              image: 'ProductKL.png',
+              video: 'VideoKL.mov',
+              description: '',
+              tarifs: [
+                { weight: '5g', price: 80.00 },
+                { weight: '10g', price: 130.00 },
+                { weight: '25g', price: 300.00 },
+                { weight: '50g', price: 450.00 },
+                { weight: '100g', price: 700.00 },
+              ]
+            },
+             {
+              id: 'ForbiddenFruit 🍎',
+              name: 'ForbiddenFruit 🍎',
+              farm: '👨‍🌾 HaramBoyz 👨‍🌾',
+              promoEligible: false,
+              type: 'Hash',
+              image: 'ProductFF.png',
+              video: 'VideoFF.mov',
+              description: '',
+              tarifs: [
+                { weight: '5g', price: 80.00 },
+                { weight: '10g', price: 130.00 },
+                { weight: '25g', price: 300.00 },
+                { weight: '50g', price: 450.00 },
+                { weight: '100g', price: 700.00 },
+              ]
+            },
+            
+          ]
         },
-
-       
-    ];
-  // Extraction de tous les produits pour "Récents" et "Tendances"
-  let allProducts = [];
-  appData.forEach((c) =>
-    c.farms.forEach((f) => {
-      f.products.forEach((p) => {
-        p.category = c;
-        p.farmName = f.name;
-        allProducts.push(p);
-      });
-    }),
-  );
-
-  // --- VARIABLES GLOBALES ---
-  let cart = [];
-  let currentProd = null;
-  let currTarif = null;
-  let currVar = null;
-  let currQty = 1;
-  let checkoutMode = "Livraison";
-
-  // --- TELEGRAM USER DATA ---
-  const user = tg.initDataUnsafe?.user;
-  if (user) {
-    document.getElementById("prof-pseudo").innerText = user.username
-      ? `@${user.username}`
-      : user.first_name;
-    document.getElementById("prof-id").innerText = user.id;
-    // Optionnel: photo url si dispo
-    if (user.photo_url)
-      document.getElementById("prof-img").src = user.photo_url;
-  }
-  // --- ROUTER ---
-  window.navigate = function (pageId) {
-    document
-      .querySelectorAll(".page")
-      .forEach((p) => p.classList.remove("active"));
-    document.getElementById("page-" + pageId).classList.add("active");
-    window.scrollTo(0, 0);
-
-    // Update Bottom Nav UI
-    document
-      .querySelectorAll(".nav-item-float")
-      .forEach((i) => i.classList.remove("active"));
-    if (pageId === "cart")
-      document.querySelectorAll(".nav-item-float")[0].classList.add("active");
-    if (pageId === "home" || pageId === "cat-list" || pageId === "product")
-      document.querySelectorAll(".nav-item-float")[1].classList.add("active");
-    if (pageId === "profile" || pageId === "contact" || pageId === "info")
-      document.querySelectorAll(".nav-item-float")[2].classList.add("active");
-
-    // 🔥 LIGNES AJOUTÉES : On force le calcul et l'affichage du panier quand on l'ouvre
-    if (pageId === "cart") renderCart();
-    if (pageId === "checkout") renderCheckout();
-  };
-
-  // --- RENDER HOME ---
-  function renderHome() {
-    // Catégories
-    const catContainer = document.getElementById("cat-scroll");
-    catContainer.innerHTML = appData
-      .map(
-        (c) => `
-            <div class="cat-card" onclick="openCategory('${c.id}')">
-                <img src="${c.image}" alt="">
-                <div class="title">${c.name}</div>
-                <div class="flags">🇲🇦 🇪🇸 🇺🇸</div>
-            </div>
-        `,
-      )
-      .join("");
-
-    // Récents (Prend 3 produits)
-    const recContainer = document.getElementById("recent-scroll");
-    recContainer.innerHTML = allProducts
-      .slice(0, 3)
-      .map((p) => createCardHTML(p, true))
-      .join("");
-
-    // Tendances (Prend le reste)
-    const trendContainer = document.getElementById("trend-grid");
-    trendContainer.innerHTML = allProducts
-      .slice(3, 7)
-      .map((p) => createCardHTML(p, false))
-      .join("");
-  }
-
-  function createCardHTML(p, isLarge) {
-    const badge = p.farmName || p.farm || p.type || "Premium";
-    const image = p.image && p.image.trim() !== "" ? p.image : "Logo.jpg";
-    return `
-            <div class="prod-card-lg" style="${!isLarge ? "flex:none; width:100%;" : ""}" onclick="openProduct('${p.id}')">
-                <img src="${image}" alt="${p.name}">
-                <div class="info">
-                    <div class="badge">${badge}</div>
-                    <div class="title">${p.name}</div>
-                    <div class="btn-outline">Voir les détails</div>
-                </div>
-            </div>
-        `;
-  }
-
-  window.openCategory = function (catId) {
-    const cat = appData.find((c) => c.id === catId);
-    document.getElementById("cat-list-title").innerText = cat.name;
-
-        const catBannerImg = document.getElementById("cat-banner-img");
-    const catBannerBg = document.getElementById("cat-banner-bg");
-
-    if (catBannerImg && catBannerBg) {
-        catBannerImg.src = cat.image || "";
-        catBannerBg.src = cat.image || "";
-        catBannerImg.alt = cat.name;
-    }
-
-    const selectWrapper = document.querySelector(".search-container");
-    const selectEl = document.getElementById("cat-type-select");
-
-    function displayFilteredProducts(filterValue) {
-      let html = "";
-      cat.farms.forEach((f) => {
-        if (filterValue === "ALL" || f.id === filterValue) {
-          f.products.forEach((p) => {
-            html += createCardHTML(p, false);
-          });
+        {
+          id: 'STATIC_1',
+          name: 'STATIC USA 🇺🇸',
+          image: '',
+          badgeText: '1 produit',
+          products: [
+            {
+              id: 'Papaya x Zangria 🥭🥤',
+              name: 'Papaya x Zangria 🥭🥤',
+              farm: 'Wizard Treez x Golden Warriors 🇺🇸',
+              promoEligible: false,
+              type: 'Hash',
+              image: 'ProductPZ.png',
+              video: 'VideoPZ.mov',
+              description: 'Static Sift Whole Plante Full Melt 🍯🧤\n Collab Wizard Treez x Golden Head Warriors 🇺🇸 Produit Des Ténèbres 🔥Parmis Les Meilleurs Hash Du Monde 🌍 2 Strains De Folie Full MELT 🍯🍯Tu Pete Ta Tête 🤯🤯🧠',
+              tarifs: [
+                { weight: '1g', price: 40.00 },
+                { weight: '5g', price: 200.00 },
+                { weight: '10g', price: 340.00 },
+              ]
+            },
+            {
+              id: 'Limelight 🍋‍🟩☀️',
+              name: 'Limelight 🍋‍🟩☀️',
+              farm: 'Wizard Treez x Golden Warriors 🇺🇸',
+              promoEligible: false,
+              type: 'Hash',
+              image: 'ProductLL.png',
+              video: 'VideoLL.mov',
+              description: 'Static Sift Whole Plante Full Melt 🍯🧤\n Collab Wizard Treez x Golden Head Warriors 🇺🇸 Produit Des Ténèbres 🔥Parmis Les Meilleurs Hash Du Monde 🌍 2 Strains De Folie Full MELT 🍯🍯Tu Pete Ta Tête 🤯🤯🧠',
+              tarifs: [
+                { weight: '1g', price: 40.00 },
+                { weight: '5g', price: 200.00 },
+                { weight: '10g', price: 340.00 },
+              ]
+            },
+          ]
+        },
+        {
+          id: 'STATIC_2',
+          name: '2️⃣ Double Static 🧤',
+          image: '',
+          badgeText: '1 produit',
+          products: [
+            /* {
+              id: 'Grape Gas 🦍',
+              name: 'Grape Gas ⛽',
+              farm: 'Hamdullah Farmz 🇺🇸🇲🇦',
+              promoEligible: false,
+              type: 'Hash',
+              image: 'ProductGrap.png',
+              video: 'VideoGrap.mp4',
+              description: 'New Farm Qui Fait Parler D’elle 🇲🇦 Full Seeds 🇺🇸 Qualité Premium 😱😱 Goût Visuel Texture De Taré 🥶 Fort En Thc 🧪 Pour Les Gros Poumons 🫁',
+              tarifs: [
+                { weight: '3g', price: 60.00 },
+                { weight: '5g', price: 90.00 },
+                { weight: '10g', price: 160.00 },
+                { weight: '25g', price: 300.00 },
+              ]
+            },
+            {
+              id: 'Tarzamania 🦍',
+              name: 'Tarzamania 🦍',
+              farm: 'Hamdullah Farmz 🇺🇸🇲🇦',
+              promoEligible: false,
+              type: 'Hash',
+              image: 'ProductTar.png',
+              video: 'VideoTar.mp4',
+              description: 'New Farm Qui Fait Parler D’elle 🇲🇦 Full Seeds 🇺🇸 Qualité Premium 😱😱 Goût Visuel Texture De Taré 🥶 Fort En Thc 🧪 Pour Les Gros Poumons 🫁',
+              tarifs: [
+                { weight: '3g', price: 60.00 },
+                { weight: '5g', price: 90.00 },
+                { weight: '10g', price: 160.00 },
+                { weight: '25g', price: 300.00 },
+              ]
+            }, */
+            {
+              id: 'South Park Chem 🍋‍🟩🥤',
+              name: 'South Park Chem 🍋‍🟩🥤',
+              farm: 'TRAFICANTE FARMLAND 🇲🇦',
+              promoEligible: false,
+              type: 'Hash',
+              image: 'ProductSP.png',
+              video: 'VideoSP.mov',
+              videos:['VideoSP1.mov','VideoSP2.mov','VideoSP3.mov'],
+              description: 'Plates 50g \n\n Ferme Connue 🇲🇦 Produit Pépite Bête De Variété+Terps Texture De Fou 🌪️🍬 Qualité Qui Parle Delle Même Pas Besoin De Vous Présenter 🥇🥇Blanc De Blanc La Folie Extrême 💨💨⛽️⛽️Prix Arranger De Tare Vu La Qualité Stratosphérique 🪐🪐',
+              tarifs: [
+                { weight: '3g', price: 60.00 },
+                { weight: '5g', price: 90.00 },
+                { weight: '10g', price: 160.00 },
+                { weight: '20g', price: 300.00 },
+                { weight: '25g', price: 350.00 },
+                { weight: '50g', price: 600.00 },
+                { weight: '100g', price: 1050.00 }
+              ]
+            },
+            {
+              id: 'Sunset Sherbet 🎇💥💨',
+              name: 'Sunset Sherbet 🎇💥💨',
+              farm: 'TRAFICANTE FARMLAND 🇲🇦',
+              promoEligible: false,
+              type: 'Hash',
+              image: 'ProductSS.png',
+              video: 'VideoSS.mov',
+              videos:['VideoSS1.mov','VideoSS2.mov','VideoSS3.mov'],
+              description: 'Plates 50g \n\n Ferme Connue 🇲🇦 Produit Pépite Bête De Variété+Terps Texture De Fou 🌪️🍬 Qualité Qui Parle Delle Même Pas Besoin De Vous Présenter 🥇🥇Blanc De Blanc La Folie Extrême 💨💨⛽️⛽️Prix Arranger De Tare Vu La Qualité Stratosphérique 🪐🪐',
+              tarifs: [
+                { weight: '3g', price: 60.00 },
+                { weight: '5g', price: 90.00 },
+                { weight: '10g', price: 160.00 },
+                { weight: '20g', price: 300.00 },
+                { weight: '25g', price: 350.00 },
+                { weight: '50g', price: 600.00 },
+                { weight: '100g', price: 1050.00 }
+              ]
+            },
+            {
+              id: 'Fatso x Spritzer 💎⛽️🍬',
+              name: 'Fatso x Spritzer 💎⛽️🍬',
+              farm: 'TRAFICANTE FARMLAND 🇲🇦',
+              promoEligible: false,
+              type: 'Hash',
+              image: 'ProductFS.png',
+              video: 'VideoFS.mov',
+              videos:['VideoFS1.mov','VideoFS2.mov','VideoFS3.mov'],
+              description: 'Plates 50g \n\n Ferme Connue 🇲🇦 Produit Pépite Bête De Variété+Terps Texture De Fou 🌪️🍬 Qualité Qui Parle Delle Même Pas Besoin De Vous Présenter 🥇🥇Blanc De Blanc La Folie Extrême 💨💨⛽️⛽️Prix Arranger De Tare Vu La Qualité Stratosphérique 🪐🪐',
+              tarifs: [
+                { weight: '3g', price: 60.00 },
+                { weight: '5g', price: 90.00 },
+                { weight: '10g', price: 160.00 },
+                { weight: '20g', price: 300.00 },
+                { weight: '25g', price: 350.00 },
+                { weight: '50g', price: 600.00 },
+                { weight: '100g', price: 1050.00 }
+              ]
+            }
+          ]
+        },
+        {
+          id: 'WPFF',
+          name: 'WPFF 💎',
+          image: '',
+          badgeText: '1 produit',
+          products: [
+            
+          ]
         }
-      });
+      ]
+    },
 
-      if (!html) {
-        html = `<p style="text-align:center; color:var(--text-muted); width:100%; grid-column:1/-1; padding-top:20px;">Aucun produit disponible.</p>`;
-      }
-      document.getElementById("cat-list-grid").innerHTML = html;
-    }
-
-    // Monkey.D : certaines catégories vont direct aux produits, sans sous-menu
-    if (cat.directToProducts === true) {
-      if (selectWrapper) selectWrapper.style.display = "none";
-      displayFilteredProducts("ALL");
-      navigate("cat-list");
-      return;
-    }
-
-    if (selectWrapper) selectWrapper.style.display = "block";
-    let selectHTML = `<option value="ALL">✨ Tout afficher (${cat.name})</option>`;
-    cat.farms.forEach((f) => {
-      selectHTML += `<option value="${f.id}">🔹 ${f.name}</option>`;
-    });
-    selectEl.innerHTML = selectHTML;
-
-    displayFilteredProducts("ALL");
-
-    selectEl.onchange = function (e) {
-      displayFilteredProducts(e.target.value);
-      if (tg.HapticFeedback) {
-        tg.HapticFeedback.selectionChanged();
-      }
-    };
-
-    navigate("cat-list");
-  };
-
-
-  function productVideoControlsHTML() {
-    return `
-        <div class="product-video-controls">
-            <button type="button" id="video-play-pause">⏸</button>
-            <button type="button" id="video-back-10">↺ 10s</button>
-            <button type="button" id="video-fullscreen">⛶</button>
-        </div>
-    `;
-}
-
-function showProductVideoControls() {
-    const layer = document.getElementById("product-video-controls-layer");
-    if (!layer) return;
-
-    layer.innerHTML = productVideoControlsHTML();
-    bindProductVideoControls();
-}
-
-function hideProductVideoControls() {
-    const layer = document.getElementById("product-video-controls-layer");
-    if (!layer) return;
-
-    layer.innerHTML = "";
-}
-
-function getActiveProductVideo() {
-    const mediaZone = document.getElementById("prod-media");
-    const videos = Array.from(mediaZone.querySelectorAll("video"));
-
-    if (videos.length === 0) return null;
-    if (videos.length === 1) return videos[0];
-
-    const center = mediaZone.scrollLeft + mediaZone.clientWidth / 2;
-
-    return videos.reduce((best, video) => {
-        const slide = video.closest(".multi-video-slide");
-        const slideCenter = slide.offsetLeft + slide.clientWidth / 2;
-        const distance = Math.abs(slideCenter - center);
-
-        return distance < best.distance ? { video, distance } : best;
-    }, { video: videos[0], distance: Infinity }).video;
-}
-
-function bindProductVideoControls() {
-    const playPauseBtn = document.getElementById("video-play-pause");
-    const backBtn = document.getElementById("video-back-10");
-    const fullscreenBtn = document.getElementById("video-fullscreen");
-
-    if (!playPauseBtn || !backBtn || !fullscreenBtn) return;
-
-    playPauseBtn.onclick = () => {
-        const video = getActiveProductVideo();
-        if (!video) return;
-
-        if (video.paused) {
-            video.play();
-            playPauseBtn.innerText = "⏸";
-        } else {
-            video.pause();
-            playPauseBtn.innerText = "▶";
+    // --- Catégorie 2: WEED ---
+    {
+      id: 'WEED',
+      name: ' 🪴 Weed 🪴',
+      farm: '',
+      type: 'Weed',
+      quality: ' 🪴 Weed 🪴',
+      image: 'CategWeed.png',
+      directToProducts: true,
+      farms: [
+        {
+          id: 'CALI_USA',
+          name: 'CALI TOP SHELF 🇺🇸',
+          image: '',
+          badgeText: '1 produit',
+          products: [
+            /* {
+              id: 'Tropicana 🦜🍹🥭',
+              name: 'Tropicana 🦜🍹🥭',
+              farm: 'CALI NL TOP SHELF 🇺🇸🇳🇱',
+              promoEligible: false,
+              type: '🪴 Weed 🪴',
+              image: 'ProductCHP.png',
+              video: 'VideoCHP.mp4',
+              description: 'Déjà Victime De Son Succès 🌈💥 Cali Hollandaise 🇳🇱 Du Vrai Crack 💨 Goût Incroyable 🇺🇸🍑🍓 Bien Compacte ☄️ La Fusée 🚀',
+              tarifs: [
+                { weight: '5g', price: 70.00 },
+                { weight: '10g', price: 130.00 },
+                { weight: '25g', price: 250.00 },
+                { weight: '50g', price: 400.00 },
+                { weight: '100g', price: 750.00 }
+              ]
+            } */
+          ]
         }
-    };
+      ]
+    },
 
-    backBtn.onclick = () => {
-        const video = getActiveProductVideo();
-        if (!video) return;
-
-        video.currentTime = Math.max(0, video.currentTime - 10);
-    };
-
-    fullscreenBtn.onclick = () => {
-        const video = getActiveProductVideo();
-        if (!video) return;
-
-        if (video.webkitEnterFullscreen) {
-            video.webkitEnterFullscreen(); // iPhone / Safari / Telegram iOS
-        } else if (video.requestFullscreen) {
-            video.requestFullscreen();
-        } else if (video.webkitRequestFullscreen) {
-            video.webkitRequestFullscreen();
-        }
-    };
-}
-
-  // --- RENDER PRODUCT ---
-  window.openProduct = function (id) {
-    currentProd = allProducts.find((p) => p.id === id);
-    currQty = 1;
-    currTarif = currentProd.tarifs[0];
-    currVar = currentProd.jars ? currentProd.jars[0].name : null;
-
-    // Media (Gestion des vidéos uniques ou multiples avec indicateur de swipe)
-    const mediaZone = document.getElementById("prod-media");
-    mediaZone.className = "prod-media-zone"; // Reset classe de base
-
-    if (currentProd.videos && currentProd.videos.length > 0) {
-    mediaZone.classList.add("multiple-media");
-
-    let html = currentProd.videos
-        .map(
-            (v) => `
-                <div class="multi-video-slide">
-                    <video autoplay loop muted playsinline controls>
-                        <source src="${v}" type="video/mp4">
-                    </video>
-                </div>
-            `
-        )
-        .join("");
-
-    if (currentProd.videos.length > 1) {
-        html += `<div class="swipe-hint">Swipe ➡️</div>`;
-    }
-
-   mediaZone.innerHTML = html;
-showProductVideoControls();
-
-} else if (currentProd.video) {
-    mediaZone.innerHTML = `
-    <video autoplay loop muted playsinline controls>
-        <source src="${currentProd.video}" type="video/mp4">
-    </video>
-`;
-
-showProductVideoControls();
-
-} else {
-    mediaZone.innerHTML = `<img src="${currentProd.image}">`;
-hideProductVideoControls();
-}
     
+  ];
 
-    document.getElementById("p-name").innerText = currentProd.name;
-    // Injection dynamique du type de produit (ex: Top90u, FrozenSift...)
-    document.getElementById("p-type").innerText = currentProd.type
-      ? currentProd.type
-      : "Premium";
-    document.getElementById("p-desc").innerHTML = currentProd.description
-      ? currentProd.description.replace(/\n/g, "<br>")
-      : "";
+ let allProducts = [];
+ appData.forEach((category) => {
+  category.farms.forEach((farm) => {
+   farm.products.forEach((product) => {
+    product.category = category;
+    product.farmName = farm.name;
+    product.farmId = farm.id;
+    allProducts.push(product);
+   });
+  });
+ });
 
-    // Variantes
-    const vZone = document.getElementById("variants-zone");
-    const vScroll = document.getElementById("p-variants");
-    if (currentProd.jars) {
-      vZone.style.display = "block";
-      vScroll.innerHTML = currentProd.jars
-        .map(
-          (j, i) => `
-                <div class="tarif-pill var-btn ${i === 0 ? "active" : ""}" data-val="${j.name}">
-                    <span class="w">${j.emoji}</span>
-                    <span class="p">${j.name}</span>
-                </div>
-            `,
-        )
-        .join("");
+ let favorites = new Set();
+ let cart = [];
+ let currentProd = null;
+ let currTarif = null;
+ let currVar = null;
+ let currQty = 1;
+ let checkoutMode = "Livraison";
+ let currentCategory = null;
+ let selectedReviewRating = 5;
+ window.lastListPage = "home";
 
-      document.querySelectorAll(".var-btn").forEach((b) => {
-        b.onclick = (e) => {
-          document
-            .querySelectorAll(".var-btn")
-            .forEach((btn) => btn.classList.remove("active"));
-          e.currentTarget.classList.add("active");
-          currVar = e.currentTarget.dataset.val;
-          tg.HapticFeedback.selectionChanged();
-        };
-      });
-    } else {
-      vZone.style.display = "none";
-    }
+ const contactUrl = "https://t.me/MonkeyDieLuffy2";
 
-    // Tarifs
-    const tScroll = document.getElementById("p-tarifs");
-    tScroll.innerHTML = currentProd.tarifs
-      .map(
-        (t, i) => `
-            <div class="tarif-pill tar-btn ${i === 0 ? "active" : ""}" data-idx="${i}">
-                <span class="w">${t.weight}</span>
-                <span class="p">${t.price}€</span>
-            </div>
-        `,
-      )
-      .join("");
+ function money(n) {
+  return Number(n || 0).toFixed(2).replace(".00", "") + "€";
+ }
 
-    document.querySelectorAll(".tar-btn").forEach((b) => {
-      b.onclick = (e) => {
-        document
-          .querySelectorAll(".tar-btn")
-          .forEach((btn) => btn.classList.remove("active"));
-        e.currentTarget.classList.add("active");
-        currTarif = currentProd.tarifs[e.currentTarget.dataset.idx];
-        updateProdTotal();
-        tg.HapticFeedback.selectionChanged();
-      };
-    });
+ function firstPrice(product) {
+  const prices = (product.tarifs || []).map(t => Number(t.price)).filter(n => !Number.isNaN(n));
+  return prices.length ? Math.min(...prices) : 0;
+ }
 
-    updateProdTotal();
-    navigate("product");
+ function mediaCount(product) {
+  if (product.videos && product.videos.length) return product.videos.length;
+  if (product.video) return 1;
+  return product.image ? 1 : 0;
+ }
+
+ function hasVideo(product) {
+  return Boolean((product.videos && product.videos.length) || product.video);
+ }
+
+ function productImage(product) {
+  return product.image && String(product.image).trim() !== "" ? product.image : "Logo.jpg";
+ }
+
+ function safeText(value, fallback = "-") {
+  return value && String(value).trim() !== "" ? value : fallback;
+ }
+
+ function shortText(value, max = 46) {
+  const txt = safeText(value, "");
+  return txt.length > max ? txt.slice(0, max - 1) + "…" : txt;
+ }
+
+ function haptic(type = "light") {
+  try { tg.HapticFeedback?.impactOccurred(type); } catch(e) {}
+ }
+
+ function productMatches(product, query) {
+  if (!query) return true;
+  const q = query.toLowerCase().trim();
+  const haystack = [product.name, product.farm, product.farmName, product.type, product.category?.name, product.description]
+   .join(" ").toLowerCase();
+  return haystack.includes(q);
+ }
+
+ function setStats() {
+  const cats = appData.filter(c => c.farms.some(f => f.products.length)).length;
+  document.getElementById("stat-products").innerText = allProducts.length;
+  document.getElementById("stat-cats").innerText = cats;
+  document.getElementById("new-count").innerText = `${Math.min(6, allProducts.length)} produits`;
+ }
+
+ window.navigate = function(pageId) {
+  const normalized = pageId.replace("page-", "");
+  document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+  const page = document.getElementById("page-" + normalized);
+  if (page) page.classList.add("active");
+  window.scrollTo(0, 0);
+
+  document.querySelectorAll(".nav-item-float").forEach(i => i.classList.remove("active"));
+  const nav = document.querySelector(`.nav-btn[data-target="page-${normalized}"]`);
+  if (nav) nav.classList.add("active");
+  else if (["cat-list", "product"].includes(normalized)) document.querySelector('.nav-btn[data-target="page-home"]')?.classList.add("active");
+  else if (normalized === "checkout") document.querySelector('.nav-btn[data-target="page-cart"]')?.classList.add("active");
+
+  if (normalized === "cart") renderCart();
+  if (normalized === "favorites") renderFavorites();
+  if (normalized === "checkout") renderCheckout();
+ };
+
+ function createCategoryCard(category) {
+  const total = category.farms.reduce((sum, farm) => sum + farm.products.length, 0);
+  return `
+   <div class="cat-card" onclick="openCategory('${category.id}')">
+    <span class="open-badge">›</span>
+    <img src="${category.image || 'Logo.jpg'}" alt="${category.name}">
+    <div class="title">${category.name}</div>
+    <div class="meta">${total} produit${total > 1 ? 's' : ''} · ${category.directToProducts ? 'direct' : 'sous-catégories'}</div>
+   </div>`;
+ }
+
+ function favoriteIconHTML(active) {
+  return `<svg aria-hidden="true"><use href="#${active ? 'ic-heart' : 'ic-heart-outline'}"></use></svg>`;
+ }
+
+ function syncProductFavoriteButton() {
+  const btn = document.getElementById("p-like");
+  if (!btn || !currentProd) return;
+  const active = favorites.has(currentProd.id);
+  btn.innerHTML = favoriteIconHTML(active);
+  btn.classList.toggle("active", active);
+ }
+
+ function createCardHTML(product, isLarge = false) {
+  const from = firstPrice(product);
+  const count = mediaCount(product);
+  const isFav = favorites.has(product.id);
+  const badge = safeText(product.farmName || product.type || product.category?.name, "Premium");
+  const safeId = encodeURIComponent(product.id);
+  return `
+   <div class="prod-card ${isLarge ? 'large' : ''}" onclick="openProduct(decodeURIComponent('${safeId}'))">
+    <div class="prod-img-wrap">
+     <img src="${productImage(product)}" alt="${product.name}">
+     <div class="media-chip">${hasVideo(product) ? '▶ ' + count + ' média' : 'IMAGE'}</div>
+     <button class="fav-chip ${isFav ? 'active' : ''}" aria-label="Favori" onclick="event.stopPropagation(); toggleFavorite(decodeURIComponent('${safeId}'))">${favoriteIconHTML(isFav)}</button>
+    </div>
+    <div class="prod-info">
+     <div class="prod-badge">${shortText(badge, 30)}</div>
+     <div class="prod-title">${product.name}</div>
+     <div class="prod-farm">Farm : ${shortText(product.farm || product.farmName, 42)}</div>
+     <div class="prod-card-bottom">
+      <div class="from-price"><span>À partir de</span><b>${money(from)}</b></div>
+      <div class="details-pill">Détails</div>
+     </div>
+    </div>
+   </div>`;
+ }
+
+ function renderHome(products = allProducts) {
+  const catContainer = document.getElementById("cat-scroll");
+  catContainer.innerHTML = appData.map(createCategoryCard).join("");
+
+  const filtered = products.length ? products : allProducts;
+  document.getElementById("recent-scroll").innerHTML = filtered.slice(0, 6).map(p => createCardHTML(p, true)).join("");
+  document.getElementById("trend-grid").innerHTML = filtered.slice(0, 12).map(p => createCardHTML(p, false)).join("") || emptyState("Aucun produit trouvé");
+  setStats();
+ }
+
+ function emptyState(text) {
+  return `<div class="empty-state" style="grid-column:1/-1">${text}</div>`;
+ }
+
+ document.getElementById("home-search")?.addEventListener("input", (e) => {
+  const q = e.target.value;
+  const results = allProducts.filter(p => productMatches(p, q));
+  renderHome(results);
+ });
+
+ window.openCategory = function(catId) {
+  currentCategory = appData.find(c => c.id === catId);
+  if (!currentCategory) return;
+  window.lastListPage = "cat-list";
+
+  document.getElementById("cat-list-title").innerText = currentCategory.name;
+  document.getElementById("cat-banner-img").src = currentCategory.image || "Logo.jpg";
+  document.getElementById("cat-banner-bg").src = currentCategory.image || "Logo.jpg";
+
+  const select = document.getElementById("cat-type-select");
+  const activeFarms = currentCategory.farms.filter(f => f.products.length || !currentCategory.directToProducts);
+  select.innerHTML = `<option value="ALL">✨ Tout afficher</option>` + activeFarms.map(f => `<option value="${f.id}">${f.name} (${f.products.length})</option>`).join("");
+  select.style.display = currentCategory.directToProducts ? "none" : "block";
+  document.getElementById("cat-search").value = "";
+  renderCategoryProducts();
+  navigate("cat-list");
+ };
+
+ function renderCategoryProducts() {
+  if (!currentCategory) return;
+  const selectedFarm = document.getElementById("cat-type-select").value || "ALL";
+  const query = document.getElementById("cat-search").value || "";
+  let products = [];
+  currentCategory.farms.forEach(farm => {
+   if (selectedFarm === "ALL" || farm.id === selectedFarm) products.push(...farm.products);
+  });
+  products = products.filter(p => productMatches(p, query));
+  document.getElementById("cat-list-grid").innerHTML = products.map(p => createCardHTML(p, false)).join("") || emptyState("Aucun produit disponible.");
+ }
+
+ document.getElementById("cat-type-select")?.addEventListener("change", () => { renderCategoryProducts(); haptic(); });
+ document.getElementById("cat-search")?.addEventListener("input", renderCategoryProducts);
+
+ function productVideoControlsHTML() {
+  return `
+   <div class="product-video-controls">
+    <button type="button" id="video-play-pause">⏸</button>
+    <button type="button" id="video-back-10">↺ 10s</button>
+    <button type="button" id="video-fullscreen">⛶</button>
+   </div>`;
+ }
+
+ function showProductVideoControls() {
+  const layer = document.getElementById("product-video-controls-layer");
+  if (!layer) return;
+  layer.innerHTML = productVideoControlsHTML();
+  bindProductVideoControls();
+ }
+
+ function hideProductVideoControls() {
+  const layer = document.getElementById("product-video-controls-layer");
+  if (layer) layer.innerHTML = "";
+ }
+
+ function getActiveProductVideo() {
+  const mediaZone = document.getElementById("prod-media");
+  const videos = Array.from(mediaZone.querySelectorAll("video"));
+  if (!videos.length) return null;
+  if (videos.length === 1) return videos[0];
+  const center = mediaZone.scrollLeft + mediaZone.clientWidth / 2;
+  return videos.reduce((best, video) => {
+   const slide = video.closest(".multi-video-slide");
+   const slideCenter = slide.offsetLeft + slide.clientWidth / 2;
+   const distance = Math.abs(slideCenter - center);
+   return distance < best.distance ? { video, distance } : best;
+  }, { video: videos[0], distance: Infinity }).video;
+ }
+
+ function bindProductVideoControls() {
+  const playPauseBtn = document.getElementById("video-play-pause");
+  const backBtn = document.getElementById("video-back-10");
+  const fullscreenBtn = document.getElementById("video-fullscreen");
+  if (!playPauseBtn || !backBtn || !fullscreenBtn) return;
+
+  playPauseBtn.onclick = () => {
+   const video = getActiveProductVideo();
+   if (!video) return;
+   if (video.paused) { video.play(); playPauseBtn.innerText = "⏸"; }
+   else { video.pause(); playPauseBtn.innerText = "▶"; }
+   haptic();
   };
+  backBtn.onclick = () => { const v = getActiveProductVideo(); if (v) v.currentTime = Math.max(0, v.currentTime - 10); haptic(); };
+  fullscreenBtn.onclick = () => {
+   const v = getActiveProductVideo(); if (!v) return;
+   if (v.webkitEnterFullscreen) v.webkitEnterFullscreen();
+   else if (v.requestFullscreen) v.requestFullscreen();
+   else if (v.webkitRequestFullscreen) v.webkitRequestFullscreen();
+   haptic();
+  };
+ }
 
-  function updateProdTotal() {
-    document.getElementById("p-qty").innerText = currQty;
-    document.getElementById("p-total").innerText =
-      (currTarif.price * currQty).toFixed(2) + "€";
+ window.openProduct = function(id) {
+  currentProd = allProducts.find(p => p.id === id);
+  if (!currentProd) return;
+  currQty = 1;
+  currTarif = currentProd.tarifs?.[0] || { weight: "-", price: 0 };
+  currVar = currentProd.jars ? currentProd.jars[0].name : null;
+  window.lastListPage = document.getElementById("page-cat-list").classList.contains("active") ? "cat-list" : "home";
+
+  const mediaZone = document.getElementById("prod-media");
+  mediaZone.className = "prod-media-zone";
+  if (currentProd.videos && currentProd.videos.length > 0) {
+   mediaZone.classList.add("multiple-media");
+   let html = currentProd.videos.map(v => `<div class="multi-video-slide"><video autoplay loop muted playsinline controls><source src="${v}" type="video/mp4"></video></div>`).join("");
+   if (currentProd.videos.length > 1) html += `<div class="swipe-hint">Swipe ➜</div>`;
+   mediaZone.innerHTML = html;
+   showProductVideoControls();
+  } else if (currentProd.video) {
+   mediaZone.innerHTML = `<video autoplay loop muted playsinline controls><source src="${currentProd.video}" type="video/mp4"></video>`;
+   showProductVideoControls();
+  } else {
+   mediaZone.innerHTML = `<img src="${productImage(currentProd)}" alt="${currentProd.name}">`;
+   hideProductVideoControls();
   }
 
-  document.getElementById("p-minus").onclick = () => {
-    if (currQty > 1) {
-      currQty--;
-      updateProdTotal();
-    }
-  };
-  document.getElementById("p-plus").onclick = () => {
-    currQty++;
-    updateProdTotal();
-  };
+  document.getElementById("p-type").innerText = safeText(currentProd.type, "Premium");
+  document.getElementById("p-name").innerText = currentProd.name;
+  document.getElementById("p-farm").innerText = "Farm : " + safeText(currentProd.farm || currentProd.farmName, "Non renseignée");
+  document.getElementById("p-subtype").innerText = safeText(currentProd.farmName, "-");
+  document.getElementById("p-from").innerText = money(firstPrice(currentProd));
+  document.getElementById("p-media-count").innerText = `${mediaCount(currentProd)} média${mediaCount(currentProd) > 1 ? 's' : ''}`;
+  document.getElementById("p-format-count").innerText = `${currentProd.tarifs?.length || 0} format${(currentProd.tarifs?.length || 0) > 1 ? 's' : ''}`;
+  document.getElementById("p-desc").innerHTML = currentProd.description ? currentProd.description.split("\\n").join("<br>") : "Fiche catalogue avec visuel, farm, formats disponibles et médias associés.";
+  syncProductFavoriteButton();
 
-  document.getElementById("p-add").onclick = () => {
-    const cartId = `${currentProd.id}-${currTarif.weight}-${currVar || "def"}`;
-    const ext = cart.find((i) => i.id === cartId);
-    let fn = currentProd.name;
-    if (currVar) fn += ` (${currVar})`;
+  const vZone = document.getElementById("variants-zone");
+  const vScroll = document.getElementById("p-variants");
+  if (currentProd.jars && currentProd.jars.length) {
+   vZone.style.display = "block";
+   vScroll.innerHTML = currentProd.jars.map((j, i) => `<div class="tarif-pill var-btn ${i === 0 ? 'active' : ''}" data-val="${j.name}"><span class="w">${j.emoji || '•'}</span><span class="p">${j.name}</span></div>`).join("");
+   document.querySelectorAll(".var-btn").forEach(btn => btn.onclick = e => {
+    document.querySelectorAll(".var-btn").forEach(x => x.classList.remove("active"));
+    e.currentTarget.classList.add("active"); currVar = e.currentTarget.dataset.val; haptic();
+   });
+  } else vZone.style.display = "none";
 
-    if (ext) {
-      ext.qty += currQty;
-      ext.tot = ext.qty * ext.price;
-    } else {
-      cart.push({
-        id: cartId,
-        name: fn,
-        img: currentProd.image,
-        weight: currTarif.weight,
-        price: currTarif.price,
-        qty: currQty,
-        tot: currTarif.price * currQty,
-      });
-    }
-
-    tg.HapticFeedback.notificationOccurred("success");
-    document.getElementById("success-modal").style.display = "flex";
-    updateBadge();
-  };
-
-  // --- PANIER ---
-  function updateBadge() {
-    const count = cart.reduce((s, i) => s + i.qty, 0);
-    const b = document.getElementById("nav-badge");
-    b.innerText = count;
-    b.style.display = count > 0 ? "flex" : "none";
-  }
-
-  function renderCart() {
-    const list = document.getElementById("cart-list");
-    if (cart.length === 0) {
-      list.innerHTML = `<p style="text-align:center;color:var(--text-muted);margin-top:40px;">Panier vide</p>`;
-      document.getElementById("cart-recap-text").innerText = "Total (0)";
-      document.getElementById("cart-total-display").innerText = "0€";
-      return;
-    }
-
-    list.innerHTML = cart
-      .map(
-        (i) => `
-            <div class="cart-item">
-                <img src="${i.img || 'Logo.jpg'}">
-                <div style="flex-grow:1">
-                    <div style="font-weight:800; font-size:0.95rem;">${i.name}</div>
-                    <div style="color:var(--text-muted); font-size:0.8rem; margin: 4px 0;">Grammage: ${i.weight}</div>
-                    <div style="font-weight:800;">${i.tot.toFixed(2)}€</div>
-                </div>
-                <div style="display:flex; align-items:center; background:var(--bg-color); border-radius:10px; padding:4px;">
-                    <button style="border:none;background:none;font-size:1.2rem;font-weight:bold;width:30px;" onclick="modCart('${i.id}',-1)">-</button>
-                    <span style="font-weight:800; width:20px; text-align:center;">${i.qty}</span>
-                    <button style="border:none;background:none;font-size:1.2rem;font-weight:bold;width:30px;" onclick="modCart('${i.id}',1)">+</button>
-                </div>
-            </div>
-        `,
-      )
-      .join("");
-
-    const sum = cart.reduce((s, i) => s + i.tot, 0);
-    const count = cart.reduce((s, i) => s + i.qty, 0);
-    document.getElementById("cart-recap-text").innerText =
-      `Total (${count} articles)`;
-    document.getElementById("cart-total-display").innerText =
-      sum.toFixed(2) + "€";
-  }
-
-  window.modCart = function (id, d) {
-    const item = cart.find((i) => i.id === id);
-    item.qty += d;
-    if (item.qty <= 0) cart = cart.filter((i) => i.id !== id);
-    else item.tot = item.qty * item.price;
-    renderCart();
-    updateBadge();
-  };
-
-  // --- CHECKOUT & SWIPE ---
-  function renderCheckout() {
-    const cItems = document.getElementById("checkout-items");
-    cItems.innerHTML = cart
-      .map((i) => `• ${i.name} (${i.weight}) x${i.qty} — ${i.tot.toFixed(2)}€`)
-      .join("<br>");
-    const sum = cart.reduce((s, i) => s + i.tot, 0);
-    document.getElementById("checkout-total").innerText =
-      `Total: ${sum.toFixed(2)}€`;
-  }
-
-  document.querySelectorAll(".mode-btn").forEach((b) => {
-    b.onclick = (e) => {
-      document
-        .querySelectorAll(".mode-btn")
-        .forEach((btn) => btn.classList.remove("active"));
-      e.currentTarget.classList.add("active");
-      checkoutMode = e.currentTarget.dataset.m;
-
-      const info = document.getElementById("info-text");
-      const addr = document.getElementById("address-field");
-      if (checkoutMode === "Livraison") {
-        info.innerText = "L'adresse vous sera communiquée en MP.";
-        addr.style.display = "block";
-      }
-      if (checkoutMode === "Meet-up") {
-        info.innerText = "Lieu exact communiqué après validation.";
-        addr.style.display = "none";
-      }
-      if (checkoutMode === "Envoi colis") {
-        info.innerText = "Suivi d'envoi confirmé après validation.";
-        addr.style.display = "block";
-        addr.placeholder = "Adresse postale complète...";
-      }
-    };
+  const tScroll = document.getElementById("p-tarifs");
+  tScroll.innerHTML = (currentProd.tarifs || []).map((t, i) => `<div class="tarif-pill tar-btn ${i === 0 ? 'active' : ''}" data-idx="${i}"><span class="w">${t.weight}</span><span class="p">${money(t.price)}</span></div>`).join("");
+  document.querySelectorAll(".tar-btn").forEach(btn => btn.onclick = e => {
+   document.querySelectorAll(".tar-btn").forEach(x => x.classList.remove("active"));
+   e.currentTarget.classList.add("active"); currTarif = currentProd.tarifs[e.currentTarget.dataset.idx]; updateProdTotal(); haptic();
   });
 
-  // Slider Logique Native
-  const swipeBtn = document.getElementById("swipe-btn");
-  const swipeBox = document.getElementById("swipe-box");
-  let isDragging = false,
-    startX = 0;
+  renderSimilarProducts();
+  updateProdTotal();
+  navigate("product");
+ };
 
-  swipeBtn.addEventListener("touchstart", (e) => {
-    if (cart.length === 0) return;
-    isDragging = true;
-    startX = e.touches[0].clientX - swipeBtn.offsetLeft;
-    swipeBtn.style.transition = "none";
-  });
-  swipeBtn.addEventListener("touchmove", (e) => {
-    if (!isDragging) return;
-    const max = swipeBox.offsetWidth - swipeBtn.offsetWidth - 8;
-    let x = e.touches[0].clientX - startX;
-    if (x < 4) x = 4;
-    if (x > max) x = max;
-    swipeBtn.style.left = `${x}px`;
-  });
-  swipeBtn.addEventListener("touchend", () => {
-    isDragging = false;
-    const max = swipeBox.offsetWidth - swipeBtn.offsetWidth - 8;
-    const cur = parseInt(swipeBtn.style.left || 4);
-    if (cur > max * 0.85) {
-      swipeBtn.style.left = `${max}px`;
-      swipeBtn.style.background = "var(--green)";
-      swipeBtn.innerHTML = "✓";
-      tg.HapticFeedback.notificationOccurred("success");
+ function renderSimilarProducts() {
+  const similar = allProducts
+   .filter(p => p.id !== currentProd.id && (p.category?.id === currentProd.category?.id || p.farmName === currentProd.farmName))
+   .slice(0, 8);
+  document.getElementById("p-similar").innerHTML = similar.map(p => createCardHTML(p, false)).join("") || `<div class="tiny">Aucun produit similaire.</div>`;
+ }
 
-      // Envoi Message
-      let msg = `*🛒 COMMANDE MONKEY.D THE DRY*\n\n`;
-      cart.forEach((i) => {
-        msg += `▪️ *${i.name}* (${i.weight}) x${i.qty} = ${i.tot.toFixed(2)}€\n`;
-      });
-      const sum = cart.reduce((s, i) => s + i.tot, 0);
-      msg += `\n*💰 TOTAL: ${sum.toFixed(2)}€*\n*📦 Mode:* ${checkoutMode}\n`;
-      if (document.getElementById("address-field").style.display !== "none") {
-        msg += `*📍 Adresse:* ${document.getElementById("address-field").value || "Non précisée"}`;
-      }
-      tg.openTelegramLink(
-        `https://t.me/MonkeyDieLuffy2?text=${encodeURIComponent(msg)}`,
-      );
+ function updateProdTotal() {
+  document.getElementById("p-qty").innerText = currQty;
+  document.getElementById("p-total").innerText = money((currTarif?.price || 0) * currQty);
+ }
+ document.getElementById("p-minus").onclick = () => { if (currQty > 1) { currQty--; updateProdTotal(); haptic(); } };
+ document.getElementById("p-plus").onclick = () => { currQty++; updateProdTotal(); haptic(); };
+ document.getElementById("p-like").onclick = () => toggleFavorite(currentProd.id);
 
-      setTimeout(() => {
-        swipeBtn.style.transition = "left 0.3s ease, background 0.3s ease";
-        swipeBtn.style.left = "4px";
-        swipeBtn.style.background = "var(--blue)";
-        swipeBtn.innerHTML =
-          '<svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
-      }, 2000);
-    } else {
-      swipeBtn.style.transition = "left 0.3s ease";
-      swipeBtn.style.left = "4px";
-    }
-  });
-
-  // --- GESTION DES CLICS SUR LA NOUVELLE NAVBAR ---
-  document.querySelectorAll(".nav-btn").forEach((btn) => {
-    btn.addEventListener("click", (e) => {
-      const target = e.currentTarget.dataset.target;
-      if (!target) return;
-
-      // Les fameuses lignes pour l'animation de la pilule !
-      document
-        .querySelectorAll(".nav-item-float")
-        .forEach((i) => i.classList.remove("active"));
-      if (e.currentTarget.classList.contains("nav-item-float")) {
-        e.currentTarget.classList.add("active");
-      }
-
-      // Redirection vers la bonne page
-      const pageName = target.replace("page-", "");
-      navigate(pageName);
-    });
-  });
-
-  // NE TOUCHE PAS AUX DEUX LIGNES EN DESSOUS (Elles y sont déjà)
+ window.toggleFavorite = function(id) {
+  if (favorites.has(id)) favorites.delete(id); else favorites.add(id);
+  syncProductFavoriteButton();
   renderHome();
+  renderCategoryProducts();
+  renderFavorites();
+  haptic("medium");
+ };
+
+ document.getElementById("p-add").onclick = () => {
+  if (!currentProd || !currTarif) return;
+  const cartId = `${currentProd.id}-${currTarif.weight}-${currVar || 'def'}`;
+  const found = cart.find(i => i.id === cartId);
+  let name = currentProd.name + (currVar ? ` (${currVar})` : "");
+  if (found) { found.qty += currQty; found.tot = found.qty * found.price; }
+  else cart.push({ id: cartId, productId: currentProd.id, name, img: productImage(currentProd), farm: currentProd.farm || currentProd.farmName, weight: currTarif.weight, price: currTarif.price, qty: currQty, tot: currTarif.price * currQty });
+  updateBadge(); document.getElementById("success-modal").style.display = "flex"; haptic("heavy");
+ };
+
+ function updateBadge() {
+  const count = cart.reduce((s, i) => s + i.qty, 0);
+  const badge = document.getElementById("nav-badge");
+  badge.innerText = count;
+  badge.style.display = count ? "flex" : "none";
+ }
+
+ function renderCart() {
+  const list = document.getElementById("cart-list");
+  if (!cart.length) {
+   list.innerHTML = emptyState("Ta sélection est vide.");
+   document.getElementById("cart-recap-text").innerText = "Total (0)";
+   document.getElementById("cart-total-display").innerText = "0€";
+   return;
+  }
+  list.innerHTML = cart.map((i, index) => `
+   <div class="cart-item">
+    <img src="${i.img}" alt="${i.name}">
+    <div style="flex:1;min-width:0">
+     <div style="font-weight:1000;line-height:1.2">${i.name}</div>
+     <div class="tiny">Farm : ${shortText(i.farm, 34)}</div>
+     <div class="tiny">${i.weight} · x${i.qty} · ${money(i.tot)}</div>
+    </div>
+    <button class="cart-trash" onclick="removeCartItem(${index})">×</button>
+   </div>`).join("");
+  const total = cart.reduce((s, i) => s + i.tot, 0);
+  document.getElementById("cart-recap-text").innerText = `Total (${cart.reduce((s,i)=>s+i.qty,0)})`;
+  document.getElementById("cart-total-display").innerText = money(total);
+ }
+
+ window.removeCartItem = function(index) { cart.splice(index, 1); renderCart(); updateBadge(); haptic(); };
+
+ function renderFavorites() {
+  const favs = allProducts.filter(p => favorites.has(p.id));
+  document.getElementById("fav-grid").innerHTML = favs.map(p => createCardHTML(p, false)).join("") || emptyState("Aucun favori pour le moment.");
+ }
+
+ document.querySelectorAll(".mode-btn").forEach(btn => btn.addEventListener("click", e => {
+  document.querySelectorAll(".mode-btn").forEach(b => b.classList.remove("active"));
+  e.currentTarget.classList.add("active");
+  checkoutMode = e.currentTarget.dataset.m;
+  haptic();
+ }));
+
+ function renderCheckout() {
+  const items = document.getElementById("checkout-items");
+  if (!cart.length) { items.innerHTML = "Aucun produit dans la sélection."; document.getElementById("checkout-total").innerText = "Total indicatif : 0€"; return; }
+  items.innerHTML = cart.map(i => `• ${i.name} — ${i.weight} x${i.qty} — ${money(i.tot)}`).join("<br>");
+  document.getElementById("checkout-total").innerText = "Total indicatif : " + money(cart.reduce((s,i)=>s+i.tot,0));
+ }
+
+ document.getElementById("send-request-btn")?.addEventListener("click", () => {
+  const note = document.getElementById("address-field").value.trim();
+  const lines = cart.map(i => `- ${i.name} | ${i.weight} x${i.qty} | ${money(i.tot)}`).join("\n");
+  const total = money(cart.reduce((s,i)=>s+i.tot,0));
+  const msg = `Salut, je voudrais des infos sur ma sélection catalogue.\n\nMode : ${checkoutMode}\n${lines}\n\nTotal indicatif : ${total}${note ? "\n\nNote : " + note : ""}`;
+  window.open(contactUrl + "?text=" + encodeURIComponent(msg), "_blank");
+ });
+
+ function renderReviewStars() {
+  document.querySelectorAll("#review-stars button").forEach(btn => {
+   const rating = Number(btn.dataset.rating);
+   btn.classList.toggle("active", rating <= selectedReviewRating);
+  });
+ }
+
+ document.querySelectorAll("#review-stars button").forEach(btn => btn.addEventListener("click", (e) => {
+  selectedReviewRating = Number(e.currentTarget.dataset.rating) || 5;
+  renderReviewStars();
+  haptic();
+ }));
+
+ document.getElementById("send-review-btn")?.addEventListener("click", () => {
+  const text = document.getElementById("review-message")?.value.trim() || "";
+  const stars = "★".repeat(selectedReviewRating) + "☆".repeat(5 - selectedReviewRating);
+  const msg = `Salut, je veux laisser un avis.\n\nNote : ${stars}\nAvis : ${text || "Je suis satisfait du catalogue."}`;
+  window.open(contactUrl + "?text=" + encodeURIComponent(msg), "_blank");
+ });
+
+ document.querySelectorAll(".nav-btn").forEach(btn => btn.addEventListener("click", () => {
+  const page = btn.dataset.target.replace("page-", "");
+  navigate(page);
+  haptic();
+ }));
+
+ const user = tg.initDataUnsafe?.user;
+ if (user) {
+  document.getElementById("prof-pseudo").innerText = user.username ? `@${user.username}` : (user.first_name || "Membre");
+  document.getElementById("prof-id").innerText = user.id || "-";
+  if (user.photo_url) document.getElementById("prof-img").src = user.photo_url;
+ }
+
+ renderHome();
+ updateBadge();
 });

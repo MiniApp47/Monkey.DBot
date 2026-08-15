@@ -1,934 +1,676 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Monkey.D The Dry</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <style>
-        :root {
-            --bg-color: #F2F2F7; /* Fond gris iOS */
-            --card-bg: #FFFFFF;
-            --text-main: #000000;
-            --text-muted: #8E8E93;
-            --primary: #000000;
-            --border: #E5E5EA;
-            --radius-sm: 12px;
-            --radius-md: 16px;
-            --radius-lg: 24px;
-            --shadow-sm: 0 2px 8px rgba(0,0,0,0.04);
-            --shadow-md: 0 4px 16px rgba(0,0,0,0.08);
-            --blue: #007AFF;
-            --green: #34C759;
-            --red: #FF3B30;
-        }
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+ <title>Monkey.D The Dry — V3</title>
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+ <script src="https://telegram.org/js/telegram-web-app.js"></script>
+ <style>
+  :root {
+   --bg-color: #101014;
+   --bg-deep: #07070a;
+   --card-bg: rgba(22, 23, 30, 0.78);
+   --card-strong: rgba(33, 35, 46, 0.92);
+   --text-main: #ffffff;
+   --text-muted: #c8beff;
+   --text-soft: #8f86c9;
+   --primary: #5b37d4;
+   --primary-2: #e85dac;
+   --primary-3: #20fff2;
+   --green: #30ff66;
+   --red: #ff3b5f;
+   --warning: #f5bd4f;
+   --border: rgba(132, 99, 255, 0.36);
+   --border-strong: rgba(232, 93, 172, 0.54);
+   --radius-sm: 12px;
+   --radius-md: 18px;
+   --radius-lg: 28px;
+   --radius-xl: 34px;
+   --shadow-glow: 0 18px 55px rgba(91,55,212,.32);
+   --shadow-pink: 0 18px 55px rgba(232,93,172,.20);
+   --nav-h: 82px;
+  }
 
-        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html { scroll-behavior: smooth; }
+  body {
+   margin: 0;
+   min-height: 100vh;
+   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+   background:
+    radial-gradient(circle at 20% 5%, rgba(91,55,212,.35), transparent 32%),
+    radial-gradient(circle at 95% 16%, rgba(32,255,242,.18), transparent 26%),
+    radial-gradient(circle at 40% 90%, rgba(232,93,172,.18), transparent 26%),
+    linear-gradient(rgba(3,3,6,.82), rgba(3,3,6,.88)),
+    url('Fondecran.png');
+   background-size: cover;
+   background-position: center;
+   background-attachment: fixed;
+   color: var(--text-main);
+   padding-bottom: calc(var(--nav-h) + 28px);
+   overflow-x: hidden;
+  }
+  body::before {
+   content: '';
+   position: fixed;
+   inset: -20%;
+   z-index: -1;
+   background:
+    linear-gradient(115deg, transparent 0 25%, rgba(32,255,242,.08) 35%, transparent 48%),
+    linear-gradient(245deg, transparent 0 35%, rgba(232,93,172,.09) 45%, transparent 62%);
+   filter: blur(6px);
+   animation: auroraMove 12s ease-in-out infinite alternate;
+  }
+  @keyframes auroraMove {
+   0% { transform: translate3d(-2%, -1%, 0) rotate(0deg) scale(1); }
+   100% { transform: translate3d(3%, 2%, 0) rotate(4deg) scale(1.04); }
+  }
 
-        body {
-            font-family: 'Inter', -apple-system, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            margin: 0; padding: 0;
-            overscroll-behavior-y: none;
-            padding-bottom: 100px; /* Espace Bottom Nav */
-        }
+  /* Loader */
+  #page-loader {
+   position: fixed;
+   inset: 0;
+   z-index: 2000;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   background: radial-gradient(circle at center, rgba(91,55,212,.28), #050507 68%);
+   transition: opacity .35s ease, visibility .35s ease;
+  }
+  #page-loader.hide { opacity: 0; visibility: hidden; pointer-events: none; }
+  .loader-card {
+   width: min(78vw, 330px);
+   padding: 28px;
+   border-radius: 34px;
+   background: rgba(15,15,20,.72);
+   border: 1px solid rgba(232,93,172,.32);
+   box-shadow: 0 25px 80px rgba(91,55,212,.35);
+   text-align: center;
+   backdrop-filter: blur(18px);
+  }
+  .loader-logo {
+   width: 96px; height: 96px; border-radius: 28px; object-fit: cover;
+   border: 1px solid rgba(255,255,255,.14);
+   box-shadow: 0 0 0 6px rgba(91,55,212,.12), 0 18px 45px rgba(232,93,172,.28);
+   animation: pulseLogo 1.5s ease-in-out infinite alternate;
+  }
+  @keyframes pulseLogo { to { transform: scale(1.035); filter: saturate(1.18); } }
+  .loader-title { margin: 16px 0 5px; font-weight: 900; letter-spacing: .3px; }
+  .loader-sub { margin: 0; color: var(--text-muted); font-size: .82rem; }
+  .progress-line { width: 100%; height: 8px; border-radius: 99px; background: rgba(255,255,255,.10); overflow: hidden; margin-top: 20px; }
+  .progress-line span { display: block; width: 0; height: 100%; background: linear-gradient(90deg,var(--primary),var(--primary-2),var(--primary-3)); animation: loadWidth 1.2s ease forwards; }
+  @keyframes loadWidth { to { width: 100%; } }
 
-        /* --- UTILITAIRES & PAGES --- */
-        .page { display: none; flex-direction: column; min-height: 100vh; animation: fade 0.2s ease-out; }
-        .page.active { display: flex; }
-        @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
-        
-        .section-title {
-            font-size: 0.8rem; font-weight: 700; color: var(--text-muted);
-            letter-spacing: 1px; padding: 0 20px; margin: 25px 0 10px 0;
-            border-left: 3px solid var(--text-muted); margin-left: 15px;
-        }
+  .page { display: none; min-height: 100vh; animation: pageIn .22s ease-out; }
+  .page.active { display: block; }
+  @keyframes pageIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
-      /* --- HERO BANNER (Page d'accueil) --- */
-        .hero-banner {
-            position: relative;
-            width: 100%;
-            height: 280px; 
-            overflow: hidden;
-            background: #000;
-        }
-        .hero-banner img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        /* Effet de fondu avec le fond de l'app */
-        .hero-gradient {
-            position: absolute;
-            bottom: 0; left: 0; width: 100%; height: 60px;
-            background: linear-gradient(to top, var(--bg-color), transparent);
-            pointer-events: none;
-            z-index: 2;
-        }
-        /* Conteneur des icônes */
-        .hero-links {
-            position: absolute;
-            bottom: 20px;
-            left: 0;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap; /* Sécurité si l'écran est trop petit */
-            gap: 12px; /* Espace optimisé pour 6 boutons */
-            z-index: 5;
-            padding: 0 10px;
-        }
-        /* Boutons réseaux sociaux (Glassmorphism "App iOS") */
-        .hero-icon {
-            width: 42px; height: 42px;
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 12px; /* Carré arrondi style Apple */
-            display: flex; align-items: center; justify-content: center;
-            color: white; 
-            text-decoration: none;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            transition: transform 0.2s;
-        }
-        .hero-icon:active { transform: scale(0.9); }
+  .safe { padding-left: max(18px, env(safe-area-inset-left)); padding-right: max(18px, env(safe-area-inset-right)); }
+  .section-title {
+   display: flex; align-items: center; justify-content: space-between;
+   padding: 0 18px; margin: 24px 0 12px;
+   font-size: .78rem; text-transform: uppercase; letter-spacing: 1.1px;
+   color: var(--text-muted); font-weight: 900;
+  }
+  .section-title::before { content: ''; width: 9px; height: 9px; margin-right: 8px; border-radius: 50%; background: var(--green); box-shadow: 0 0 18px var(--green); }
+  .section-title > span:first-child { display: flex; align-items: center; gap: 8px; }
+  .section-action { font-size: .74rem; color: #fff; opacity: .78; }
 
-/* --- HEADER HEADER CLEAN --- */
-        .header {
-            background: rgba(255,255,255,0.9); backdrop-filter: blur(10px);
-            display: flex; align-items: center; 
-            padding: 15px; position: sticky; top: 0; z-index: 50;
-            font-weight: 700; font-size: 1.1rem; border-bottom: 1px solid var(--border);
-            overflow: hidden; /* Empêche le texte de dépasser l'écran */
-        }
-        .header-back { position: absolute; left: 15px; cursor: pointer; color: var(--text-main); font-size: 1.5rem; background:none; border:none;}
+  .app-header {
+   position: sticky; top: 0; z-index: 100;
+   display: flex; align-items: center; justify-content: space-between;
+   padding: 12px 18px;
+   background: rgba(9,9,13,.62);
+   backdrop-filter: blur(18px);
+   border-bottom: 1px solid rgba(132,99,255,.18);
+  }
+  .back-btn, .round-btn {
+   width: 42px; height: 42px; border-radius: 50%; border: 1px solid rgba(255,255,255,.12);
+   background: rgba(255,255,255,.08); color: #fff; display: grid; place-items: center;
+   font-size: 1.35rem; cursor: pointer;
+  }
+  .app-title { font-weight: 900; text-align: center; flex: 1; }
+  .tiny { color: var(--text-soft); font-size: .78rem; font-weight: 700; }
 
-        /* --- STYLE UNIQUE DU LOGO CLF44 --- */
-        .logo-style {
-            /* Police massive et condensée */
-            font-family: 'Arial Black', 'Inter', sans-serif;
-            font-weight: 900;
-            font-size: 1.4rem;
-            letter-spacing: -0.5px;
-            text-transform: uppercase;
-            
-            /* Le fameux dégradé de couleur "Luxe" à l'intérieur du texte */
-            background: linear-gradient(135deg, #000000 0%, #5a5a5e 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            
-            /* Ombre portée pour détacher le logo du fond */
-            filter: drop-shadow(0px 3px 4px rgba(0, 0, 0, 0.15));
-        }
-        /* Animation de rebond horizontal */
-        .bouncing-text {
-            display: inline-block;
-            white-space: nowrap;
-            /* L'animation dure 4s, est fluide (ease-in-out), infinie, et fait des allers-retours (alternate) */
-            animation: bounceX 4s ease-in-out infinite alternate;
-        }
+  /* Home */
+  .hero-v3 {
+   position: relative;
+   min-height: 390px;
+   padding: 22px 18px 24px;
+   overflow: hidden;
+   border-bottom: 1px solid rgba(132,99,255,.20);
+  }
+  .hero-v3::before {
+   content: '';
+   position: absolute; inset: 0;
+   background: linear-gradient(180deg, rgba(0,0,0,.08), rgba(4,4,7,.68)), url('Logo.jpg') center/cover;
+   filter: saturate(1.08) contrast(1.05);
+   opacity: .72;
+   transform: scale(1.02);
+  }
+  .hero-v3::after {
+   content: '';
+   position: absolute; inset: auto -10% -24% -10%; height: 200px;
+   background: radial-gradient(ellipse at center, rgba(91,55,212,.38), transparent 68%);
+   pointer-events: none;
+  }
+  .hero-content { position: relative; z-index: 2; display: flex; flex-direction: column; min-height: 342px; }
+  .hero-top { display: flex; align-items: center; justify-content: space-between; }
+  .brand-pill {
+   display: inline-flex; align-items: center; gap: 8px;
+   padding: 8px 12px; border-radius: 999px;
+   background: rgba(10,10,14,.52); border: 1px solid rgba(255,255,255,.12);
+   backdrop-filter: blur(12px); font-size: .78rem; font-weight: 900;
+   box-shadow: 0 12px 30px rgba(0,0,0,.28);
+  }
+  .live-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--green); box-shadow: 0 0 16px var(--green); }
+  .hero-main { margin-top: auto; }
+  .hero-kicker { color: var(--primary-3); font-size: .76rem; font-weight: 900; letter-spacing: 1.1px; text-transform: uppercase; }
+  .hero-name {
+   margin: 6px 0 8px; font-size: clamp(2rem, 9vw, 3.3rem); line-height: .94; font-weight: 1000;
+   letter-spacing: -1.7px; text-shadow: 0 18px 50px rgba(0,0,0,.45);
+  }
+  .hero-desc { margin: 0; color: #eee8ff; font-size: .92rem; line-height: 1.5; max-width: 360px; }
+  .hero-stats {
+   display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-top: 18px;
+  }
+  .stat-card {
+   padding: 12px 10px; border-radius: 18px;
+   background: rgba(12,12,17,.58); border: 1px solid rgba(255,255,255,.12); backdrop-filter: blur(14px);
+  }
+  .stat-card b { display: block; font-size: 1.05rem; }
+  .stat-card span { display: block; color: var(--text-muted); font-size: .68rem; margin-top: 3px; font-weight: 800; }
+  .hero-links-v3 { display: flex; gap: 10px; margin-top: 16px; flex-wrap: wrap; }
+  .hero-link {
+   width: 43px; height: 43px; display: grid; place-items: center; border-radius: 15px;
+   background: rgba(255,255,255,.10); color: #fff; text-decoration: none;
+   border: 1px solid rgba(255,255,255,.14); backdrop-filter: blur(12px);
+   box-shadow: 0 10px 28px rgba(0,0,0,.25);
+  }
+  .hero-link:active, .card:active, .prod-card:active { transform: scale(.985); }
 
-        /* 
-           Le texte se déplace de -30% à +30% de l'espace disponible.
-           Ajuste ces valeurs si tu veux qu'il aille plus ou moins loin sur les bords.
-        */
-        @keyframes bounceX {
-            0% { transform: translateX(-30vw); }
-            100% { transform: translateX(30vw); }
-        }
-        /* --- HOME SCROLLS --- */
-        .h-scroll {
-            display: flex; overflow-x: auto; gap: 15px; padding: 5px 20px 15px 20px;
-            scroll-snap-type: x mandatory; scrollbar-width: none;
-        }
-        .h-scroll::-webkit-scrollbar { display: none; }
-        
-        /* Cartes Catégories */
-        .cat-card {
-            flex: 0 0 140px; scroll-snap-align: start;
-            background: var(--card-bg); border-radius: var(--radius-md);
-            padding: 15px; text-align: center; box-shadow: var(--shadow-sm);
-            display: flex; flex-direction: column; align-items: center; gap: 10px; cursor: pointer;
-        }
-        .cat-card img { width: 60px; height: 60px; object-fit: contain; }
-        .cat-card .title { font-weight: 700; font-size: 0.95rem; }
-        .cat-card .flags { font-size: 0.8rem; letter-spacing: 2px;}
+  .search-shell { padding: 18px 18px 4px; }
+  .search-box {
+   display: flex; align-items: center; gap: 10px;
+   background: rgba(22,23,30,.82); border: 1px solid var(--border); border-radius: 22px;
+   padding: 12px 14px; box-shadow: var(--shadow-glow); backdrop-filter: blur(16px);
+  }
+  .search-box input { flex: 1; min-width: 0; background: none; border: none; color: #fff; font: inherit; outline: none; }
+  .search-box input::placeholder { color: rgba(216,205,255,.70); }
 
-        /* Cartes Récents / Produits */
-        .prod-card-lg {
-            flex: 0 0 220px; scroll-snap-align: start;
-            background: var(--card-bg); border-radius: var(--radius-md);
-            overflow: hidden; box-shadow: var(--shadow-sm); cursor: pointer;
-            border: 1px solid var(--border); display: flex; flex-direction: column;
-        }
-        .prod-card-lg img { width: 100%; height: 160px; object-fit: cover; }
-        .prod-card-lg .info { padding: 12px; flex-grow: 1; display: flex; flex-direction: column; }
-        .prod-card-lg .title { font-weight: 800; font-size: 1rem; margin-bottom: 5px; }
-        .prod-card-lg .badge { 
-            background: var(--primary); color: white; font-size: 0.65rem; 
-            padding: 4px 8px; border-radius: 6px; font-weight: 700; width: max-content; margin-bottom: 10px;
-        }
-        .btn-outline {
-            margin-top: auto; border: 1px solid var(--text-main); background: transparent;
-            color: var(--text-main); font-weight: 700; padding: 10px; border-radius: 10px; text-align: center;
-        }
+  .h-scroll { display: flex; gap: 14px; overflow-x: auto; padding: 2px 18px 12px; scroll-snap-type: x mandatory; scrollbar-width: none; }
+  .h-scroll::-webkit-scrollbar { display: none; }
+  .grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 14px; padding: 0 18px 20px; }
 
-        /* Grid Tendances */
-        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding: 0 20px 20px 20px; }
+  .cat-card {
+   flex: 0 0 152px; min-height: 172px; scroll-snap-align: start;
+   position: relative; overflow: hidden; border-radius: 24px;
+   background: linear-gradient(145deg, rgba(31,34,44,.86), rgba(15,16,22,.86));
+   border: 1px solid rgba(132,99,255,.34); box-shadow: 0 16px 42px rgba(0,0,0,.28);
+   padding: 14px; cursor: pointer;
+  }
+  .cat-card::before { content: ''; position: absolute; inset: -50% -40% auto auto; width: 120px; height: 120px; border-radius: 50%; background: rgba(48,255,102,.18); filter: blur(22px); }
+  .cat-card img { width: 76px; height: 76px; object-fit: contain; display: block; margin: 5px auto 12px; filter: drop-shadow(0 12px 24px rgba(91,55,212,.55)); }
+  .cat-card .title { font-weight: 900; font-size: 1rem; text-align: center; }
+  .cat-card .meta { margin-top: 8px; text-align: center; color: var(--text-muted); font-size: .72rem; font-weight: 800; }
+  .cat-card .open-badge { position: absolute; right: 10px; top: 10px; color: var(--green); font-weight: 900; }
 
-        /* --- PAGE PRODUIT FULL ECRAN --- */
-.prod-media-zone { 
-    width: 100%; 
-    height: 45vh; 
-    background: #000; 
-    position: fixed; 
-    top: 0; 
-    left: 0; 
-    z-index: 1;
-}
+  .prod-card {
+   position: relative; overflow: hidden; border-radius: 24px;
+   background: linear-gradient(155deg, rgba(28,30,40,.96), rgba(13,14,20,.92));
+   border: 1px solid rgba(132,99,255,.38); box-shadow: 0 15px 48px rgba(0,0,0,.30);
+   cursor: pointer; transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+  }
+  .prod-card:hover { border-color: rgba(232,93,172,.55); box-shadow: 0 18px 60px rgba(91,55,212,.26); }
+  .prod-card.large { flex: 0 0 246px; scroll-snap-align: start; }
+  .prod-img-wrap { position: relative; height: 154px; overflow: hidden; background: #07070a; }
+  .prod-card.large .prod-img-wrap { height: 175px; }
+  .prod-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .35s ease; }
+  .prod-card:active .prod-img-wrap img { transform: scale(1.04); }
+  .media-chip, .fav-chip {
+   position: absolute; top: 10px; padding: 6px 9px; border-radius: 999px;
+   background: rgba(0,0,0,.55); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,.10);
+   color: #fff; font-size: .68rem; font-weight: 900;
+  }
+  .media-chip { left: 10px; color: var(--green); }
+  .fav-chip { right: 10px; width: 32px; height: 32px; padding: 0; display: grid; place-items: center; font-size: 1rem; }
+  .prod-info { padding: 13px; }
+  .prod-badge { display: inline-flex; align-items: center; max-width: 100%; padding: 5px 9px; border-radius: 999px; background: rgba(91,55,212,.25); color: #fff; border: 1px solid rgba(232,93,172,.22); font-size: .64rem; font-weight: 900; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .prod-title { margin: 10px 0 6px; font-size: .98rem; line-height: 1.15; font-weight: 1000; }
+  .prod-farm { color: var(--text-muted); font-size: .72rem; line-height: 1.25; font-weight: 800; min-height: 1.25em; }
+  .prod-card-bottom { display: flex; align-items: end; justify-content: space-between; gap: 8px; margin-top: 12px; }
+  .from-price span { display: block; color: var(--text-soft); font-size: .62rem; font-weight: 900; text-transform: uppercase; }
+  .from-price b { font-size: 1.05rem; color: #fff; }
+  .details-pill { padding: 9px 10px; border-radius: 13px; background: linear-gradient(135deg, var(--primary), var(--primary-2)); font-size: .72rem; font-weight: 1000; white-space: nowrap; }
 
-.prod-media-zone video,
-.prod-media-zone img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
+  /* Category */
+  .cat-hero-banner { position: relative; height: 215px; overflow: hidden; display: grid; place-items: center; background: #08080d; }
+  #cat-banner-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: blur(18px); transform: scale(1.14); opacity: .45; }
+  #cat-banner-img { position: relative; z-index: 2; width: min(80%, 310px); max-height: 160px; object-fit: contain; border-radius: 24px; filter: drop-shadow(0 22px 48px rgba(91,55,212,.48)); }
+  .cat-hero-gradient { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.10), var(--bg-color)); z-index: 3; pointer-events: none; }
+  .filter-panel { margin: 16px 18px 14px; padding: 12px; border-radius: 24px; background: rgba(22,23,30,.74); border: 1px solid var(--border); backdrop-filter: blur(16px); }
+  .filter-row { display: grid; grid-template-columns: 1fr; gap: 10px; }
+  .filter-panel input, .filter-panel select, .address-input {
+   width: 100%; border: 1px solid rgba(132,99,255,.38); background: rgba(255,255,255,.07); color: #fff;
+   border-radius: 16px; padding: 13px 14px; font: inherit; outline: none;
+  }
+  .filter-panel select option { background: #191920; color: #fff; }
 
-.prod-sheet {
-    position: relative;
-    z-index: 5;
-}
+  /* Product */
+  #page-product { padding-bottom: 190px; }
+  .product-close-btn { position: fixed; top: 16px; left: 16px; z-index: 80; }
+  .prod-media-zone { width: 100%; height: 43vh; min-height: 305px; background:#050507; position: fixed; top:0; left:0; z-index: 1; overflow: hidden; }
+  .prod-media-zone video, .prod-media-zone img { width:100%; height:100%; object-fit: cover; display:block; }
+  .prod-media-zone.multiple-media { display:flex; overflow-x:auto; scroll-snap-type:x mandatory; scrollbar-width:none; }
+  .prod-media-zone.multiple-media::-webkit-scrollbar { display:none; }
+  .multi-video-slide { flex:0 0 100%; width:100%; height:100%; scroll-snap-align:start; }
+  .swipe-hint { position:absolute; right:14px; bottom:82px; z-index: 4; padding: 7px 11px; border-radius: 999px; background: rgba(0,0,0,.55); border:1px solid rgba(255,255,255,.12); color:#fff; font-size:.68rem; font-weight:900; animation: hintPulse 1.2s ease-in-out infinite alternate; }
+  @keyframes hintPulse { to { transform: translateX(5px); opacity:.75; } }
+  .prod-sheet {
+   position: relative; z-index: 5; margin-top: 39vh; min-height: 68vh;
+   padding: 28px 18px 190px; border-radius: 34px 34px 0 0;
+   background: linear-gradient(180deg, rgba(25,25,31,.98), rgba(10,10,14,.98));
+   border-top: 1px solid rgba(132,99,255,.45); box-shadow: 0 -18px 65px rgba(0,0,0,.50);
+   overflow: visible;
+  }
+  #product-video-controls-layer { position:absolute; top:-50px; left:0; width:100%; z-index: 90; display:flex; justify-content:center; pointer-events:none; }
+  .product-video-controls { pointer-events:auto; display:flex; align-items:center; gap:10px; padding:8px; border-radius:999px; background: rgba(17,17,22,.72); backdrop-filter: blur(16px); border:1px solid rgba(132,99,255,.60); box-shadow: 0 18px 45px rgba(0,0,0,.42); }
+  .product-video-controls button { border:0; min-width:42px; height:38px; padding:0 12px; border-radius:999px; background: linear-gradient(135deg,var(--primary),var(--primary-2)); color:#fff; font-weight:1000; cursor:pointer; }
+  .prod-head { display:flex; align-items:flex-start; justify-content:space-between; gap:12px; }
+  .type-chip { display:inline-flex; padding:6px 10px; border-radius:999px; background:linear-gradient(135deg,var(--primary),var(--primary-2)); color:#fff; font-size:.68rem; font-weight:1000; text-transform:uppercase; letter-spacing:.4px; }
+  .prod-page-title { margin: 10px 0 6px; font-size: 1.55rem; line-height: 1.04; font-weight: 1000; letter-spacing: -.5px; }
+  .prod-page-farm { color: var(--text-muted); font-size:.9rem; font-weight:800; line-height:1.4; }
+  .fav-btn { border:1px solid var(--border); background: rgba(255,255,255,.08); color:#fff; border-radius: 16px; width:46px; height:46px; font-size:1.25rem; }
+  .product-meta-grid { display:grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap:10px; margin:18px 0; }
+  .meta-card { border:1px solid rgba(132,99,255,.32); background: rgba(255,255,255,.06); border-radius:18px; padding:12px; }
+  .meta-card span { display:block; color: var(--text-soft); font-size:.68rem; text-transform:uppercase; font-weight:900; }
+  .meta-card b { display:block; margin-top:4px; color:#fff; font-size:.9rem; line-height:1.2; }
+  .tarif-title { margin: 18px 0 10px; font-size:.78rem; letter-spacing:.8px; text-transform: uppercase; color: var(--text-muted); font-weight:1000; }
+  .tarif-selector { display:flex; flex-wrap:wrap; gap:10px; }
+  .tarif-pill { min-width: 92px; flex: 1 0 auto; border:2px solid rgba(132,99,255,.55); border-radius:18px; padding:13px 14px; background:rgba(255,255,255,.06); color:#fff; text-align:center; cursor:pointer; transition:.2s; }
+  .tarif-pill.active { border-color: var(--primary-2); background: rgba(91,55,212,.28); box-shadow: 0 0 28px rgba(232,93,172,.22); }
+  .tarif-pill .w { display:block; font-weight:1000; font-size:1.05rem; }
+  .tarif-pill .p { display:block; color:var(--text-muted); font-weight:900; font-size:.82rem; margin-top:3px; }
+  .desc-box { margin-top: 18px; padding: 16px; border-radius: 22px; background: rgba(255,255,255,.06); border:1px solid rgba(132,99,255,.28); color:#e8e3ff; font-size:.9rem; line-height:1.62; }
+  .similar-grid { display:flex; gap:12px; overflow-x:auto; padding-bottom:8px; scrollbar-width:none; }
+  .similar-grid::-webkit-scrollbar { display:none; }
+  .similar-grid .prod-card { flex:0 0 185px; }
 
-#product-video-controls-layer {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 50;
-}
-       .prod-media-zone video, .prod-media-zone img { width: 100%; height: 100%; object-fit: cover; }
-      /* --- PAGE PRODUIT FULL ECRAN --- */
-        .prod-sheet {
-            background: var(--bg-color); 
-            border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-            position: relative; 
-            z-index: 2; 
-            margin-top: 42vh; 
-            min-height: 60vh; 
-            /* On augmente le padding du bas à 180px pour ne rien cacher en scrollant */
-            padding: 25px 20px 180px 20px; 
-        }
-        .prod-title-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px; }
-        .prod-title { font-size: 1.4rem; font-weight: 800; margin: 0; }
-        
-        /* Permet aux boutons de passer à la ligne intelligemment au lieu d'être cachés */
-        .tarif-selector { 
-            display: flex; 
-            flex-wrap: wrap; /* LA MAGIE EST ICI */
-            gap: 10px; 
-            margin-bottom: 20px; 
-            padding-bottom: 5px;
-        }
-        .tarif-pill {
-            flex: 0 0 auto; border: 2px solid var(--border); border-radius: 14px;
-            padding: 12px 20px; background: var(--card-bg); text-align: center; cursor: pointer; transition: 0.2s;
-        }
-        .tarif-pill.active { border-color: var(--primary); background: #fafafa; }
-        .tarif-pill .w { font-weight: 800; font-size: 1.1rem; display: block;}
-        .tarif-pill .p { color: var(--text-muted); font-size: 0.9rem; font-weight: 600;}
+  .float-bar {
+   position: fixed; left: 0; right: 0; bottom: calc(var(--nav-h) + 7px); z-index: 70;
+   display:flex; align-items:center; gap:12px; padding: 12px 18px;
+   background: rgba(10,10,14,.86); backdrop-filter: blur(18px); border-top:1px solid rgba(132,99,255,.36);
+  }
+  .qty-box { display:flex; align-items:center; gap:8px; padding:7px; border-radius:20px; background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.10); }
+  .qty-box button { width:34px; height:34px; border-radius:50%; border:0; background:rgba(255,255,255,.12); color:#fff; font-size:1.1rem; font-weight:900; }
+  .qty-box span { min-width:25px; text-align:center; font-weight:1000; }
+  .btn-main { border:0; border-radius:20px; background:linear-gradient(135deg,var(--primary),var(--primary-2)); color:#fff; font-weight:1000; padding:15px 16px; box-shadow:var(--shadow-pink); cursor:pointer; }
+  .btn-black { flex:1; display:flex; align-items:center; justify-content:space-between; gap:12px; }
 
-     /* Bottom Floating Bar (Product) */
-        .float-bar {
-            position: fixed; 
-            bottom: 85px; /* ⬅️ LA MAGIE EST ICI : On remonte au dessus de la nav */
-            left: 0; 
-            width: 100%;
-            background: rgba(255,255,255,0.95); 
-            backdrop-filter: blur(15px);
-            padding: 15px 20px; 
-            display: flex; 
-            align-items: center; 
-            gap: 15px;
-            border-top: 1px solid var(--border); 
-            z-index: 40; /* Juste en dessous de la nav qui est à 100 */
-        }
-        .qty-box {
-            display: flex; align-items: center; background: var(--bg-color);
-            border-radius: var(--radius-md); padding: 5px;
-        }
-        .qty-box button { background: var(--card-bg); border:none; width:36px; height:36px; border-radius:50%; font-size:1.2rem; font-weight:bold; box-shadow:var(--shadow-sm); }
-        .qty-box span { width: 40px; text-align: center; font-weight: 800; font-size: 1.1rem; }
-        .btn-black {
-            background: var(--primary); color: white; flex-grow: 1; border: none;
-            border-radius: var(--radius-md); padding: 16px; font-weight: 800; font-size: 1rem;
-            display: flex; justify-content: space-between; box-shadow: var(--shadow-md); cursor:pointer;
-        }
+  /* Cards pages */
+  .panel { margin: 16px 18px; padding: 18px; border-radius: 26px; background: var(--card-bg); border:1px solid var(--border); box-shadow: var(--shadow-glow); backdrop-filter: blur(16px); }
+  .profile-card { text-align:center; padding:24px; }
+  .profile-avatar { width:104px; height:104px; border-radius:32px; object-fit:cover; border:1px solid rgba(255,255,255,.16); box-shadow:0 0 0 7px rgba(91,55,212,.14),0 20px 55px rgba(232,93,172,.22); }
+  .profile-name { margin:14px 0 4px; font-weight:1000; font-size:1.3rem; }
+  .profile-rank { color:var(--green); font-weight:900; font-size:.82rem; }
+  .profile-stats, .rating-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:16px; }
+  .rating-grid { grid-template-columns: 1fr; }
+  .line-stat { display:flex; align-items:center; justify-content:space-between; gap:12px; margin:10px 0; }
+  .bar { flex:1; height:8px; background:rgba(255,255,255,.08); border-radius:999px; overflow:hidden; }
+  .bar span { display:block; height:100%; background:linear-gradient(90deg,var(--green),var(--primary-3)); border-radius:inherit; }
+  .review-item { display:flex; gap:12px; align-items:flex-start; border-top:1px solid rgba(255,255,255,.08); padding-top:14px; margin-top:14px; }
+  .review-avatar { width:38px; height:38px; border-radius:50%; display:grid; place-items:center; background:linear-gradient(135deg,var(--primary),var(--primary-2)); font-weight:1000; }
+  .contact-link { display:flex; align-items:center; gap:14px; padding:14px; border-radius:20px; background:rgba(255,255,255,.06); border:1px solid rgba(132,99,255,.28); color:#fff; text-decoration:none; margin-top:10px; }
+  .contact-icon { width:42px; height:42px; border-radius:14px; display:grid; place-items:center; background:linear-gradient(135deg,var(--primary),var(--primary-2)); }
+  .contact-link b { display:block; }
+  .contact-link span { display:block; margin-top:2px; color:var(--text-muted); font-size:.78rem; }
 
-        /* --- PAGE PROFIL VIP --- */
-        .profile-card {
-            background: var(--card-bg); border-radius: var(--radius-lg); margin: 20px;
-            padding: 20px; display: flex; gap: 20px; box-shadow: var(--shadow-sm); align-items: center;
-        }
-        .profile-pic { width: 100px; height: 130px; border-radius: var(--radius-sm); object-fit: cover; background: #eee; }
-        .profile-info { flex-grow: 1; display: flex; flex-direction: column; gap: 12px; font-size: 0.85rem;}
-        .info-line { display: flex; justify-content: space-between; border-bottom: 1px solid var(--border); padding-bottom: 8px;}
-        .info-line span:first-child { color: var(--text-muted); }
-        .info-line span:last-child { font-weight: 700; }
-        .btn-msg-plug {
-            background: #f2f2f7; border: none; padding: 8px; border-radius: 8px; font-weight: 700;
-            width: 100px; margin-top: 10px; font-size: 0.8rem; display: flex; justify-content: center; gap: 5px;
-        }
+  .cart-item { display:flex; gap:12px; align-items:center; padding:14px; border-radius:22px; background:rgba(255,255,255,.06); border:1px solid rgba(132,99,255,.28); margin:0 18px 12px; }
+  .cart-item img { width:64px; height:64px; object-fit:cover; border-radius:16px; }
+  .cart-trash { border:0; background:rgba(255,59,95,.15); color:#ff8ca1; border-radius:13px; width:38px; height:38px; }
+  .cart-sticky { position:fixed; left:0; right:0; bottom:calc(var(--nav-h) + 7px); z-index:65; padding:14px 18px; background:rgba(10,10,14,.88); backdrop-filter:blur(18px); border-top:1px solid rgba(132,99,255,.35); }
+  .empty-state { text-align:center; padding:55px 24px; color:var(--text-muted); }
+  .mode-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
+  .mode-btn { border:1px solid var(--border); background:rgba(255,255,255,.06); color:#fff; padding:12px 6px; border-radius:16px; font-weight:900; }
+  .mode-btn.active { border-color:var(--primary-2); background:rgba(91,55,212,.28); }
 
-        /* --- PAGE PANIER & CHECKOUT --- */
-        .cart-item {
-            background: var(--card-bg); border-radius: var(--radius-md); padding: 15px; margin: 0 20px 15px 20px;
-            display: flex; align-items: center; gap: 15px; box-shadow: var(--shadow-sm);
-        }
-        .cart-item img { width: 60px; height: 60px; border-radius: 10px; object-fit: cover; }
-        
-        .checkout-modes { display: flex; gap: 10px; padding: 0 20px; margin-bottom: 20px; }
-        .mode-btn {
-            flex: 1; padding: 12px 0; border: 1px solid var(--border); background: var(--card-bg);
-            border-radius: 12px; font-weight: 600; font-size: 0.85rem; color: var(--text-muted); transition: 0.2s;
-        }
-        .mode-btn.active { border-color: var(--primary); color: var(--primary); background: #f8f8f8; }
+  .modal-overlay { position:fixed; inset:0; z-index:1000; display:none; align-items:center; justify-content:center; padding:20px; background:rgba(0,0,0,.55); backdrop-filter:blur(6px); }
+  .modal-box { width:min(92vw,360px); background:rgba(22,23,30,.96); border:1px solid var(--border); border-radius:28px; padding:24px; text-align:center; box-shadow:0 30px 90px rgba(0,0,0,.45); animation:pop .25s cubic-bezier(.17,.89,.32,1.25); }
+  @keyframes pop { from{transform:scale(.88); opacity:0;} to{transform:scale(1); opacity:1;} }
+  .modal-check { width:58px; height:58px; margin:0 auto 12px; display:grid; place-items:center; border-radius:50%; background:rgba(48,255,102,.14); color:var(--green); font-size:1.8rem; }
 
-        .info-box { background: #e5f0ff; color: #005fff; padding: 15px; border-radius: 12px; margin: 0 20px 20px; font-size: 0.85rem; font-weight: 500; display:flex; gap:10px; }
-        .recap-box { background: var(--card-bg); padding: 20px; margin: 0 20px 20px; border-radius: var(--radius-md); box-shadow: var(--shadow-sm); }
-        .address-input {
-            width: 100%; border: 1px solid var(--border); background: var(--bg-color);
-            padding: 15px; border-radius: 12px; font-family: inherit; font-size: 0.9rem; margin-top: 10px; resize: none;
-        }
+  /* Nav */
+  .nav-floating {
+   position: fixed; left: 50%; bottom: 17px; transform: translateX(-50%); z-index: 120;
+   width: min(94%, 430px); height: 64px; padding: 7px;
+   display: grid; grid-template-columns: repeat(5,1fr); align-items: center; gap: 5px;
+   background: rgba(9,9,13,.78); border: 1px solid rgba(132,99,255,.45); border-radius: 999px; backdrop-filter: blur(20px);
+   box-shadow: 0 18px 60px rgba(91,55,212,.26);
+  }
+  .nav-item-float { position:relative; height:50px; border-radius:999px; display:flex; align-items:center; justify-content:center; gap:6px; color:var(--text-muted); font-weight:1000; cursor:pointer; transition:.22s ease; }
+  .nav-item-float.active { background:linear-gradient(135deg,var(--primary),var(--primary-2)); color:#fff; box-shadow:0 10px 30px rgba(232,93,172,.30); }
+  .nav-text { display:none; font-size:.75rem; }
+  .nav-item-float.active .nav-text { display:inline; }
+  .nav-badge-float { position:absolute; top:1px; right:8px; min-width:18px; height:18px; border-radius:999px; background:var(--red); color:#fff; font-size:.65rem; display:none; align-items:center; justify-content:center; border:2px solid #09090d; }
 
-        /* Slider Swipe */
-        .swipe-container {
-            position: relative; height: 56px; background: #e5e5ea; border-radius: 28px;
-            margin: 20px 20px 40px 20px; overflow: hidden;
-        }
-        .swipe-text { position: absolute; width: 100%; line-height: 56px; text-align: center; font-weight: 700; color: var(--text-muted); font-size: 0.9rem; z-index: 1;}
-        .swipe-btn {
-            position: absolute; left: 4px; top: 4px; width: 48px; height: 48px; background: var(--blue);
-            border-radius: 50%; z-index: 2; display: flex; align-items: center; justify-content: center;
-            color: white; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: background 0.3s;
-        }
+  @media (max-width: 380px) {
+   .prod-card.large { flex-basis: 226px; }
+   .grid-2 { gap: 11px; padding-left: 14px; padding-right: 14px; }
+   .prod-info { padding: 11px; }
+   .details-pill { display:none; }
+   .nav-text { display:none !important; }
+   .hero-stats { gap: 8px; }
+  }
+ 
+  /* --- Corrections V3.1 : icônes propres + réseaux une seule fois --- */
+  .hero-top { gap: 12px; }
+  .hero-social-top {
+   display: flex;
+   align-items: center;
+   justify-content: flex-end;
+   gap: 8px;
+  }
+  .hero-social-top .hero-link {
+   width: 40px;
+   height: 40px;
+   border-radius: 14px;
+   flex: 0 0 40px;
+  }
+  .hero-links-v3 { display: none !important; }
+  .hero-link svg,
+  .contact-icon svg,
+  .nav-item-float svg,
+  .round-btn svg,
+  .back-btn svg,
+  .fav-chip svg,
+  .fav-btn svg {
+   width: 20px;
+   height: 20px;
+   display: block;
+   overflow: visible;
+  }
+  .fav-chip,
+  .fav-btn {
+   display: grid !important;
+   place-items: center !important;
+   line-height: 0 !important;
+   color: #ffffff;
+  }
+  .fav-chip.active,
+  .fav-btn.active {
+   background: linear-gradient(135deg, var(--primary), var(--primary-2)) !important;
+   border-color: rgba(232,93,172,.75) !important;
+   box-shadow: 0 10px 28px rgba(232,93,172,.30) !important;
+  }
+  .fav-chip:not(.active),
+  .fav-btn:not(.active) {
+   background: rgba(0,0,0,.54) !important;
+  }
+  .rating-picker {
+   display: flex;
+   gap: 8px;
+   margin: 14px 0;
+  }
+  .rating-picker button {
+   width: 42px;
+   height: 42px;
+   border-radius: 14px;
+   border: 1px solid rgba(132,99,255,.34);
+   background: rgba(255,255,255,.07);
+   color: rgba(255,255,255,.45);
+   font-size: 1.2rem;
+   font-weight: 1000;
+   cursor: pointer;
+  }
+  .rating-picker button.active {
+   color: var(--green);
+   border-color: rgba(48,255,102,.55);
+   background: rgba(48,255,102,.12);
+   box-shadow: 0 0 22px rgba(48,255,102,.18);
+  }
 
-      /* --- BOTTOM NAV DYNAMIC PILL (10X) --- */
-        .nav-floating {
-            position: fixed;
-            bottom: 25px; /* Détaché du bas de l'écran */
-            left: 50%;
-            transform: translateX(-50%);
-            width: 90%;
-            max-width: 380px;
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            border-radius: 40px; /* Arrondi maximal */
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 8px 10px;
-            z-index: 100;
-        }
-
-        .nav-item-float {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0; /* Pas de gap par défaut */
-            padding: 12px;
-            border-radius: 30px;
-            color: var(--text-muted);
-            font-weight: 700;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1); /* Animation ultra fluide */
-        }
-
-        /* L'état Actif : Extension et coloration */
-        .nav-item-float.active {
-            background: var(--primary);
-            color: #ffffff;
-            padding: 12px 20px; /* S'élargit */
-            gap: 8px; /* Écarte l'icône du texte */
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        /* Le texte est caché par défaut (largeur 0) */
-        .nav-text {
-            max-width: 0;
-            overflow: hidden;
-            opacity: 0;
-            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-        }
-        
-        /* Révélation du texte quand actif */
-        .nav-item-float.active .nav-text {
-            max-width: 80px;
-            opacity: 1;
-        }
-
-        /* Le point rouge du panier restylisé */
-        .nav-badge-float {
-            position: absolute;
-            top: -2px;
-            right: -2px;
-            background: var(--red);
-            color: white;
-            font-size: 0.65rem;
-            font-weight: 800;
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 2px solid white;
-        }
-
-        /* --- MULTI-VIDEOS SLIDER --- */
-        .prod-media-zone.multiple-media {
-            display: flex !important;
-            overflow-x: auto !important;
-            scroll-snap-type: x mandatory !important;
-            scrollbar-width: none;
-        }
-        .prod-media-zone.multiple-media::-webkit-scrollbar { 
-            display: none; 
-        }
-        .multi-video-slide {
-            flex: 0 0 100%;
-            width: 100%;
-            height: 100%;
-            scroll-snap-align: start;
-        }
-
-        #cat-list-title{
-            margin-left:5vh;
-        }
-
-        /* --- INDICATEUR SWIPE MULTI-MEDIAS --- */
-        .swipe-hint {
-            position: absolute;
-            bottom: 7vh;
-            right: 2vh;
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            color: #000000;
-            padding: 6px 14px;
-            border-radius: 30px;
-            font-size: 0.75rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            z-index: 10;
-            pointer-events: none; /* Ne bloque pas le clic/swipe sous le texte */
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            animation: swipePulse 1.2s infinite alternate ease-in-out;
-        }
-
-        /* Micro-animation de va-et-vient horizontal */
-        @keyframes swipePulse {
-            0% { transform: translateX(0); opacity: 0.8; }
-            100% { transform: translateX(6px); opacity: 1; }
-        }
-
-        /* --- MODAL SUCCESS --- */
-        .modal-overlay {
-            position: fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.4);
-            backdrop-filter: blur(4px); z-index: 999; display: none; align-items: center; justify-content: center;
-        }
-        .modal-box {
-            background: var(--card-bg); padding: 30px 20px; border-radius: var(--radius-lg); width: 85%;
-            text-align: center; box-shadow: var(--shadow-md); animation: pop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        @keyframes pop { from{transform:scale(0.8); opacity:0;} to{transform:scale(1); opacity:1;} }
-        .modal-check { width: 60px; height: 60px; background: #e5f9e7; color: var(--green); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; font-size: 2rem; }
-        .modal-btn { width: 100%; padding: 14px; border-radius: 12px; font-weight: 700; margin-top: 10px; border:none; cursor:pointer;}
-        .btn-grey { background: #5e5e61; color: var(--text-main); }
-        .btn-green { background: var(--green); color: white; }
-
-
-
-        /* --- MONKEY.D THE DRY : COULEURS SUR DESIGN CLF --- */
-        :root {
-            --bg-color: #1c1c1d;
-            --card-bg: rgba(44, 44, 46, 0.94);
-            --text-main: #ffffff;
-            --text-muted: #d7ccff;
-            --primary: #5b37d4;
-            --border: rgba(91, 55, 212, 0.55);
-            --radius-sm: 12px;
-            --radius-md: 16px;
-            --radius-lg: 24px;
-            --shadow-sm: 0 4px 18px rgba(91,55,212,0.20);
-            --shadow-md: 0 8px 28px rgba(91,55,212,0.30);
-            --blue: #5b37d4;
-            --green: #34C759;
-            --red: #FF3B30;
-            --monkey-pink: #e85dac;
-            --monkey-cyan: #00fff3;
-        }
-
-        body {
-            background-color: var(--bg-color);
-            background-image: linear-gradient(rgba(0,0,0,.72), rgba(0,0,0,.82)), url('Fondecran.png');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-        }
-
-        .hero-banner { background: #000; border-bottom: 1px solid var(--border); }
-        .hero-banner img { filter: saturate(1.08) contrast(1.05); }
-        .hero-gradient { background: linear-gradient(to top, var(--bg-color), transparent); }
-        .hero-icon { background: rgba(91,55,212,.22); border-color: rgba(232,93,172,.55); color: #fff; }
-
-
-        .cat-hero-banner {
-    position: relative;
-    width: 100%;
-    height: 210px;
-    overflow: hidden;
-    background: #141014;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-bottom: 1px solid rgba(91, 55, 212, 0.35);
-}
-
-#cat-banner-bg {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: blur(14px);
-    transform: scale(1.15);
-    opacity: 0.45;
-}
-
-#cat-banner-img {
-    position: relative;
-    z-index: 2;
-    max-width: 92%;
-    max-height: 170px;
-    object-fit: contain;
-    border-radius: 24px;
-    box-shadow: 0 10px 35px rgba(91, 55, 212, 0.45);
-}
-
-.cat-hero-gradient {
-    position: absolute;
-    inset: 0;
-    z-index: 3;
-    background: linear-gradient(
-        to bottom,
-        rgba(0,0,0,0.05),
-        rgba(0,0,0,0.15),
-        var(--bg-color)
-    );
-    pointer-events: none;
-}
-
-.cat-header {
-    position: sticky;
-    top: 0;
-    z-index: 20;
-    background: rgba(20, 16, 20, 0.92) !important;
-    color: white;
-    border-bottom: 1px solid rgba(91, 55, 212, 0.35) !important;
-}
-
-.cat-header .header-back {
-    color: white !important;
-}
-        .header {
-            background: rgba(28,28,29,.88);
-            color: var(--text-main);
-            border-bottom: 1px solid var(--border);
-        }
-        .logo-style {
-            background: linear-gradient(135deg, var(--monkey-pink) 0%, #7a5cff 48%, var(--monkey-cyan) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0px 3px 8px rgba(91,55,212,.45));
-        }
-        .section-title { color: var(--text-muted); border-left-color: var(--monkey-pink); }
-
-        .cat-card,
-        .prod-card-lg,
-        .profile-card,
-        .cart-item,
-        .recap-box,
-        .modal-box {
-            background: var(--card-bg);
-            color: var(--text-main);
-            border: 1px solid var(--border);
-            box-shadow: var(--shadow-sm);
-        }
-        .cat-card img { filter: drop-shadow(0 8px 15px rgba(91,55,212,.35)); }
-        .prod-card-lg img { background: #111; }
-        .prod-card-lg .badge,
-        #p-type,
-        .btn-black,
-        .nav-item-float.active {
-            background: linear-gradient(135deg, var(--primary), var(--monkey-pink));
-            color: #fff;
-            border: none;
-        }
-        .btn-outline { border-color: var(--primary); color: #fff; background: rgba(91,55,212,.18); }
-
-        .prod-sheet { background: rgba(28,28,29,.98); color: #fff; }
-        .prod-title { color: #fff; }
-        #p-desc { color: var(--text-muted) !important; }
-        .tarif-pill { background: rgba(44,44,46,.96); color: #fff; border-color: var(--border); }
-        .tarif-pill.active { border-color: var(--monkey-pink); background: rgba(91,55,212,.35); }
-        .tarif-pill .p { color: var(--text-muted); }
-
-        .float-bar,
-        .nav-floating {
-            background: rgba(28,28,29,.86);
-            border: 1px solid var(--border);
-            box-shadow: var(--shadow-md);
-        }
-        .nav-item-float { color: var(--text-muted); }
-        .nav-badge-float { border-color: var(--bg-color); }
-        .product-close-btn { background: rgba(28,28,29,.78) !important; color: #fff !important; border: 1px solid var(--border) !important; }
-
-        .mode-btn,
-        .address-input,
-        #cat-type-select {
-            background: rgba(44,44,46,.96) !important;
-            color: #fff !important;
-            border: 1px solid var(--border) !important;
-        }
-        .mode-btn.active { border-color: var(--monkey-pink) !important; color: #fff !important; background: rgba(91,55,212,.35) !important; }
-        .info-box { background: rgba(91,55,212,.20); color: var(--text-muted); }
-        .qty-box { background: rgba(255,255,255,.08); }
-        .qty-box button { background: rgba(255,255,255,.12); color: #fff; }
-        .swipe-container { background: rgba(255,255,255,.12); }
-        .swipe-text { color: var(--text-muted); }
-        .btn-msg-plug { background: rgba(91,55,212,.20); color: #fff; }
-
-.prod-sheet {
-    position: relative;
-    z-index: 5;
-    overflow: visible;
-}
-  #product-video-controls-layer {
-    position: absolute;
-    top: -48px;
-    left: 0;
-    width: 100%;
-    z-index: 80;
-    display: flex;
-    justify-content: center;
-    pointer-events: none;
-}
-
-.product-video-controls {
-    position: relative;
-    left: auto;
-    top: auto;
-    transform: none;
-    z-index: 9999;
-
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 8px;
-    border-radius: 999px;
-
-    background: rgba(20, 16, 20, 0.75);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(91, 55, 212, 0.65);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.45);
-
-    pointer-events: auto;
-}
-.product-video-controls button {
-    border: none;
-    min-width: 44px;
-    height: 38px;
-    padding: 0 12px;
-    border-radius: 999px;
-    background: linear-gradient(135deg, #5b37d4, #c661a4);
-    color: white;
-    font-weight: 900;
-    font-size: 0.85rem;
-    cursor: pointer;
-}
-
-.product-video-controls button:active {
-    transform: scale(0.94);
-}
-    </style>
+ </style>
 </head>
-
 <body>
+ <div id="page-loader" class="active">
+  <div class="loader-card">
+   <img src="Logo.jpg" class="loader-logo" alt="Monkey.D">
+   <div class="loader-title">LUFFY THE DRY 31</div>
+   <p class="loader-sub">Chargement du catalogue premium...</p>
+   <div class="progress-line"><span id="myBar"></span></div>
+  </div>
+ </div>
 
-   <!-- SVG ICONS -->
-    <svg width="0" height="0" style="position:absolute">
-        <defs>
-            <!-- Les icônes de base de l'App iOS -->
-            <symbol id="ic-home" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l8 6v12h-5v-7h-6v7H4V9l8-6z"/></symbol>
-            <symbol id="ic-cart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></symbol>
-            <symbol id="ic-user" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></symbol>
-            <symbol id="ic-trash" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></symbol>
-            <symbol id="ic-send" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></symbol>
-            
-            <!-- TES ICONES RÉSEAUX SOCIAUX AJOUTÉES ICI 👇 -->
-            <symbol id="icon-telegram" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M22 2 L11 13 L2 9 L22 2 Z M22 2 L15 22 L11 13 L2 9 L22 2 Z"></path>
-            </symbol>
-            <symbol id="icon-potato" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" />
-                <circle cx="10" cy="10" r="1.5" />
-                <circle cx="14" cy="14" r="1.5" />
-                <circle cx="14" cy="10" r="1.5" />
-                <circle cx="10" cy="14" r="1.5" />
-            </symbol>
-            <symbol id="icon-instagram" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-            </symbol>
-            <symbol id="icon-link" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.72"></path>
-                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.72-1.72"></path>
-            </symbol>
-        </defs>
-    </svg>
+ <svg width="0" height="0" style="position:absolute">
+  <defs>
+   <symbol id="ic-home" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l8 6v12h-5v-7h-6v7H4V9l8-6z"/></symbol>
+   <symbol id="ic-cart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></symbol>
+   <symbol id="ic-user" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></symbol>
+   <symbol id="ic-star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.4 7 .8-5.2 4.7 1.4 6.9L12 17.2 5.9 20.8l1.4-6.9L2.1 9.2l7-.8L12 2z"/></symbol>
+   <symbol id="ic-heart" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7.2-4.6-9.5-8.4C.4 9.1 2.2 5 6.1 5c2 0 3.3 1 3.9 2 .6-1 1.9-2 3.9-2 3.9 0 5.7 4.1 3.6 7.6C19.2 16.4 12 21 12 21z"/></symbol>
+    <symbol id="ic-heart-outline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6c-2.1-2-5.5-1.7-7.4.5L12 6.8l-1.4-1.7C8.7 2.9 5.3 2.6 3.2 4.6c-2.4 2.3-2.5 6.1-.2 8.5 2.4 2.6 9 7.1 9 7.1s6.6-4.5 9-7.1c2.3-2.4 2.2-6.2-.2-8.5Z"/></symbol>
+   <symbol id="ic-send" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></symbol>
+   <symbol id="ic-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></symbol>
+   <symbol id="icon-telegram" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13 2 9 22 2Z"/><path d="M22 2 15 22 11 13"/></symbol>
+   <symbol id="icon-instagram" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></symbol>
+   <symbol id="icon-potato" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="10" cy="10" r="1.3"/><circle cx="14" cy="14" r="1.3"/><circle cx="14" cy="10" r="1.3"/><circle cx="10" cy="14" r="1.3"/></symbol>
+  </defs>
+ </svg>
 
-    <!-- SUCCESS MODAL -->
-    <div class="modal-overlay" id="success-modal">
-        <div class="modal-box">
-            <div class="modal-check">✓</div>
-            <h2 style="margin:0 0 5px 0;">Produit ajouté !</h2>
-            <p style="color:var(--text-muted); font-size:0.85rem; margin-bottom: 20px;">Le produit a été ajouté à votre panier avec succès.</p>
-            <button class="modal-btn btn-grey" onclick="document.getElementById('success-modal').style.display='none'">Continuer les achats</button>
-            <button class="modal-btn btn-green" onclick="document.getElementById('success-modal').style.display='none'; navigate('cart');">Voir mon panier</button>
-        </div>
+ <div class="modal-overlay" id="success-modal">
+  <div class="modal-box">
+   <div class="modal-check">✓</div>
+   <h2 style="margin:0 0 6px">Ajouté à ta sélection</h2>
+   <p style="color:var(--text-muted);font-size:.9rem;margin:0 0 18px">Tu peux continuer à parcourir ou ouvrir ta sélection.</p>
+   <button class="btn-main" style="width:100%;justify-content:center;margin-bottom:10px" onclick="document.getElementById('success-modal').style.display='none'">Continuer</button>
+   <button class="btn-main" style="width:100%;justify-content:center;background:rgba(255,255,255,.09)" onclick="document.getElementById('success-modal').style.display='none'; navigate('cart');">Voir la sélection</button>
+  </div>
+ </div>
+
+ <div id="page-home" class="page active">
+  <section class="hero-v3">
+   <div class="hero-content">
+    <div class="hero-top">
+     <div class="brand-pill"><span class="live-dot"></span> Catalogue premium</div>
+     <div class="hero-social-top" aria-label="Réseaux officiels">
+       <a class="hero-link" href="https://t.me/MonkeyDieLuffy2" target="_blank" title="Telegram"><svg><use href="#icon-telegram"/></svg></a>
+       <a class="hero-link" href="https://m.tatokdym.org/joinchat/HjXuEMdY2hj94aLmMabCrg" target="_blank" title="Potato"><svg><use href="#icon-potato"/></svg></a>
+       <a class="hero-link" href="https://www.instagram.com/realuffythedry?igsh=MWNsenVrdncwcmswdA%3D%3D&utm_source=qr" target="_blank" title="Instagram"><svg><use href="#icon-instagram"/></svg></a>
+      </div>
     </div>
-
-<!-- PAGE: HOME -->
-    <div id="page-home" class="page active">
-        
-        <!-- NOUVEAU HERO BANNER AVEC TES 6 LIENS -->
-        <div class="hero-banner">
-            <img src="Logo.jpg" alt="Monkey.D The Dry">
-            
-            <div class="hero-links">
-                <a href="https://t.me/MonkeyDieLuffy2" target="_blank" class="hero-icon" title="Telegram">
-                    <svg width="22" height="22"><use href="#icon-telegram"/></svg>
-                </a>
-                <a href="https://t.me/+rDOEy45DwFE1ZTJk" target="_blank" class="hero-icon" title="Canal Telegram">
-                    <svg width="22" height="22"><use href="#icon-telegram"/></svg>
-                </a>
-                <a href="https://m.tatokdym.org/joinchat/HjXuEMdY2hj94aLmMabCrg" target="_blank" class="hero-icon" title="Potato">
-                    <svg width="22" height="22"><use href="#icon-potato"/></svg>
-                </a>
-                <a href="https://www.instagram.com/realuffythedry?igsh=MWNsenVrdncwcmswdA%3D%3D&utm_source=qr" target="_blank" class="hero-icon" title="Instagram">
-                    <svg width="22" height="22"><use href="#icon-instagram"/></svg>
-                </a>
-            </div>
-            
-            <div class="hero-gradient"></div>
-        </div>
-
-        <!-- Header du shop -->
-<div class="header" style="border-top: none; justify-content: center;">
-    <span class="bouncing-text logo-style">LUFFY THE DRY 31 🏴‍☠️</span>
-</div>        
-        <!-- SECTION 1 : CATÉGORIES -->
-        <div class="section-title">| CATÉGORIES</div>
-        <div class="h-scroll" id="cat-scroll">
-            <!-- Rendu JS -->
-        </div>
-
-        <!-- SECTION 2 : RÉCENTS -->
-        <div class="section-title">| NOUVEAUTÉS</div>
-        <div class="h-scroll" id="recent-scroll">
-            <!-- Rendu JS -->
-        </div>
-
-        <!-- SECTION 3 : TENDANCES -->
-        <div class="section-title">| TENDANCES</div>
-        <div class="grid-2" id="trend-grid">
-            <!-- Rendu JS -->
-        </div>
+    <div class="hero-main">
+     <div class="hero-kicker">Premium selection</div>
+     <h1 class="hero-name">LUFFY<br>THE DRY 31</h1>
+     <div class="hero-stats">
+      <div class="stat-card"><b id="stat-products">0</b><span>Produits</span></div>
+      <div class="stat-card"><b id="stat-cats">0</b><span>Catégories</span></div>
+      <div class="stat-card"><b>5.0</b><span>Avis</span></div>
+     </div>
     </div>
+   </div>
+  </section>
 
-    <!-- PAGE: CATEGORY LIST (Quand on clique sur Weed ou Hash) -->
-<div id="page-cat-list" class="page">
+  <div class="search-shell">
+   <div class="search-box">
+    <svg width="20" height="20"><use href="#ic-search"/></svg>
+    <input id="home-search" type="text" placeholder="Rechercher un produit, une farm...">
+   </div>
+  </div>
 
-    <div class="cat-hero-banner">
-        <img id="cat-banner-bg" src="" alt="">
-        <img id="cat-banner-img" src="" alt="Catégorie">
-        <div class="cat-hero-gradient"></div>
+  <div class="section-title"><span>Catégories</span><span class="section-action">Swipe</span></div>
+  <div class="h-scroll" id="cat-scroll"></div>
+
+  <div class="section-title"><span>Nouveautés</span><span class="section-action" id="new-count"></span></div>
+  <div class="h-scroll" id="recent-scroll"></div>
+
+  <div class="section-title"><span>Top sélection</span><span class="section-action">Infos complètes</span></div>
+  <div class="grid-2" id="trend-grid"></div>
+ </div>
+
+ <div id="page-cat-list" class="page">
+  <div class="cat-hero-banner">
+   <img id="cat-banner-bg" src="" alt="">
+   <img id="cat-banner-img" src="" alt="Catégorie">
+   <div class="cat-hero-gradient"></div>
+  </div>
+  <div class="app-header">
+   <button class="back-btn" onclick="navigate('home')">‹</button>
+   <div class="app-title" id="cat-list-title">Catégorie</div>
+   <button class="round-btn" onclick="navigate('contact')"><svg width="18" height="18"><use href="#ic-send"/></svg></button>
+  </div>
+  <div class="filter-panel">
+   <div class="filter-row">
+    <input id="cat-search" type="text" placeholder="Rechercher dans cette catégorie...">
+    <select id="cat-type-select"></select>
+   </div>
+  </div>
+  <div class="grid-2" id="cat-list-grid"></div>
+ </div>
+
+ <div id="page-product" class="page">
+  <button class="back-btn product-close-btn" onclick="navigate(lastListPage || 'home')">‹</button>
+  <div class="prod-media-zone" id="prod-media"></div>
+  <div class="prod-sheet">
+   <div id="product-video-controls-layer"></div>
+   <div class="prod-head">
+    <div>
+     <span class="type-chip" id="p-type">TYPE</span>
+     <h2 class="prod-page-title" id="p-name">Nom</h2>
+     <div class="prod-page-farm" id="p-farm">Farm</div>
     </div>
+    <button class="fav-btn" id="p-like" aria-label="Favori"></button>
+   </div>
+   <div class="product-meta-grid">
+    <div class="meta-card"><span>Sous-catégorie</span><b id="p-subtype">-</b></div>
+    <div class="meta-card"><span>Format dès</span><b id="p-from">-</b></div>
+    <div class="meta-card"><span>Médias</span><b id="p-media-count">-</b></div>
+    <div class="meta-card"><span>Formats</span><b id="p-format-count">-</b></div>
+   </div>
+   <div id="variants-zone" style="display:none; margin-top: 18px;">
+    <div class="tarif-title">Saveur / Variante</div>
+    <div class="tarif-selector" id="p-variants"></div>
+   </div>
+   <div class="tarif-title">Tarifs</div>
+   <div class="tarif-selector" id="p-tarifs"></div>
+   <div class="desc-box" id="p-desc"></div>
+   <div class="section-title" style="padding:0;margin-top:24px"><span>Produits similaires</span></div>
+   <div class="similar-grid" id="p-similar"></div>
+  </div>
+  <div class="float-bar">
+   <div class="qty-box">
+    <button id="p-minus">-</button><span id="p-qty">1</span><button id="p-plus">+</button>
+   </div>
+   <button class="btn-main btn-black" id="p-add"><span>Ajouter</span><span id="p-total">0.00€</span></button>
+  </div>
+ </div>
 
-    <div class="header cat-header">
-        <button class="header-back" onclick="navigate('home')">‹</button>
-        <span id="cat-list-title">Catégorie</span>
+ <div id="page-favorites" class="page">
+  <div class="app-header"><button class="back-btn" onclick="navigate('home')">‹</button><div class="app-title">Favoris</div><div style="width:42px"></div></div>
+  <div class="panel"><b>⭐ Tes favoris</b><p class="tiny" style="margin-bottom:0">Ajoute des produits en favoris depuis une fiche ou une carte.</p></div>
+  <div class="grid-2" id="fav-grid"></div>
+ </div>
+
+ <div id="page-cart" class="page">
+  <div class="app-header"><button class="back-btn" onclick="navigate('home')">‹</button><div class="app-title">Sélection</div><div style="width:42px"></div></div>
+  <div id="cart-list" style="padding-top:18px; padding-bottom:170px"></div>
+  <div class="cart-sticky">
+   <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;font-weight:1000"><span id="cart-recap-text">Total (0)</span><span id="cart-total-display">0€</span></div>
+   <button class="btn-main" style="width:100%" onclick="navigate('checkout')">Préparer ma demande d’infos</button>
+  </div>
+ </div>
+
+ <div id="page-checkout" class="page">
+  <div class="app-header"><button class="back-btn" onclick="navigate('cart')">‹</button><div class="app-title">Demande d’infos</div><div style="width:42px"></div></div>
+  <div class="panel">
+   <div class="tiny" style="text-transform:uppercase;font-weight:1000;margin-bottom:10px">Mode</div>
+   <div class="mode-grid">
+    <button class="mode-btn active" data-m="Livraison">🚚 Livraison</button>
+    <button class="mode-btn" data-m="Meet-up">🤝 Meet-up</button>
+    <button class="mode-btn" data-m="Colis">📦 Colis</button>
+   </div>
+  </div>
+  <div class="panel">
+   <b>Récapitulatif</b>
+   <div id="checkout-items" style="font-size:.9rem;line-height:1.7;margin:14px 0"></div>
+   <div id="checkout-total" style="font-weight:1000;margin-bottom:12px">Total indicatif : 0€</div>
+   <textarea class="address-input" id="address-field" rows="4" placeholder="Note optionnelle pour le support..."></textarea>
+   <p class="tiny">Le bouton ouvre Telegram avec une demande d’informations pré-remplie.</p>
+   <button class="btn-main" id="send-request-btn" style="width:100%;margin-top:12px">Ouvrir Telegram</button>
+  </div>
+ </div>
+
+ <div id="page-reviews" class="page">
+   <div class="app-header"><button class="back-btn" onclick="navigate('home')">‹</button><div class="app-title">Avis clients</div><div style="width:42px"></div></div>
+   <div class="panel">
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:14px">
+     <div><div style="font-size:3rem;font-weight:1000;line-height:.9">5.0</div><div style="color:var(--green);font-weight:1000;margin-top:8px">★★★★★</div></div>
+     <div style="flex:1">
+      <div class="line-stat"><span>Service</span><div class="bar"><span style="width:98%"></span></div></div>
+      <div class="line-stat"><span>Qualité</span><div class="bar"><span style="width:96%"></span></div></div>
+      <div class="line-stat"><span>Réponse</span><div class="bar"><span style="width:94%"></span></div></div>
+     </div>
     </div>
-        
-        <div class="search-container" style="padding: 15px 20px 0 20px;">
-            <select id="cat-type-select" style="width: 100%; border: 1px solid var(--border); background: var(--card-bg); padding: 14px; border-radius: 12px; font-family: inherit; font-size: 0.95rem; font-weight: 600; outline: none; color: var(--text-main); box-shadow: var(--shadow-sm); -webkit-appearance: none;">
-                </select>
-        </div>
-
-        <div class="grid-2" id="cat-list-grid" style="padding-top: 15px;"></div>
+   </div>
+   <div class="panel">
+    <b>Retours récents</b>
+    <div class="review-item"><div class="review-avatar">A</div><div><b>Anonyme</b><div style="color:var(--green);font-size:.75rem">★★★★★</div><p class="tiny">Catalogue propre, réponse rapide et interface claire.</p></div></div>
+    <div class="review-item"><div class="review-avatar">M</div><div><b>Membre</b><div style="color:var(--green);font-size:.75rem">★★★★★</div><p class="tiny">Les fiches produits sont bien détaillées, vidéos et farms visibles.</p></div></div>
+   </div>
+   <div class="panel review-form">
+    <b>Laisser un avis</b>
+    <p class="tiny">Choisis une note et écris ton retour. Le bouton ouvre Telegram avec ton avis pré-rempli.</p>
+    <div class="rating-picker" id="review-stars" aria-label="Note">
+     <button type="button" data-rating="1">★</button>
+     <button type="button" data-rating="2">★</button>
+     <button type="button" data-rating="3">★</button>
+     <button type="button" data-rating="4">★</button>
+     <button type="button" data-rating="5">★</button>
     </div>
+    <textarea class="address-input" id="review-message" rows="4" placeholder="Écris ton avis ici..."></textarea>
+    <button class="btn-main" id="send-review-btn" style="width:100%;margin-top:12px">Envoyer mon avis</button>
+   </div>
+  </div>
+  
+ <div id="page-contact" class="page">
+  <div class="app-header"><button class="back-btn" onclick="navigate('home')">‹</button><div class="app-title">Contact</div><div style="width:42px"></div></div>
+  <div class="panel">
+   <b>Réseaux officiels</b>
+   <p class="tiny">Utilise uniquement les liens ci-dessous.</p>
+   <a class="contact-link" href="https://t.me/MonkeyDieLuffy2" target="_blank"><span class="contact-icon"><svg width="22" height="22"><use href="#icon-telegram"/></svg></span><div><b>Telegram</b><span>@MonkeyDieLuffy2</span></div></a>
+   <a class="contact-link" href="https://m.tatokdym.org/joinchat/HjXuEMdY2hj94aLmMabCrg" target="_blank"><span class="contact-icon"><svg width="22" height="22"><use href="#icon-potato"/></svg></span><div><b>Potato</b><span>Canal secondaire</span></div></a>
+   <a class="contact-link" href="https://www.instagram.com/realuffythedry?igsh=MWNsenVrdncwcmswdA%3D%3D&utm_source=qr" target="_blank"><span class="contact-icon"><svg width="22" height="22"><use href="#icon-instagram"/></svg></span><div><b>Instagram</b><span>@realuffythedry</span></div></a>
+  </div>
+ </div>
 
-    <!-- PAGE: PRODUCT -->
-    <div id="page-product" class="page">
-        <button class="product-close-btn" style="position:fixed; top:20px; left:20px; z-index:10; background:rgba(255,255,255,0.8); border:none; width:35px; height:35px; border-radius:50%; font-size:1.5rem; display:flex; align-items:center; justify-content:center;" onclick="navigate('home')">‹</button>
-        
-       <div class="prod-media-zone" id="prod-media"></div>
+ <div id="page-profile" class="page">
+  <div class="app-header"><button class="back-btn" onclick="navigate('home')">‹</button><div class="app-title">Profil VIP</div><button class="round-btn" onclick="navigate('contact')"><svg width="18" height="18"><use href="#ic-send"/></svg></button></div>
+  <div class="panel profile-card">
+   <img src="Logo.jpg" class="profile-avatar" id="prof-img" alt="Profil">
+   <div class="profile-name">LUFFY THE DRY 31</div>
+   <div class="profile-rank">● Connecté au catalogue</div>
+   <div class="profile-stats">
+    <div class="stat-card"><b id="prof-pseudo">-</b><span>Pseudo</span></div>
+    <div class="stat-card"><b id="prof-id">-</b><span>ID</span></div>
+    <div class="stat-card"><b>VIP</b><span>Statut</span></div>
+   </div>
+  </div>
+  <div class="panel">
+   <b>Infos</b>
+   <p style="color:var(--text-muted);line-height:1.7">Catalogue premium, fiches détaillées, farms affichées, médias produits, favoris et contact rapide. </p>
+  </div>
+ </div>
 
-<div class="prod-sheet">
-    <div id="product-video-controls-layer"></div>
-            <span id="p-type" style="background: var(--primary); color: white; font-size: 0.7rem; font-weight: 800; padding: 4px 10px; border-radius: 8px; text-transform: uppercase; letter-spacing: 0.5px; display: inline-block; margin-bottom: 10px;">TYPE</span>
-            
-            <div class="prod-title-row">
-                <h2 class="prod-title" id="p-name">Nom</h2>
-            </div>
-            
-            <div id="variants-zone" style="display:none; margin-top: 20px;">
-                <h4 style="margin:0 0 10px 0; font-size:0.9rem;">Saveur / Variante</h4>
-                <div class="tarif-selector" id="p-variants"></div>
-            </div>
+ <div class="nav-floating">
+  <div class="nav-item-float nav-btn" data-target="page-favorites"><svg width="20" height="20"><use href="#ic-heart"/></svg><span class="nav-text">Favoris</span></div>
+  <div class="nav-item-float nav-btn" data-target="page-cart" style="position:relative"><svg width="21" height="21"><use href="#ic-cart"/></svg><span class="nav-text">Sélection</span><div class="nav-badge-float" id="nav-badge">0</div></div>
+  <div class="nav-item-float nav-btn active" data-target="page-home"><svg width="21" height="21"><use href="#ic-home"/></svg><span class="nav-text">Shop</span></div>
+  <div class="nav-item-float nav-btn" data-target="page-reviews"><svg width="21" height="21"><use href="#ic-star"/></svg><span class="nav-text">Avis</span></div>
+  <div class="nav-item-float nav-btn" data-target="page-profile"><svg width="21" height="21"><use href="#ic-user"/></svg><span class="nav-text">VIP</span></div>
+ </div>
 
-            <h4 style="margin:20px 0 10px 0; font-size:0.9rem; color:var(--text-muted);">TARIFS</h4>
-            <div class="tarif-selector" id="p-tarifs"></div>
-            
-            <p id="p-desc" style="color:#555; font-size:0.9rem; line-height:1.5; margin-top:10px;"></p>
-        </div>
-
-        <div class="float-bar">
-            <div class="qty-box">
-                <button id="p-minus">-</button>
-                <span id="p-qty">1</span>
-                <button id="p-plus">+</button>
-            </div>
-            <button class="btn-black" id="p-add">
-                <span>AJOUTER AU PANIER</span>
-                <span id="p-total">0.00€</span>
-            </button>
-        </div>
-    </div>
-
-    <!-- PAGE: PROFILE (VIP) -->
-    <div id="page-profile" class="page">
-        <div class="header">
-            <span style="flex-grow:1; text-align:center;">Profil</span>
-        </div>
-        
-        <div class="profile-card">
-            <div>
-                <img src="Logo.jpg" class="profile-pic" id="prof-img">
-                <button class="btn-msg-plug" onclick="window.open('https://t.me/MonkeyDieLuffy', '_blank')"><svg width="14" height="14"><use href="#ic-send"/></svg> Message</button>
-            </div>
-            <div class="profile-info">
-                <div class="info-line"><span>Pseudo</span><span id="prof-pseudo">-</span></div>
-                <div class="info-line"><span>ID Telegram</span><span id="prof-id">-</span></div>
-                <div class="info-line"><span>Lié depuis</span><span>01/05/2026</span></div>
-                <div class="info-line"><span>Statut</span><span style="color:var(--green)">✓ Connecté</span></div>
-            </div>
-        </div>
-
-        <div style="background:var(--card-bg); margin: 0 20px; border-radius:var(--radius-lg); padding:20px; box-shadow:var(--shadow-sm);">
-            <h3 style="margin-top:0;">LUFFY THE DRY 31 🇲🇦🇪🇸🇺🇸🥇</h3>
-            <p style="font-size:0.9rem; color:var(--text-muted); line-height:1.8;">
-                🔌 <b>THE BEST PLUG</b> 💎<br>
-                ✅ Plug validé & certifié depuis 2019 🥇<br>
-                🌍 Only the Best Hash in The World<br>
-                🧤 Standards américains : exigence, pureté et qualité premium.
-            </p>
-        </div>
-    </div>
-
-    <!-- PAGE: CART -->
-    <div id="page-cart" class="page">
-        <div class="header"><span style="flex-grow:1; text-align:center;">Mon Panier</span></div>
-<div id="cart-list" style="padding-top: 20px; padding-bottom: 160px; overflow-y: auto;"></div>        
-<div style="position:fixed; bottom:80px; width:100%; background:var(--bg-color); padding: 20px; border-top: 1px solid var(--border);">            <div style="display:flex; justify-content:space-between; font-weight:800; font-size:1.2rem; margin-bottom:15px;">
-                <span id="cart-recap-text">Total (0 articles)</span>
-                <span id="cart-total-display">0€</span>
-            </div>
-            <button class="btn-black" style="width:100%; justify-content:center;" onclick="navigate('checkout')">Valider le panier</button>
-        </div>
-    </div>
-
-    <!-- PAGE: CHECKOUT -->
-    <div id="page-checkout" class="page">
-        <div class="header">
-            <button class="header-back" onclick="navigate('cart')">‹</button>
-            <span style="flex-grow:1; text-align:center;">Finaliser la commande</span>
-        </div>
-        
-        <p style="padding: 0 20px; font-weight:700; font-size:0.8rem; color:var(--text-muted); margin-top:20px;">MODE DE RETRAIT</p>
-        <div class="checkout-modes">
-            <button class="mode-btn active" data-m="Livraison">🚚 Livraison</button>
-            <button class="mode-btn" data-m="Meet-up">🤝 Meet-up</button>
-            <button class="mode-btn" data-m="Envoi colis">📦 Envoi colis</button>
-        </div>
-
-        <div class="info-box" id="info-box-mode">
-            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
-            <span id="info-text">L'adresse vous sera communiquée en message privé par le standard.</span>
-        </div>
-
-        <div class="recap-box">
-            <h4 style="margin:0 0 15px 0; color:var(--text-muted); font-size:0.8rem;">RÉCAPITULATIF DE LA COMMANDE</h4>
-            <div id="checkout-items" style="font-size:0.9rem; line-height:1.6; margin-bottom:10px;"></div>
-            <div style="font-weight:800; margin-bottom:10px;" id="checkout-total">Total: 0.00€</div>
-            
-            <textarea class="address-input" id="address-field" placeholder="Entrez votre adresse complète..."></textarea>
-        </div>
-
-        <div class="swipe-container" id="swipe-box">
-            <div class="swipe-text">Glissez pour ouvrir Telegram</div>
-            <div class="swipe-btn" id="swipe-btn">
-                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </div>
-        </div>
-    </div>
-    
-<!-- BOTTOM NAV DYNAMIC PILL -->
-    <div class="nav-floating">
-        <div class="nav-item-float nav-btn" data-target="page-cart" style="position: relative;">
-            <svg width="22" height="22"><use href="#ic-cart"/></svg>
-            <span class="nav-text">Panier</span>
-            <div class="nav-badge-float" id="nav-badge" style="display:none;">0</div>
-        </div>
-        
-        <div class="nav-item-float nav-btn active" data-target="page-home">
-            <svg width="22" height="22"><use href="#ic-home"/></svg>
-            <span class="nav-text">Shop</span>
-        </div>
-        
-        <div class="nav-item-float nav-btn" data-target="page-profile">
-            <svg width="22" height="22"><use href="#ic-user"/></svg>
-            <span class="nav-text">VIP</span>
-        </div>
-    </div>
-
-    <script src="script.js"></script>
+ <script src="script.js"></script>
 </body>
 </html>
