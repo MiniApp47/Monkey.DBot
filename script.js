@@ -2,7 +2,8 @@ document.addEventListener("DOMContentLoaded", function () {
  const tg = window.Telegram?.WebApp || {
   ready() {}, expand() {}, setHeaderColor() {}, setBackgroundColor() {},
   HapticFeedback: { impactOccurred() {}, selectionChanged() {}, notificationOccurred() {} },
-  initDataUnsafe: { user: null }
+  initDataUnsafe: { user: null },
+  sendData() {}, showAlert(msg) { alert(msg); }
  };
  tg.ready();
  tg.expand();
@@ -128,11 +129,12 @@ document.addEventListener("DOMContentLoaded", function () {
               video: 'VideoMD.mov',
               description: '',
               tarifs: [
-                { weight: '5g', price: 80.00 },
-                { weight: '10g', price: 130.00 },
-                { weight: '25g', price: 300.00 },
-                { weight: '50g', price: 450.00 },
-                { weight: '100g', price: 850.00 },
+                { weight: '3g', price: 50.00 },
+                { weight: '5g', price: 70.00 },
+                { weight: '10g', price: 120.00 },
+                { weight: '25g', price: 270.00 },
+                { weight: '50g', price: 380.00 },
+                { weight: '100g', price: 700.00 },
               ]
             },
              {
@@ -145,10 +147,11 @@ document.addEventListener("DOMContentLoaded", function () {
               video: 'VideoKL.mov',
               description: '',
               tarifs: [
-                { weight: '5g', price: 80.00 },
-                { weight: '10g', price: 130.00 },
-                { weight: '25g', price: 300.00 },
-                { weight: '50g', price: 450.00 },
+                { weight: '3g', price: 50.00 },
+                { weight: '5g', price: 70.00 },
+                { weight: '10g', price: 120.00 },
+                { weight: '25g', price: 270.00 },
+                { weight: '50g', price: 380.00 },
                 { weight: '100g', price: 700.00 },
               ]
             },
@@ -162,10 +165,11 @@ document.addEventListener("DOMContentLoaded", function () {
               video: 'VideoFF.mov',
               description: '',
               tarifs: [
-                { weight: '5g', price: 80.00 },
-                { weight: '10g', price: 130.00 },
-                { weight: '25g', price: 300.00 },
-                { weight: '50g', price: 450.00 },
+                { weight: '3g', price: 50.00 },
+                { weight: '5g', price: 70.00 },
+                { weight: '10g', price: 120.00 },
+                { weight: '25g', price: 270.00 },
+                { weight: '50g', price: 380.00 },
                 { weight: '100g', price: 700.00 },
               ]
             },
@@ -178,7 +182,7 @@ document.addEventListener("DOMContentLoaded", function () {
           image: '',
           badgeText: '1 produit',
           products: [
-            {
+           /*  {
               id: 'Papaya x Zangria 🥭🥤',
               name: 'Papaya x Zangria 🥭🥤',
               farm: 'Wizard Treez x Golden Warriors 🇺🇸',
@@ -192,7 +196,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 { weight: '5g', price: 200.00 },
                 { weight: '10g', price: 340.00 },
               ]
-            },
+            }, */
             {
               id: 'Limelight 🍋‍🟩☀️',
               name: 'Limelight 🍋‍🟩☀️',
@@ -338,14 +342,14 @@ document.addEventListener("DOMContentLoaded", function () {
           image: '',
           badgeText: '1 produit',
           products: [
-            {
-              id: 'Peach Oz',
-              name: 'Peach Oz 🍑',
+            /* {
+              id: 'Tropicana 🦜🍹🥭',
+              name: 'Tropicana 🦜🍹🥭',
               farm: 'CALI NL TOP SHELF 🇺🇸🇳🇱',
               promoEligible: false,
               type: '🪴 Weed 🪴',
-              image: 'ProductPZZ.png',
-              video: 'VideoPZZ.mp4',
+              image: 'ProductCHP.png',
+              video: 'VideoCHP.mp4',
               description: 'Déjà Victime De Son Succès 🌈💥 Cali Hollandaise 🇳🇱 Du Vrai Crack 💨 Goût Incroyable 🇺🇸🍑🍓 Bien Compacte ☄️ La Fusée 🚀',
               tarifs: [
                 { weight: '5g', price: 70.00 },
@@ -354,7 +358,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 { weight: '50g', price: 400.00 },
                 { weight: '100g', price: 750.00 }
               ]
-            }
+            } */
           ]
         }
       ]
@@ -384,9 +388,12 @@ document.addEventListener("DOMContentLoaded", function () {
  let checkoutMode = "Livraison";
  let currentCategory = null;
  let selectedReviewRating = 5;
+ let approvedReviews = [];
  window.lastListPage = "home";
 
  const contactUrl = "https://t.me/MonkeyDieLuffy2";
+ const reviewApiBase = String(window.REVIEW_API_BASE || "").replace(/\/$/, "");
+ const reviewApiUrl = reviewApiBase ? reviewApiBase + "/api/reviews" : "/api/reviews";
 
  function money(n) {
   return Number(n || 0).toFixed(2).replace(".00", "") + "€";
@@ -418,6 +425,21 @@ document.addEventListener("DOMContentLoaded", function () {
  function shortText(value, max = 46) {
   const txt = safeText(value, "");
   return txt.length > max ? txt.slice(0, max - 1) + "…" : txt;
+ }
+
+ function escapeHTML(value) {
+  return String(value ?? "")
+   .replace(/&/g, "&amp;")
+   .replace(/</g, "&lt;")
+   .replace(/>/g, "&gt;")
+   .replace(/"/g, "&quot;")
+   .replace(/'/g, "&#039;");
+ }
+
+ function publicAuthorFallback() {
+  const u = tg.initDataUnsafe?.user;
+  if (!u) return "Membre";
+  return u.username ? `@${u.username}` : (u.first_name || "Membre");
  }
 
  function haptic(type = "light") {
@@ -455,6 +477,7 @@ document.addEventListener("DOMContentLoaded", function () {
   if (normalized === "cart") renderCart();
   if (normalized === "favorites") renderFavorites();
   if (normalized === "checkout") renderCheckout();
+  if (normalized === "reviews") renderReviews();
  };
 
  function createCategoryCard(category) {
@@ -773,6 +796,120 @@ document.addEventListener("DOMContentLoaded", function () {
   });
  }
 
+ function starsText(rating) {
+  const r = Math.max(1, Math.min(5, Number(rating) || 5));
+  return "★".repeat(r) + "☆".repeat(5 - r);
+ }
+
+ function reviewDateLabel(value) {
+  if (!value) return "";
+  const d = new Date(value);
+  if (Number.isNaN(d.getTime())) return "";
+  return d.toLocaleDateString("fr-FR", { day: "2-digit", month: "2-digit" });
+ }
+
+ function createReviewHTML(review) {
+  const author = escapeHTML(review.author || "Membre");
+  const text = escapeHTML(review.text || review.message || "Avis validé.");
+  const rating = Math.max(1, Math.min(5, Number(review.rating) || 5));
+  const initial = author.replace("@", "").trim().charAt(0).toUpperCase() || "M";
+  const date = reviewDateLabel(review.approved_at || review.created_at);
+  return `
+   <div class="review-item approved">
+    <div class="review-avatar">${escapeHTML(initial)}</div>
+    <div style="flex:1;min-width:0">
+     <div style="display:flex;align-items:center;gap:4px;flex-wrap:wrap">
+      <b>${author}</b>
+      ${date ? `<span class="review-date">${escapeHTML(date)}</span>` : ""}
+      <span class="review-approved-chip">✓ Validé</span>
+     </div>
+     <div style="color:var(--green);font-size:.78rem;margin-top:4px">${starsText(rating)}</div>
+     <p class="tiny" style="margin:7px 0 0;line-height:1.55">${text}</p>
+    </div>
+   </div>`;
+ }
+
+ function updateReviewSummary(reviews) {
+  const scoreEl = document.getElementById("rating-score");
+  const starsEl = document.getElementById("rating-stars");
+  const countEl = document.getElementById("review-count-label");
+  const bars = [document.getElementById("bar-service"), document.getElementById("bar-quality"), document.getElementById("bar-response")];
+  if (!scoreEl || !starsEl || !countEl) return;
+
+  if (!reviews.length) {
+   scoreEl.innerText = "5.0";
+   starsEl.innerText = "★★★★★";
+   countEl.innerText = "Avis validés";
+   bars.forEach((bar, i) => { if (bar) bar.style.width = [98,96,94][i] + "%"; });
+   return;
+  }
+
+  const avg = reviews.reduce((sum, r) => sum + (Number(r.rating) || 5), 0) / reviews.length;
+  const rounded = Math.max(1, Math.min(5, Math.round(avg)));
+  scoreEl.innerText = avg.toFixed(1);
+  starsEl.innerText = starsText(rounded);
+  countEl.innerText = `${reviews.length} avis validé${reviews.length > 1 ? "s" : ""}`;
+  const pct = Math.max(20, Math.min(100, (avg / 5) * 100));
+  bars.forEach((bar, i) => { if (bar) bar.style.width = Math.max(20, pct - i * 3) + "%"; });
+ }
+
+ async function loadApprovedReviews() {
+  try {
+   const res = await fetch(reviewApiUrl, { cache: "no-store" });
+   if (!res.ok) throw new Error("API avis indisponible");
+   const data = await res.json();
+   const list = Array.isArray(data) ? data : (Array.isArray(data.reviews) ? data.reviews : []);
+   approvedReviews = list;
+  } catch (e) {
+   approvedReviews = [];
+  }
+  return approvedReviews;
+ }
+
+ async function renderReviews() {
+  const listEl = document.getElementById("reviews-list");
+  if (!listEl) return;
+  listEl.innerHTML = `<div class="empty-state" style="padding:28px 0">Chargement des avis...</div>`;
+  const reviews = await loadApprovedReviews();
+  updateReviewSummary(reviews);
+  if (!reviews.length) {
+   listEl.innerHTML = `<div class="empty-state" style="padding:28px 0">Aucun avis validé pour le moment.</div>`;
+   return;
+  }
+  listEl.innerHTML = reviews.map(createReviewHTML).join("");
+ }
+
+ function sendReviewToTelegramPanel(payload) {
+  const status = document.getElementById("review-send-status");
+  const messageInput = document.getElementById("review-message");
+
+  if (window.Telegram?.WebApp?.sendData) {
+   try {
+    window.Telegram.WebApp.sendData(JSON.stringify(payload));
+    if (status) {
+     status.className = "tiny ok";
+     status.innerText = "Avis envoyé au panel Telegram. Il apparaîtra après validation.";
+    }
+    if (messageInput) messageInput.value = "";
+    try { window.Telegram.WebApp.showAlert("Avis envoyé au panel ✅"); } catch(e) {}
+    haptic("medium");
+    return true;
+   } catch(e) {}
+  }
+
+  const msg = `Salut, je veux laisser un avis.
+
+Note : ${starsText(payload.rating)}
+Pseudo : ${payload.author}
+Avis : ${payload.text}`;
+  window.open(contactUrl + "?text=" + encodeURIComponent(msg), "_blank");
+  if (status) {
+   status.className = "tiny err";
+   status.innerText = "Ouverture Telegram en secours. Pour validation automatique, ouvre le catalogue depuis le bouton du bot.";
+  }
+  return false;
+ }
+
  document.querySelectorAll("#review-stars button").forEach(btn => btn.addEventListener("click", (e) => {
   selectedReviewRating = Number(e.currentTarget.dataset.rating) || 5;
   renderReviewStars();
@@ -780,10 +917,19 @@ document.addEventListener("DOMContentLoaded", function () {
  }));
 
  document.getElementById("send-review-btn")?.addEventListener("click", () => {
-  const text = document.getElementById("review-message")?.value.trim() || "";
-  const stars = "★".repeat(selectedReviewRating) + "☆".repeat(5 - selectedReviewRating);
-  const msg = `Salut, je veux laisser un avis.\n\nNote : ${stars}\nAvis : ${text || "Je suis satisfait du catalogue."}`;
-  window.open(contactUrl + "?text=" + encodeURIComponent(msg), "_blank");
+  const text = document.getElementById("review-message")?.value.trim() || "Je suis satisfait du catalogue.";
+  const authorInput = document.getElementById("review-author")?.value.trim();
+  const user = tg.initDataUnsafe?.user;
+  const payload = {
+   action: "submit_review",
+   rating: selectedReviewRating,
+   text,
+   author: authorInput || publicAuthorFallback(),
+   username: user?.username || "",
+   user_id: user?.id || null,
+   created_from: "webapp"
+  };
+  sendReviewToTelegramPanel(payload);
  });
 
  document.querySelectorAll(".nav-btn").forEach(btn => btn.addEventListener("click", () => {
@@ -800,5 +946,7 @@ document.addEventListener("DOMContentLoaded", function () {
  }
 
  renderHome();
+ renderReviewStars();
+ renderReviews();
  updateBadge();
 });
