@@ -342,14 +342,14 @@ document.addEventListener("DOMContentLoaded", function () {
           image: '',
           badgeText: '1 produit',
           products: [
-            /* {
-              id: 'Tropicana 🦜🍹🥭',
-              name: 'Tropicana 🦜🍹🥭',
+            {
+              id: 'Peach Oz',
+              name: 'Peach Oz 🍑',
               farm: 'CALI NL TOP SHELF 🇺🇸🇳🇱',
               promoEligible: false,
               type: '🪴 Weed 🪴',
-              image: 'ProductCHP.png',
-              video: 'VideoCHP.mp4',
+              image: 'ProductPZZ.png',
+              video: 'VideoPZZ.mp4',
               description: 'Déjà Victime De Son Succès 🌈💥 Cali Hollandaise 🇳🇱 Du Vrai Crack 💨 Goût Incroyable 🇺🇸🍑🍓 Bien Compacte ☄️ La Fusée 🚀',
               tarifs: [
                 { weight: '5g', price: 70.00 },
@@ -358,7 +358,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 { weight: '50g', price: 400.00 },
                 { weight: '100g', price: 750.00 }
               ]
-            } */
+            }
           ]
         }
       ]
