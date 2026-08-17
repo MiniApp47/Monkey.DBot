@@ -86,8 +86,26 @@ document.addEventListener("DOMContentLoaded", function () {
           badgeText: '1 produit',
           products: [
              {
-              id: 'FEDERALSIFT RESERVE 🇺🇸⭐️',
-              name: 'FEDERALSIFT RESERVE 🇺🇸⭐️',
+              id: 'White Walker 💎❄️',
+              name: 'White Walker 💎❄️',
+              farm: '⭐️ NoFarm ⭐️',
+              promoEligible: false,
+              type: 'Hash',
+              image: 'ProductWW.jpg',
+              video: 'VideoWW.mov',
+              videos: ['VideoWW2.mov'],
+              description: 'Fresh Frozen Premium 💎🧊 \n\n Pur Produit Des USA 🇺🇸 Fresh Frozen Full Melt Full Terps 🇺🇸🍯 Pour Les Adeptes De La Fume Forte 🌡️🫁 Produit De Folie 🤯🧠 Très Limité 💥💥',
+              tarifs: [
+                { weight: '1g', price: 30.00 },
+                { weight: '3g', price: 90.00 },
+                { weight: '5g', price: 120.00 },
+                { weight: '10g', price: 220.00 },
+                { weight: '20g', price: 420.00 },
+                            ]
+            },
+             {
+              id: 'Blue Cookies 🔵🍪',
+              name: 'Blue Cookies 🔵🍪',
               farm: 'FEDERALSIFT RESERVE 🇺🇸⭐️',
               promoEligible: false,
               type: 'Hash',
