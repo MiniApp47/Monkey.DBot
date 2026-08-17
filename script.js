@@ -88,7 +88,7 @@ document.addEventListener("DOMContentLoaded", function () {
              {
               id: 'White Walker 💎❄️',
               name: 'White Walker 💎❄️',
-              farm: '⭐️ NoFarm ⭐️',
+              farm: 'By EXOTICS ❄️',
               promoEligible: false,
               type: 'Hash',
               image: 'ProductWW.jpg',
