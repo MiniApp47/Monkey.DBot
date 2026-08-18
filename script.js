@@ -93,7 +93,7 @@ document.addEventListener("DOMContentLoaded", function () {
               type: 'Hash',
               image: 'ProductWW.jpg',
               video: 'VideoWW.mov',
-              videos: ['VideoWW2.mov'],
+              videos: ['VideoWW.mov','VideoWW2.mov'],
               description: 'Fresh Frozen Premium 💎🧊 \n\n Pur Produit Des USA 🇺🇸 Fresh Frozen Full Melt Full Terps 🇺🇸🍯 Pour Les Adeptes De La Fume Forte 🌡️🫁 Produit De Folie 🤯🧠 Très Limité 💥💥',
               tarifs: [
                 { weight: '1g', price: 30.00 },
