@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function () {
           image: '',
           badgeText: '2 produits',
           products: [
-            {
+            /* {
               id: 'Smash Meloncini 🍈🍋‍🟩',
               name: 'Smash Meloncini 🍈🍋‍🟩',
               farm: 'BONNE MAMAN 120U 🇲🇦',
@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", function () {
                { weight: '25g', price: 170.00 },
                { weight: '50g', price: 280.00 },
               ]
-            },
+            }, */
             /* {
               id: 'Candy Fruit 🍑🍌🍬',
               name: 'Candy Fruit 🍑🍌🍬',
@@ -120,7 +120,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 { weight: '100g', price: 1400.00 },
               ]
             },
-             {
+            /*  {
               id: 'GrapeGas x Runtz🍇🍭',
               name: 'GrapeGas x Runtz🍇🍭',
               farm: 'MORROCCAN REFINERY 🌪️🇲🇦',
@@ -136,7 +136,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 { weight: '25g', price: 280.00 },
                 { weight: '50g', price: 450.00 },
               ]
-            },
+            }, */
              {
               id: 'Mandarina 🍊',
               name: 'Mandarina 🍊',
@@ -270,7 +270,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 { weight: '25g', price: 300.00 },
               ]
             }, */
-            {
+            /* {
               id: 'South Park Chem 🍋‍🟩🥤',
               name: 'South Park Chem 🍋‍🟩🥤',
               farm: 'TRAFICANTE FARMLAND 🇲🇦',
@@ -289,8 +289,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 { weight: '50g', price: 600.00 },
                 { weight: '100g', price: 1050.00 }
               ]
-            },
-            {
+            }, */
+            /* {
               id: 'Sunset Sherbet 🎇💥💨',
               name: 'Sunset Sherbet 🎇💥💨',
               farm: 'TRAFICANTE FARMLAND 🇲🇦',
@@ -309,8 +309,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 { weight: '50g', price: 600.00 },
                 { weight: '100g', price: 1050.00 }
               ]
-            },
-            {
+            }, */
+            /* {
               id: 'Fatso x Spritzer 💎⛽️🍬',
               name: 'Fatso x Spritzer 💎⛽️🍬',
               farm: 'TRAFICANTE FARMLAND 🇲🇦',
@@ -329,7 +329,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 { weight: '50g', price: 600.00 },
                 { weight: '100g', price: 1050.00 }
               ]
-            }
+            } */
           ]
         },
         {
