@@ -29,6 +29,44 @@ document.addEventListener("DOMContentLoaded", function () {
           image: '',
           badgeText: '2 produits',
           products: [
+            {
+              id: 'Prickly Pearlz 🍇',
+              name: 'Prickly Pearlz 🍇',
+              farm: 'MOUNTAIN GIANT x ONE PIECE FARM ☠️🇲🇦',
+              promoEligible: false,
+              type: 'Hash',
+              image: 'ProductLR.png',
+              video: 'VideoPP.mov',
+              description: 'Farm Reconnu + Collab One Pièce 🇲🇦☠️ Best Quality Vous Trouverez Pas Mieux Ailleurs 🏆 Goût Bien Fort 🌡️Qualité Frozen Texture Conservation 🇺🇸🧊',
+              tarifs: [
+               { weight: '5g', price: 50.00 },
+               { weight: '10g', price: 80.00 },
+               { weight: '25g', price: 150.00 },
+               { weight: '50g', price: 200.00 },
+               { weight: '100g', price: 360.00 },
+               { weight: '500g', price: 1600.00 },
+               { weight: '1Kg', price: 2900.00 },
+              ]
+            },
+            {
+              id: 'Lemon Rain 🍋',
+              name: 'Lemon Rain 🍋',
+              farm: 'MOUNTAIN GIANT x ONE PIECE FARM ☠️🇲🇦',
+              promoEligible: false,
+              type: 'Hash',
+              image: 'ProductLR.png',
+              video: 'VideoLR.mov',
+              description: 'Farm Reconnu + Collab One Pièce 🇲🇦☠️ Best Quality Vous Trouverez Pas Mieux Ailleurs 🏆 Goût Bien Fort 🌡️Qualité Frozen Texture Conservation 🇺🇸🧊',
+              tarifs: [
+               { weight: '5g', price: 50.00 },
+               { weight: '10g', price: 80.00 },
+               { weight: '25g', price: 150.00 },
+               { weight: '50g', price: 200.00 },
+               { weight: '100g', price: 360.00 },
+               { weight: '500g', price: 1600.00 },
+               { weight: '1Kg', price: 2900.00 },
+              ]
+            },
             /* {
               id: 'Smash Meloncini 🍈🍋‍🟩',
               name: 'Smash Meloncini 🍈🍋‍🟩',
@@ -193,7 +231,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 { weight: '20g', price: 420.00 },
                             ]
             },
-             {
+             /* {
               id: 'Blue Cookies 🔵🍪',
               name: 'Blue Cookies 🔵🍪',
               farm: 'FEDERALSIFT RESERVE 🇺🇸⭐️',
@@ -209,7 +247,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 { weight: '50g', price: 750.00 },
                 { weight: '100g', price: 1400.00 },
               ]
-            },
+            }, */
             /*  {
               id: 'GrapeGas x Runtz🍇🍭',
               name: 'GrapeGas x Runtz🍇🍭',
@@ -305,7 +343,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 { weight: '10g', price: 340.00 },
               ]
             }, */
-            {
+            /* {
               id: 'Limelight 🍋‍🟩☀️',
               name: 'Limelight 🍋‍🟩☀️',
               farm: 'Wizard Treez x Golden Warriors 🇺🇸',
@@ -319,7 +357,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 { weight: '5g', price: 200.00 },
                 { weight: '10g', price: 340.00 },
               ]
-            },
+            }, */
           ]
         },
         {
