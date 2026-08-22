@@ -86,6 +86,96 @@ document.addEventListener("DOMContentLoaded", function () {
           badgeText: '1 produit',
           products: [
              {
+              id: 'Diez Lemon 🍋⛽️',
+              name: 'Diez Lemon 🍋⛽️',
+              farm: 'PACO FARMZ 🇲🇦',
+              promoEligible: false,
+              type: 'Hash',
+              image: 'ProductDL.png',
+              video: 'VideoDL.mp4',
+              description: 'Produit Full Handmade 🧤Travail au Gants 🇲🇦 Qualité Aspect Texture Odeur Terps De Fdp 😱😱🇺🇸 Meilleur Hash Du Moment 🔥🔥',
+              tarifs: [
+                { weight: '3g', price: 60.00 },
+                { weight: '5g', price: 80.00 },
+                { weight: '10g', price: 140.00 },
+                { weight: '25g', price: 300.00 },
+                { weight: '50g', price: 500.00 },
+                { weight: '100g', price: 900.00 },
+                            ]
+            },
+             {
+              id: 'Jardin Fruit 🍑🍇🍒🍋',
+              name: 'Jardin Fruit 🍑🍇🍒🍋',
+              farm: 'PACO FARMZ 🇲🇦',
+              promoEligible: false,
+              type: 'Hash',
+              image: 'ProductJF.png',
+              video: 'VideoJF.mp4',
+              description: 'Produit Full Handmade 🧤Travail au Gants 🇲🇦 Qualité Aspect Texture Odeur Terps De Fdp 😱😱🇺🇸 Meilleur Hash Du Moment 🔥🔥',
+              tarifs: [
+                { weight: '3g', price: 60.00 },
+                { weight: '5g', price: 80.00 },
+                { weight: '10g', price: 140.00 },
+                { weight: '25g', price: 300.00 },
+                { weight: '50g', price: 500.00 },
+                { weight: '100g', price: 900.00 },
+                            ]
+            },
+             {
+              id: 'AnaZookies 🍍🍪',
+              name: 'AnaZookies 🍍🍪',
+              farm: 'PACO FARMZ 🇲🇦',
+              promoEligible: false,
+              type: 'Hash',
+              image: 'ProductAZ.png',
+              video: 'VideoAZ.mp4',
+              description: 'Produit Full Handmade 🧤Travail au Gants 🇲🇦 Qualité Aspect Texture Odeur Terps De Fdp 😱😱🇺🇸 Meilleur Hash Du Moment 🔥🔥',
+              tarifs: [
+                { weight: '3g', price: 60.00 },
+                { weight: '5g', price: 80.00 },
+                { weight: '10g', price: 140.00 },
+                { weight: '25g', price: 300.00 },
+                { weight: '50g', price: 500.00 },
+                { weight: '100g', price: 900.00 },
+                            ]
+            },
+             {
+              id: 'GMO ⛽️',
+              name: 'GMO ⛽️',
+              farm: 'PACO FARMZ 🇲🇦',
+              promoEligible: false,
+              type: 'Hash',
+              image: 'ProductGMO.png',
+              video: 'VideoGMO.mp4',
+              description: 'Produit Full Handmade 🧤Travail au Gants 🇲🇦 Qualité Aspect Texture Odeur Terps De Fdp 😱😱🇺🇸 Meilleur Hash Du Moment 🔥🔥',
+              tarifs: [
+                { weight: '3g', price: 60.00 },
+                { weight: '5g', price: 80.00 },
+                { weight: '10g', price: 140.00 },
+                { weight: '25g', price: 300.00 },
+                { weight: '50g', price: 500.00 },
+                { weight: '100g', price: 900.00 },
+                            ]
+            },
+             {
+              id: 'Lem Mandarina 🍋🍊',
+              name: 'Lem Mandarina 🍋🍊',
+              farm: 'PACO FARMZ 🇲🇦',
+              promoEligible: false,
+              type: 'Hash',
+              image: 'ProductLM.png',
+              video: 'VideoLM.mp4',
+              description: 'Produit Full Handmade 🧤Travail au Gants 🇲🇦 Qualité Aspect Texture Odeur Terps De Fdp 😱😱🇺🇸 Meilleur Hash Du Moment 🔥🔥',
+              tarifs: [
+                { weight: '3g', price: 60.00 },
+                { weight: '5g', price: 80.00 },
+                { weight: '10g', price: 140.00 },
+                { weight: '25g', price: 300.00 },
+                { weight: '50g', price: 500.00 },
+                { weight: '100g', price: 900.00 },
+                            ]
+            },
+             {
               id: 'White Walker 💎❄️',
               name: 'White Walker 💎❄️',
               farm: 'By EXOTICS ❄️',
@@ -238,6 +328,38 @@ document.addEventListener("DOMContentLoaded", function () {
           image: '',
           badgeText: '1 produit',
           products: [
+            {
+              id: '4Fruitz 🍓🥝🍒🍋',
+              name: '4Fruitz 🍓🥝🍒🍋',
+              farm: 'MOUNTAINS GIANT x OASIS 51 🇲🇦🌎',
+              promoEligible: false,
+              type: 'Hash',
+              image: 'Product4.png',
+              video: 'Video4.mov',
+              description: 'Collab MG x Oasis 51 🇲🇦 2 Strains De Folie 🇺🇸 Qualité Phénoménale 🧠 Vrai Plasma Static Full Terps 🍌🍑🍒🍋⛽️ Quantité Limite Que Détail 📰📰',
+              tarifs: [
+                { weight: '3g', price: 60.00 },
+                { weight: '5g', price: 90.00 },
+                { weight: '10g', price: 160.00 },
+                { weight: '20g', price: 300.00 },
+              ]
+            }, 
+            {
+              id: 'RottenPear 🍐⛽️',
+              name: 'RottenPear 🍐⛽️',
+              farm: 'MOUNTAINS GIANT x OASIS 51 🇲🇦🌎',
+              promoEligible: false,
+              type: 'Hash',
+              image: 'ProductRP.png',
+              video: 'VideoRP.mov',
+              description: 'Collab MG x Oasis 51 🇲🇦 2 Strains De Folie 🇺🇸 Qualité Phénoménale 🧠 Vrai Plasma Static Full Terps 🍌🍑🍒🍋⛽️ Quantité Limite Que Détail 📰📰',
+              tarifs: [
+                { weight: '3g', price: 60.00 },
+                { weight: '5g', price: 90.00 },
+                { weight: '10g', price: 160.00 },
+                { weight: '20g', price: 300.00 },
+              ]
+            }, 
             /* {
               id: 'Grape Gas 🦍',
               name: 'Grape Gas ⛽',
