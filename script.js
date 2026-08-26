@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
               farm: 'MOUNTAIN GIANT x ONE PIECE FARM ☠️🇲🇦',
               promoEligible: false,
               type: 'Hash',
-              image: 'ProductLR.png',
+              image: 'ProductLR.jpg',
               video: 'VideoPP.mov',
               description: 'Farm Reconnu + Collab One Pièce 🇲🇦☠️ Best Quality Vous Trouverez Pas Mieux Ailleurs 🏆 Goût Bien Fort 🌡️Qualité Frozen Texture Conservation 🇺🇸🧊',
               tarifs: [
@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", function () {
               farm: 'MOUNTAIN GIANT x ONE PIECE FARM ☠️🇲🇦',
               promoEligible: false,
               type: 'Hash',
-              image: 'ProductLR.png',
+              image: 'ProductLR.jpg',
               video: 'VideoLR.mov',
               description: 'Farm Reconnu + Collab One Pièce 🇲🇦☠️ Best Quality Vous Trouverez Pas Mieux Ailleurs 🏆 Goût Bien Fort 🌡️Qualité Frozen Texture Conservation 🇺🇸🧊',
               tarifs: [
