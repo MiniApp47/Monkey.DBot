@@ -213,7 +213,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 { weight: '100g', price: 900.00 },
                             ]
             },
-             {
+             /* {
               id: 'White Walker 💎❄️',
               name: 'White Walker 💎❄️',
               farm: 'By EXOTICS ❄️',
@@ -230,7 +230,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 { weight: '10g', price: 220.00 },
                 { weight: '20g', price: 420.00 },
                             ]
-            },
+            }, */
              /* {
               id: 'Blue Cookies 🔵🍪',
               name: 'Blue Cookies 🔵🍪',
@@ -265,7 +265,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 { weight: '50g', price: 450.00 },
               ]
             }, */
-             {
+            /*  {
               id: 'Mandarina 🍊',
               name: 'Mandarina 🍊',
               farm: '👨‍🌾 HaramBoyz 👨‍🌾',
@@ -318,7 +318,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 { weight: '50g', price: 380.00 },
                 { weight: '100g', price: 700.00 },
               ]
-            },
+            }, */
             
           ]
         },
