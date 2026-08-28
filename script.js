@@ -30,6 +30,54 @@ document.addEventListener("DOMContentLoaded", function () {
           badgeText: '2 produits',
           products: [
             {
+              id: 'Hawaian Blue 🌺🌀🏖️',
+              name: 'Hawaian Blue 🌺🌀🏖️',
+              farm: 'STICKY FINGERS 73U 🇲🇦',
+              promoEligible: false,
+              type: 'Hash',
+              image: 'ProductHB.png',
+              video: 'VideoHB.mov',
+              description: 'Produit 100% 🇲🇦 Full Seeds 🇺🇸 Rapport Qualite Prix 😱 Premium Quality Certified⭐️Goût Odeur Texture 💥💥Quantité Limite ⏳⌛️',
+              tarifs: [
+               { weight: '5g', price: 50.00 },
+               { weight: '10g', price: 90.00 },
+               { weight: '25g', price: 200.00 },
+               { weight: '50g', price: 320.00 },
+              ]
+            },
+            {
+              id: 'Electic Lemonade ⚡️🍋',
+              name: 'Electic Lemonade ⚡️🍋',
+              farm: 'STICKY FINGERS 73U 🇲🇦',
+              promoEligible: false,
+              type: 'Hash',
+              image: 'ProductEL.png',
+              video: 'VideoEL.mov',
+              description: 'Produit 100% 🇲🇦 Full Seeds 🇺🇸 Rapport Qualite Prix 😱 Premium Quality Certified⭐️Goût Odeur Texture 💥💥Quantité Limite ⏳⌛️',
+              tarifs: [
+               { weight: '5g', price: 50.00 },
+               { weight: '10g', price: 90.00 },
+               { weight: '25g', price: 200.00 },
+               { weight: '50g', price: 320.00 },
+              ]
+            },
+            {
+              id: 'Super Bowl ⚾️',
+              name: 'Super Bowl ⚾️',
+              farm: 'STICKY FINGERS 73U 🇲🇦',
+              promoEligible: false,
+              type: 'Hash',
+              image: 'ProductSB.png',
+              video: 'VideoSB.mov',
+              description: 'Produit 100% 🇲🇦 Full Seeds 🇺🇸 Rapport Qualite Prix 😱 Premium Quality Certified⭐️Goût Odeur Texture 💥💥Quantité Limite ⏳⌛️',
+              tarifs: [
+               { weight: '5g', price: 50.00 },
+               { weight: '10g', price: 90.00 },
+               { weight: '25g', price: 200.00 },
+               { weight: '50g', price: 320.00 },
+              ]
+            },
+            {
               id: 'Prickly Pearlz 🍇',
               name: 'Prickly Pearlz 🍇',
               farm: 'MOUNTAIN GIANT x ONE PIECE FARM ☠️🇲🇦',
