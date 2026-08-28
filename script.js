@@ -30,8 +30,8 @@ document.addEventListener("DOMContentLoaded", function () {
           badgeText: '2 produits',
           products: [
             {
-              id: 'Hawaian Blue 🌺🌀🏖️',
-              name: 'Hawaian Blue 🌺🌀🏖️',
+              id: 'Coche Runtz 🍭🍬',
+              name: 'Coche Runtz 🍭🍬',
               farm: 'STICKY FINGERS 73U 🇲🇦',
               promoEligible: false,
               type: 'Hash',
