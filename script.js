@@ -172,6 +172,60 @@ document.addEventListener("DOMContentLoaded", function () {
           badgeText: '1 produit',
           products: [
              {
+              id: 'Mandarina 🍊',
+              name: 'Mandarina 🍊',
+              farm: '👨‍🌾 HaramBoyz 👨‍🌾',
+              promoEligible: false,
+              type: 'Hash',
+              image: 'ProductMD.png',
+              video: 'VideoMD.mov',
+              description: '',
+              tarifs: [
+                { weight: '3g', price: 50.00 },
+                { weight: '5g', price: 70.00 },
+                { weight: '10g', price: 120.00 },
+                { weight: '25g', price: 270.00 },
+                { weight: '50g', price: 380.00 },
+                { weight: '100g', price: 700.00 },
+              ]
+            },
+             {
+              id: 'KayLinePay 💳',
+              name: 'KayLinePay 💳',
+              farm: '👨‍🌾 HaramBoyz 👨‍🌾',
+              promoEligible: false,
+              type: 'Hash',
+              image: 'ProductKL.png',
+              video: 'VideoKL.mov',
+              description: '',
+              tarifs: [
+                { weight: '3g', price: 50.00 },
+                { weight: '5g', price: 70.00 },
+                { weight: '10g', price: 120.00 },
+                { weight: '25g', price: 270.00 },
+                { weight: '50g', price: 380.00 },
+                { weight: '100g', price: 700.00 },
+              ]
+            },
+             {
+              id: 'ForbiddenFruit 🍎',
+              name: 'ForbiddenFruit 🍎',
+              farm: '👨‍🌾 HaramBoyz 👨‍🌾',
+              promoEligible: false,
+              type: 'Hash',
+              image: 'ProductFF.png',
+              video: 'VideoFF.mov',
+              description: '',
+              tarifs: [
+                { weight: '3g', price: 50.00 },
+                { weight: '5g', price: 70.00 },
+                { weight: '10g', price: 120.00 },
+                { weight: '25g', price: 270.00 },
+                { weight: '50g', price: 380.00 },
+                { weight: '100g', price: 700.00 },
+              ]
+            },
+             {
               id: 'Diez Lemon 🍋⛽️',
               name: 'Diez Lemon 🍋⛽️',
               farm: 'PACO FARMZ 🇲🇦',
@@ -313,60 +367,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 { weight: '50g', price: 450.00 },
               ]
             }, */
-            /*  {
-              id: 'Mandarina 🍊',
-              name: 'Mandarina 🍊',
-              farm: '👨‍🌾 HaramBoyz 👨‍🌾',
-              promoEligible: false,
-              type: 'Hash',
-              image: 'ProductMD.png',
-              video: 'VideoMD.mov',
-              description: '',
-              tarifs: [
-                { weight: '3g', price: 50.00 },
-                { weight: '5g', price: 70.00 },
-                { weight: '10g', price: 120.00 },
-                { weight: '25g', price: 270.00 },
-                { weight: '50g', price: 380.00 },
-                { weight: '100g', price: 700.00 },
-              ]
-            },
-             {
-              id: 'KayLinePay 💳',
-              name: 'KayLinePay 💳',
-              farm: '👨‍🌾 HaramBoyz 👨‍🌾',
-              promoEligible: false,
-              type: 'Hash',
-              image: 'ProductKL.png',
-              video: 'VideoKL.mov',
-              description: '',
-              tarifs: [
-                { weight: '3g', price: 50.00 },
-                { weight: '5g', price: 70.00 },
-                { weight: '10g', price: 120.00 },
-                { weight: '25g', price: 270.00 },
-                { weight: '50g', price: 380.00 },
-                { weight: '100g', price: 700.00 },
-              ]
-            },
-             {
-              id: 'ForbiddenFruit 🍎',
-              name: 'ForbiddenFruit 🍎',
-              farm: '👨‍🌾 HaramBoyz 👨‍🌾',
-              promoEligible: false,
-              type: 'Hash',
-              image: 'ProductFF.png',
-              video: 'VideoFF.mov',
-              description: '',
-              tarifs: [
-                { weight: '3g', price: 50.00 },
-                { weight: '5g', price: 70.00 },
-                { weight: '10g', price: 120.00 },
-                { weight: '25g', price: 270.00 },
-                { weight: '50g', price: 380.00 },
-                { weight: '100g', price: 700.00 },
-              ]
-            }, */
+
             
           ]
         },
