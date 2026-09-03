@@ -77,7 +77,7 @@ document.addEventListener("DOMContentLoaded", function () {
                { weight: '50g', price: 320.00 },
               ]
             },
-            {
+            /* {
               id: 'Prickly Pearlz 🍇',
               name: 'Prickly Pearlz 🍇',
               farm: 'MOUNTAIN GIANT x ONE PIECE FARM ☠️🇲🇦',
@@ -95,8 +95,8 @@ document.addEventListener("DOMContentLoaded", function () {
                { weight: '500g', price: 1600.00 },
                { weight: '1Kg', price: 2900.00 },
               ]
-            },
-            {
+            }, */
+            /* {
               id: 'Lemon Rain 🍋',
               name: 'Lemon Rain 🍋',
               farm: 'MOUNTAIN GIANT x ONE PIECE FARM ☠️🇲🇦',
@@ -114,7 +114,7 @@ document.addEventListener("DOMContentLoaded", function () {
                { weight: '500g', price: 1600.00 },
                { weight: '1Kg', price: 2900.00 },
               ]
-            },
+            }, */
             /* {
               id: 'Smash Meloncini 🍈🍋‍🟩',
               name: 'Smash Meloncini 🍈🍋‍🟩',
@@ -569,7 +569,7 @@ document.addEventListener("DOMContentLoaded", function () {
           image: '',
           badgeText: '1 produit',
           products: [
-            {
+            /* {
               id: 'Peach Oz',
               name: 'Peach Oz 🍑',
               farm: 'CALI NL TOP SHELF 🇺🇸🇳🇱',
@@ -585,7 +585,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 { weight: '50g', price: 400.00 },
                 { weight: '100g', price: 750.00 }
               ]
-            }
+            } */
           ]
         }
       ]
