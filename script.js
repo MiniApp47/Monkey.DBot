@@ -432,7 +432,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 { weight: '100g', price: 1000.00 },
               ]
             },
-            {
+           /*  {
               id: '4Fruitz 🍓🥝🍒🍋',
               name: '4Fruitz 🍓🥝🍒🍋',
               farm: 'MOUNTAINS GIANT x OASIS 51 🇲🇦🌎',
@@ -463,7 +463,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 { weight: '10g', price: 160.00 },
                 { weight: '20g', price: 300.00 },
               ]
-            }, 
+            },  */
             /* {
               id: 'Grape Gas 🦍',
               name: 'Grape Gas ⛽',
