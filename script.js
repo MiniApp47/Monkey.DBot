@@ -416,6 +416,23 @@ document.addEventListener("DOMContentLoaded", function () {
           badgeText: '1 produit',
           products: [
             {
+              id: 'Forbidden x Calippo 🍓🍬',
+              name: 'Forbidden x Calippo 🍓🍬',
+              farm: 'Hamdullah Farmz 🇺🇸🇲🇦',
+              promoEligible: false,
+              type: 'Hash',
+              image: 'ProductFC.png',
+              video: 'VideoFC.mov',
+              description: 'Plasma Static ⚡️ \n\n Farm Au Top 👌 Produit A Base De Graine De Cali 🇺🇸 Goût Incroyavle 🤯🤯 Odeur Puissante de Cali 🌉🌉🌉',
+              tarifs: [
+                { weight: '5g', price: 90.00 },
+                { weight: '10g', price: 160.00 },
+                { weight: '25g', price: 350.00 },
+                { weight: '50g', price: 550.00 },
+                { weight: '100g', price: 1000.00 },
+              ]
+            },
+            {
               id: '4Fruitz 🍓🥝🍒🍋',
               name: '4Fruitz 🍓🥝🍒🍋',
               farm: 'MOUNTAINS GIANT x OASIS 51 🇲🇦🌎',
