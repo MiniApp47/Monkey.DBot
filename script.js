@@ -30,6 +30,22 @@ document.addEventListener("DOMContentLoaded", function () {
           badgeText: '2 produits',
           products: [
             {
+              id: 'Strawberry Pie 🍓🍒',
+              name: 'Strawberry Pie 🍓🍒',
+              farm: 'DRYSIFT 120U 🇲🇦',
+              promoEligible: false,
+              type: 'Hash',
+              image: 'ProductSP.png',
+              video: 'VideoSP.mov',
+              description: 'Top Qualité Odeur Goût Texture Curing Au Top Du Top 🔥🇲🇦 Rapport Qualité Prix Parfait Pour Bosser Limite Qualité Frozen 🧊 Quantité Limite ⌛️',
+              tarifs: [
+               { weight: '100g', price: 350.00 },
+               { weight: '200g', price: 650.00 },
+               { weight: '500g', price: 1500.00 },
+               { weight: '1Kg', price: 2800.00 },
+              ]
+            },
+            {
               id: 'Coche Runtz 🍭🍬',
               name: 'Coche Runtz 🍭🍬',
               farm: 'STICKY FINGERS 73U 🇲🇦',
