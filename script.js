@@ -35,8 +35,8 @@ document.addEventListener("DOMContentLoaded", function () {
               farm: 'DRYSIFT 120U 🇲🇦',
               promoEligible: false,
               type: 'Hash',
-              image: 'ProductSP.png',
-              video: 'VideoSP.mov',
+              image: 'ProductSPP.png',
+              video: 'VideoSPP.mov',
               description: 'Top Qualité Odeur Goût Texture Curing Au Top Du Top 🔥🇲🇦 Rapport Qualité Prix Parfait Pour Bosser Limite Qualité Frozen 🧊 Quantité Limite ⌛️',
               tarifs: [
                { weight: '100g', price: 350.00 },
