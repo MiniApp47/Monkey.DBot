@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function () {
                { weight: '1Kg', price: 2800.00 },
               ]
             },
-            {
+            /* {
               id: 'Coche Runtz 🍭🍬',
               name: 'Coche Runtz 🍭🍬',
               farm: 'STICKY FINGERS 73U 🇲🇦',
@@ -92,7 +92,7 @@ document.addEventListener("DOMContentLoaded", function () {
                { weight: '25g', price: 200.00 },
                { weight: '50g', price: 320.00 },
               ]
-            },
+            }, */
             /* {
               id: 'Prickly Pearlz 🍇',
               name: 'Prickly Pearlz 🍇',
@@ -187,6 +187,42 @@ document.addEventListener("DOMContentLoaded", function () {
           image: '',
           badgeText: '1 produit',
           products: [
+             {
+              id: 'Yellow Melon',
+              name: 'Yellow Melon',
+              farm: '👨‍🌾 HaramBoyz 👨‍🌾',
+              promoEligible: false,
+              type: 'Hash',
+              image: 'ProductYM.png',
+              video: 'VideoYM.mov',
+              description: '',
+              tarifs: [
+                { weight: '3g', price: 50.00 },
+                { weight: '5g', price: 70.00 },
+                { weight: '10g', price: 120.00 },
+                { weight: '25g', price: 270.00 },
+                { weight: '50g', price: 380.00 },
+                { weight: '100g', price: 700.00 },
+              ]
+            },
+             {
+              id: 'Tropy Lime',
+              name: 'Tropy Lime',
+              farm: '👨‍🌾 HaramBoyz 👨‍🌾',
+              promoEligible: false,
+              type: 'Hash',
+              image: 'ProductTL.png',
+              video: 'VideoTL.mov',
+              description: '',
+              tarifs: [
+                { weight: '3g', price: 50.00 },
+                { weight: '5g', price: 70.00 },
+                { weight: '10g', price: 120.00 },
+                { weight: '25g', price: 270.00 },
+                { weight: '50g', price: 380.00 },
+                { weight: '100g', price: 700.00 },
+              ]
+            },
              {
               id: 'Mandarina 🍊',
               name: 'Mandarina 🍊',
