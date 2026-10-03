@@ -187,6 +187,70 @@ document.addEventListener("DOMContentLoaded", function () {
           image: '',
           badgeText: '1 produit',
           products: [
+           /*   {
+              id: 'Mroroccan Peach',
+              name: 'Mroroccan Peach 🍑',
+              farm: 'SECRET FARMERZ 🔮',
+              promoEligible: false,
+              type: 'Hash',
+              image: 'ProductODV.png',
+              video: 'VideoODV.mov',
+              description: 'Produit Full Terps 🇺🇸🍒🥭 Fort En THC 🌡️ Real Frozen 🧊⭐️ Odeur De Zinzin Terps De Zinzin 🧠🧠🤯🤯',
+              tarifs: [
+                { weight: '5g', price: 70.00 },
+                { weight: '10g', price: 130.00 },
+                { weight: '25g', price: 270.00 },
+                { weight: '50g', price: 450.00 },
+              ]
+            },
+             {
+              id: 'Muel Fuel x Tropcherry 🍒⛽️',
+              name: 'Muel Fuel x Tropcherry 🍒⛽️',
+              farm: 'SECRET FARMERZ 🔮',
+              promoEligible: false,
+              type: 'Hash',
+              image: 'ProductODV.png',
+              video: 'VideoODV.mov',
+              description: 'Produit Full Terps 🇺🇸🍒🥭 Fort En THC 🌡️ Real Frozen 🧊⭐️ Odeur De Zinzin Terps De Zinzin 🧠🧠🤯🤯',
+              tarifs: [
+                { weight: '5g', price: 70.00 },
+                { weight: '10g', price: 130.00 },
+                { weight: '25g', price: 270.00 },
+                { weight: '50g', price: 450.00 },
+              ]
+            }, */
+             {
+              id: 'Tropical ODV 🥭',
+              name: 'Tropical ODV 🥭',
+              farm: 'SECRET FARMERZ 🔮',
+              promoEligible: false,
+              type: 'Hash',
+              image: 'ProductODV.png',
+              video: 'VideoODV.mov',
+              description: 'Produit Full Terps 🇺🇸🍒🥭 Fort En THC 🌡️ Real Frozen 🧊⭐️ Odeur De Zinzin Terps De Zinzin 🧠🧠🤯🤯',
+              tarifs: [
+                { weight: '5g', price: 70.00 },
+                { weight: '10g', price: 130.00 },
+                { weight: '25g', price: 270.00 },
+                { weight: '50g', price: 450.00 },
+              ]
+            },
+             {
+              id: 'ICC x Runtz 🍦🍭',
+              name: 'ICC x Runtz 🍦🍭',
+              farm: 'SECRET FARMERZ 🔮',
+              promoEligible: false,
+              type: 'Hash',
+              image: 'ProductIR.png',
+              video: 'VideoIR.mov',
+              description: 'Produit Full Terps 🇺🇸🍒🥭 Fort En THC 🌡️ Real Frozen 🧊⭐️ Odeur De Zinzin Terps De Zinzin 🧠🧠🤯🤯',
+                tarifs: [
+                { weight: '5g', price: 70.00 },
+                { weight: '10g', price: 130.00 },
+                { weight: '25g', price: 270.00 },
+                { weight: '50g', price: 450.00 },
+              ]
+            },
              {
               id: 'Yellow Melon',
               name: 'Yellow Melon',
