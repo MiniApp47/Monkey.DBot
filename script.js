@@ -30,6 +30,22 @@ document.addEventListener("DOMContentLoaded", function () {
           badgeText: '2 produits',
           products: [
             {
+              id: 'Punch Breath 🥊🧄',
+              name: 'Punch Breath 🥊🧄',
+              farm: 'GAZ FRUIT 73U 🇲🇦',
+              promoEligible: false,
+              type: 'Hash',
+              image: 'ProductPB.png',
+              videos: ['VideoPB.mov','VideoPB2.mov'],
+              description: 'Drysift Premium by Gazfruit 🇲🇦 Top Qualité Goût Très Présent Très Bonne Résine 🤯👅 Pour Les Petit Budgets Qui Cherche De La Qualidad 💎🌡️',
+              tarifs: [
+               { weight: '5g', price: 50.00 },
+               { weight: '10g', price: 90.00 },
+               { weight: '25g', price: 170.00 },
+               { weight: '50g', price: 220.00 },
+              ]
+            },
+            {
               id: 'Strawberry Pie 🍓🍒',
               name: 'Strawberry Pie 🍓🍒',
               farm: 'DRYSIFT 120U 🇲🇦',
