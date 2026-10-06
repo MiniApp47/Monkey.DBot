@@ -432,6 +432,133 @@
    box-shadow: 0 0 22px rgba(48,255,102,.18);
   }
 
+
+  /* --- FIX V3.2 : recadrage icônes + avis validés --- */
+  .hero-social-top .hero-link,
+  .contact-icon,
+  .round-btn,
+  .back-btn,
+  .nav-item-float,
+  .fav-chip,
+  .fav-btn {
+   flex-shrink: 0;
+  }
+
+  .hero-social-top .hero-link svg,
+  .contact-icon svg,
+  .round-btn svg,
+  .back-btn svg,
+  .nav-item-float svg,
+  .fav-chip svg,
+  .fav-btn svg {
+   display: block !important;
+   width: 19px !important;
+   height: 19px !important;
+   max-width: 19px !important;
+   max-height: 19px !important;
+   overflow: visible !important;
+  }
+
+  .fav-chip {
+   position: absolute !important;
+   top: 10px !important;
+   right: 10px !important;
+   width: 34px !important;
+   height: 34px !important;
+   min-width: 34px !important;
+   min-height: 34px !important;
+   padding: 0 !important;
+   border-radius: 50% !important;
+   display: flex !important;
+   align-items: center !important;
+   justify-content: center !important;
+   line-height: 1 !important;
+   z-index: 8 !important;
+  }
+
+  .fav-chip svg {
+   width: 17px !important;
+   height: 17px !important;
+   max-width: 17px !important;
+   max-height: 17px !important;
+  }
+
+  .fav-btn {
+   width: 46px !important;
+   height: 46px !important;
+   min-width: 46px !important;
+   padding: 0 !important;
+   display: flex !important;
+   align-items: center !important;
+   justify-content: center !important;
+   border-radius: 16px !important;
+  }
+
+  .fav-btn svg {
+   width: 20px !important;
+   height: 20px !important;
+  }
+
+  .nav-floating {
+   grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+   overflow: hidden !important;
+  }
+
+  .nav-item-float {
+   min-width: 0 !important;
+   overflow: hidden !important;
+   padding: 0 8px !important;
+  }
+
+  .nav-item-float svg {
+   width: 20px !important;
+   height: 20px !important;
+   min-width: 20px !important;
+   max-width: 20px !important;
+  }
+
+  .nav-item-float.active .nav-text {
+   display: inline-block !important;
+   max-width: 72px !important;
+   overflow: hidden !important;
+   white-space: nowrap !important;
+   text-overflow: ellipsis !important;
+  }
+
+  .prod-img-wrap {
+   position: relative !important;
+   overflow: hidden !important;
+  }
+
+  .review-item.approved {
+   border-top: 1px solid rgba(255,255,255,.08);
+  }
+
+  .review-date {
+   display: inline-block;
+   margin-left: 6px;
+   color: var(--text-soft);
+   font-size: .68rem;
+   font-weight: 800;
+  }
+
+  .review-approved-chip {
+   display: inline-flex;
+   align-items: center;
+   gap: 5px;
+   padding: 4px 8px;
+   border-radius: 999px;
+   background: rgba(48,255,102,.11);
+   color: var(--green);
+   border: 1px solid rgba(48,255,102,.25);
+   font-size: .66rem;
+   font-weight: 1000;
+   margin-left: 6px;
+  }
+
+  #review-send-status.ok { color: var(--green); }
+  #review-send-status.err { color: #ff8ca1; }
+
  </style>
 </head>
 <body>
@@ -476,7 +603,7 @@
     <div class="hero-top">
      <div class="brand-pill"><span class="live-dot"></span> Catalogue premium</div>
      <div class="hero-social-top" aria-label="Réseaux officiels">
-       <a class="hero-link" href="https://t.me/MonkeyDieLuffy2" target="_blank" title="Telegram"><svg><use href="#icon-telegram"/></svg></a>
+       <a class="hero-link" href="https://t.me/LuffyIsBackVip" target="_blank" title="Telegram"><svg><use href="#icon-telegram"/></svg></a>
        <a class="hero-link" href="https://m.tatokdym.org/joinchat/HjXuEMdY2hj94aLmMabCrg" target="_blank" title="Potato"><svg><use href="#icon-potato"/></svg></a>
        <a class="hero-link" href="https://www.instagram.com/realuffythedry?igsh=MWNsenVrdncwcmswdA%3D%3D&utm_source=qr" target="_blank" title="Instagram"><svg><use href="#icon-instagram"/></svg></a>
       </div>
@@ -603,43 +730,56 @@
  </div>
 
  <div id="page-reviews" class="page">
-   <div class="app-header"><button class="back-btn" onclick="navigate('home')">‹</button><div class="app-title">Avis clients</div><div style="width:42px"></div></div>
-   <div class="panel">
-    <div style="display:flex;align-items:center;justify-content:space-between;gap:14px">
-     <div><div style="font-size:3rem;font-weight:1000;line-height:.9">5.0</div><div style="color:var(--green);font-weight:1000;margin-top:8px">★★★★★</div></div>
-     <div style="flex:1">
-      <div class="line-stat"><span>Service</span><div class="bar"><span style="width:98%"></span></div></div>
-      <div class="line-stat"><span>Qualité</span><div class="bar"><span style="width:96%"></span></div></div>
-      <div class="line-stat"><span>Réponse</span><div class="bar"><span style="width:94%"></span></div></div>
-     </div>
+  <div class="app-header"><button class="back-btn" onclick="navigate('home')">‹</button><div class="app-title">Avis clients</div><div style="width:42px"></div></div>
+
+  <div class="panel">
+   <div style="display:flex;align-items:center;justify-content:space-between;gap:14px">
+    <div>
+     <div id="rating-score" style="font-size:3rem;font-weight:1000;line-height:.9">5.0</div>
+     <div id="rating-stars" style="color:var(--green);font-weight:1000;margin-top:8px">★★★★★</div>
+     <div id="review-count-label" class="tiny" style="margin-top:6px">Avis validés</div>
     </div>
-   </div>
-   <div class="panel">
-    <b>Retours récents</b>
-    <div class="review-item"><div class="review-avatar">A</div><div><b>Anonyme</b><div style="color:var(--green);font-size:.75rem">★★★★★</div><p class="tiny">Catalogue propre, réponse rapide et interface claire.</p></div></div>
-    <div class="review-item"><div class="review-avatar">M</div><div><b>Membre</b><div style="color:var(--green);font-size:.75rem">★★★★★</div><p class="tiny">Les fiches produits sont bien détaillées, vidéos et farms visibles.</p></div></div>
-   </div>
-   <div class="panel review-form">
-    <b>Laisser un avis</b>
-    <p class="tiny">Choisis une note et écris ton retour. Le bouton ouvre Telegram avec ton avis pré-rempli.</p>
-    <div class="rating-picker" id="review-stars" aria-label="Note">
-     <button type="button" data-rating="1">★</button>
-     <button type="button" data-rating="2">★</button>
-     <button type="button" data-rating="3">★</button>
-     <button type="button" data-rating="4">★</button>
-     <button type="button" data-rating="5">★</button>
+    <div style="flex:1">
+     <div class="line-stat"><span>Service</span><div class="bar"><span id="bar-service" style="width:98%"></span></div></div>
+     <div class="line-stat"><span>Qualité</span><div class="bar"><span id="bar-quality" style="width:96%"></span></div></div>
+     <div class="line-stat"><span>Réponse</span><div class="bar"><span id="bar-response" style="width:94%"></span></div></div>
     </div>
-    <textarea class="address-input" id="review-message" rows="4" placeholder="Écris ton avis ici..."></textarea>
-    <button class="btn-main" id="send-review-btn" style="width:100%;margin-top:12px">Envoyer mon avis</button>
    </div>
   </div>
+
+  <div class="panel">
+   <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
+    <b>Retours validés</b>
+    <span class="tiny" id="reviews-refresh-label">Mis à jour automatiquement</span>
+   </div>
+   <div id="reviews-list">
+    <div class="empty-state" style="padding:28px 0">Chargement des avis...</div>
+   </div>
+  </div>
+
+  <div class="panel review-form">
+   <b>Laisser un avis</b>
+   <p class="tiny">Ton avis part dans le panel Telegram. Il apparaît ici uniquement après validation.</p>
+   <div class="rating-picker" id="review-stars" aria-label="Note">
+    <button type="button" data-rating="1">★</button>
+    <button type="button" data-rating="2">★</button>
+    <button type="button" data-rating="3">★</button>
+    <button type="button" data-rating="4">★</button>
+    <button type="button" data-rating="5">★</button>
+   </div>
+   <input class="address-input" id="review-author" type="text" placeholder="Ton pseudo (optionnel)" style="margin-bottom:10px">
+   <textarea class="address-input" id="review-message" rows="4" placeholder="Écris ton avis ici..."></textarea>
+   <button class="btn-main" id="send-review-btn" style="width:100%;margin-top:12px">Envoyer au panel Telegram</button>
+   <p class="tiny" id="review-send-status" style="margin:10px 0 0"></p>
+  </div>
+ </div>
   
  <div id="page-contact" class="page">
   <div class="app-header"><button class="back-btn" onclick="navigate('home')">‹</button><div class="app-title">Contact</div><div style="width:42px"></div></div>
   <div class="panel">
    <b>Réseaux officiels</b>
    <p class="tiny">Utilise uniquement les liens ci-dessous.</p>
-   <a class="contact-link" href="https://t.me/MonkeyDieLuffy2" target="_blank"><span class="contact-icon"><svg width="22" height="22"><use href="#icon-telegram"/></svg></span><div><b>Telegram</b><span>@MonkeyDieLuffy2</span></div></a>
+   <a class="contact-link" href="https://t.me/LuffyIsBackVip" target="_blank"><span class="contact-icon"><svg width="22" height="22"><use href="#icon-telegram"/></svg></span><div><b>Telegram</b><span>@LuffyIsBackVip</span></div></a>
    <a class="contact-link" href="https://m.tatokdym.org/joinchat/HjXuEMdY2hj94aLmMabCrg" target="_blank"><span class="contact-icon"><svg width="22" height="22"><use href="#icon-potato"/></svg></span><div><b>Potato</b><span>Canal secondaire</span></div></a>
    <a class="contact-link" href="https://www.instagram.com/realuffythedry?igsh=MWNsenVrdncwcmswdA%3D%3D&utm_source=qr" target="_blank"><span class="contact-icon"><svg width="22" height="22"><use href="#icon-instagram"/></svg></span><div><b>Instagram</b><span>@realuffythedry</span></div></a>
   </div>
@@ -671,6 +811,7 @@
   <div class="nav-item-float nav-btn" data-target="page-profile"><svg width="21" height="21"><use href="#ic-user"/></svg><span class="nav-text">VIP</span></div>
  </div>
 
+ <script>window.REVIEW_API_BASE = window.REVIEW_API_BASE || "";</script>
  <script src="script.js"></script>
 </body>
 </html>

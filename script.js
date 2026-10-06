@@ -767,7 +767,7 @@ document.addEventListener("DOMContentLoaded", function () {
  let approvedReviews = [];
  window.lastListPage = "home";
 
- const contactUrl = "https://t.me/MonkeyDieLuffy2";
+ const contactUrl = "https://t.me/LuffyIsBackVip";
  const reviewApiBase = String(window.REVIEW_API_BASE || "").replace(/\/$/, "");
  const reviewApiUrl = reviewApiBase ? reviewApiBase + "/api/reviews" : "/api/reviews";
 
