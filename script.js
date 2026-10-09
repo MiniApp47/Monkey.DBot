@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function () {
           image: '',
           badgeText: '2 produits',
           products: [
-            {
+           /*  {
               id: 'Punch Breath 🥊🧄',
               name: 'Punch Breath 🥊🧄',
               farm: 'GAZ FRUIT 73U 🇲🇦',
@@ -44,8 +44,8 @@ document.addEventListener("DOMContentLoaded", function () {
                { weight: '25g', price: 170.00 },
                { weight: '50g', price: 220.00 },
               ]
-            },
-            {
+            }, */
+            /* {
               id: 'Strawberry Pie 🍓🍒',
               name: 'Strawberry Pie 🍓🍒',
               farm: 'DRYSIFT 120U 🇲🇦',
@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", function () {
                { weight: '500g', price: 1500.00 },
                { weight: '1Kg', price: 2800.00 },
               ]
-            },
+            }, */
             /* {
               id: 'Coche Runtz 🍭🍬',
               name: 'Coche Runtz 🍭🍬',
@@ -267,7 +267,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 { weight: '50g', price: 450.00 },
               ]
             },
-             {
+            /*  {
               id: 'Yellow Melon',
               name: 'Yellow Melon',
               farm: '👨‍🌾 HaramBoyz 👨‍🌾',
@@ -356,7 +356,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 { weight: '50g', price: 380.00 },
                 { weight: '100g', price: 700.00 },
               ]
-            },
+            }, */
              {
               id: 'Diez Lemon 🍋⛽️',
               name: 'Diez Lemon 🍋⛽️',
@@ -547,7 +547,7 @@ document.addEventListener("DOMContentLoaded", function () {
           image: '',
           badgeText: '1 produit',
           products: [
-            {
+           /*  {
               id: 'Forbidden x Calippo 🍓🍬',
               name: 'Forbidden x Calippo 🍓🍬',
               farm: 'Hamdullah Farmz 🇺🇸🇲🇦',
@@ -563,7 +563,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 { weight: '50g', price: 550.00 },
                 { weight: '100g', price: 1000.00 },
               ]
-            },
+            }, */
            /*  {
               id: '4Fruitz 🍓🥝🍒🍋',
               name: '4Fruitz 🍓🥝🍒🍋',
