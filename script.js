@@ -547,6 +547,54 @@ document.addEventListener("DOMContentLoaded", function () {
           image: '',
           badgeText: '1 produit',
           products: [
+            {
+              id: 'FRANCIACORTA 🍷⛽️',
+              name: 'FRANCIACORTA 🍷⛽️',
+              farm: 'MOUNTAIN GIANTS X OASIS 51 ⛰️🇲🇦',
+              promoEligible: false,
+              type: 'Hash',
+              image: 'ProductFA.png',
+              video: 'VideoFA.mov',
+              description: 'Plasma Static ⚡️ \n\n Parmis Les Meilleures Ferme  🇲🇦 \n Variété De Zinzin 🧠🤯 \n Full Terps Full Gazyy ⚡️🍑🍋⛽️',
+              tarifs: [
+                { weight: '3g', price: 60.00 },
+                { weight: '5g', price: 90.00 },
+                { weight: '10g', price: 160.00 },
+                { weight: '25g', price: 300.00 },
+              ]
+            },
+            {
+              id: 'FRUITZER 🍇🥭',
+              name: 'FRUITZER 🍇🥭',
+              farm: 'MOUNTAIN GIANTS X OASIS 51 ⛰️🇲🇦',
+              promoEligible: false,
+              type: 'Hash',
+              image: 'ProductF.png',
+              video: 'VideoF.mov',
+              description: 'Plasma Static ⚡️ \n\n Parmis Les Meilleures Ferme  🇲🇦 \n Variété De Zinzin 🧠🤯 \n Full Terps Full Gazyy ⚡️🍑🍋⛽️',
+              tarifs: [
+                { weight: '3g', price: 60.00 },
+                { weight: '5g', price: 90.00 },
+                { weight: '10g', price: 160.00 },
+                { weight: '25g', price: 300.00 },
+              ]
+            },
+            {
+              id: 'Grape Gas ⛽️🍇',
+              name: 'Grape Gas ⛽️🍇',
+              farm: 'NO LIMIT FARMZ 🇲🇦🇺🇸',
+              promoEligible: false,
+              type: 'Hash',
+              image: 'ProductGG.png',
+              videos:['VideoGG1.mov','VideoGG2.mov'],
+              description: 'Plasma Static ⚡️ \n\n Produit Au Top 💎 \n Full Terps Full Gaz ⛽️🇺🇸',
+              tarifs: [
+                { weight: '5g', price: 80.00 },
+                { weight: '10g', price: 140.00 },
+                { weight: '25g', price: 270.00 },
+                { weight: '50g', price: 450.00 },
+              ]
+            },
            /*  {
               id: 'Forbidden x Calippo 🍓🍬',
               name: 'Forbidden x Calippo 🍓🍬',
