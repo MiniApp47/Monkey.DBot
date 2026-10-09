@@ -586,7 +586,7 @@ document.addEventListener("DOMContentLoaded", function () {
               promoEligible: false,
               type: 'Hash',
               image: 'ProductGG.png',
-              videos:['VideoGG1.mov','VideoGG2.mov'],
+              videos:['VideoGG.mov','VideoGG2.mov'],
               description: 'Plasma Static ⚡️ \n\n Produit Au Top 💎 \n Full Terps Full Gaz ⛽️🇺🇸',
               tarifs: [
                 { weight: '5g', price: 80.00 },
