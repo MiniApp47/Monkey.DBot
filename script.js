@@ -16,10 +16,10 @@ document.addEventListener("DOMContentLoaded", function () {
     // --- Catégorie 1: HASH ---
     {
       id: 'HASH',
-      name: '🍪 Hash 🍪',
+      name: '⭐️ Hash ⭐️',
       farm: '',
       type: 'Hash',
-      quality: ' 🍪 Hash 🍪',
+      quality: ' ⭐️ Hash ⭐️',
       image: 'CategHash.png',
       directToProducts: false,
       farms: [
