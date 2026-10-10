@@ -203,6 +203,22 @@ document.addEventListener("DOMContentLoaded", function () {
           image: '',
           badgeText: '1 produit',
           products: [
+             {
+              id: 'Cherry Cake x Orange Punch 🍊',
+              name: 'Cherry Cake x Orange Punch 🍊',
+              farm: 'SECRET FARMERZ 🔮',
+              promoEligible: false,
+              type: 'Hash',
+              image: 'ProductCCO.png',
+              video: 'VideoCCO.mov',
+              description: 'Produit Full Terps 🇺🇸🍒🥭 Fort En THC 🌡️ Real Frozen 🧊⭐️ Odeur De Zinzin Terps De Zinzin 🧠🧠🤯🤯',
+              tarifs: [
+                { weight: '5g', price: 70.00 },
+                { weight: '10g', price: 130.00 },
+                { weight: '25g', price: 270.00 },
+                { weight: '50g', price: 450.00 },
+              ]
+            },
            /*   {
               id: 'Mroroccan Peach',
               name: 'Mroroccan Peach 🍑',
@@ -509,6 +525,38 @@ document.addEventListener("DOMContentLoaded", function () {
           image: '',
           badgeText: '1 produit',
           products: [
+            {
+              id: 'Orange Cream Pop 🍊🍦',
+              name: 'Orange Cream Pop 🍊🍦',
+              farm: 'BAKHOUR BASHA 🫖⚡️',
+              promoEligible: false,
+              type: 'Hash',
+              image: 'ProductOC.png',
+              video: 'VideoOC.mp4',
+              description: 'Produit Certifié Tout Droit Des USA 🇺🇸 Qualité De Malade Terps Odeur Des Ténèbres 🤯🗽',
+              tarifs: [
+                { weight: '2g', price: 60.00 },
+                { weight: '3g', price: 90.00 },
+                { weight: '5g', price: 140.00 },
+                { weight: '10g', price: 270.00 },
+              ]
+            },
+            {
+              id: 'Weeding Cake 🍰',
+              name: 'Weeding Cake 🍰',
+              farm: 'BAKHOUR BASHA 🫖⚡️',
+              promoEligible: false,
+              type: 'Hash',
+              image: 'ProductWC.png',
+              video: 'VideoWC.mp4',
+              description: 'Produit Certifié Tout Droit Des USA 🇺🇸 Qualité De Malade Terps Odeur Des Ténèbres 🤯🗽',
+              tarifs: [
+                { weight: '2g', price: 60.00 },
+                { weight: '3g', price: 90.00 },
+                { weight: '5g', price: 140.00 },
+                { weight: '10g', price: 270.00 },
+              ]
+            },
            /*  {
               id: 'Papaya x Zangria 🥭🥤',
               name: 'Papaya x Zangria 🥭🥤',
